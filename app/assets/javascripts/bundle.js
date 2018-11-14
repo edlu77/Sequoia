@@ -86,6 +86,71 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/session_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/session_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_USER, RECEIVE_ERRORS, login, logout, signup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_USER", function() { return RECEIVE_CURRENT_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER", function() { return LOGOUT_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ERRORS", function() { return RECEIVE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
+/* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
+
+var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
+var LOGOUT_USER = 'LOGOUT_CURRENT_USER';
+var RECEIVE_ERRORS = 'RECEIVE_ERRORS';
+
+var receiveCurrentUser = function receiveCurrentUser(currentUser) {
+  return {
+    type: "RECEIVE_CURRENT_USER",
+    currentUser: currentUser
+  };
+};
+
+var logoutCurrentUser = function logoutCurrentUser() {
+  return {
+    type: "LOGOUT_CURRENT_USER"
+  };
+};
+
+var receiveErrors = function receiveErrors(errors) {
+  return {
+    type: "RECEIVE_ERRORS",
+    errors: errors
+  };
+};
+
+var login = function login(user) {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (user) {
+      return dispatch(receiveCurrentUser(user));
+    });
+  };
+};
+var logout = function logout() {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function () {
+      return dispatch(logoutCurrentUser());
+    });
+  };
+};
+var signup = function signup(user) {
+  return function (dispatch) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (user) {
+      return dispatch(receiveCurrentUser(user));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/sequoia.jsx":
 /*!******************************!*\
   !*** ./frontend/sequoia.jsx ***!
@@ -100,6 +165,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./util/session_api_util */ "./frontend/util/session_api_util.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
+
 
 
 
@@ -107,9 +174,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome to Sequoia"), root);
 });
-window.signup = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__["signup"];
-window.login = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__["login"];
-window.logout = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__["logout"];
+window.signup = _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["signup"];
+window.login = _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["login"];
+window.logout = _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["logout"];
 
 /***/ }),
 
