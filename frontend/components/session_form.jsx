@@ -28,11 +28,25 @@ class SessionForm extends React.Component {
     );
   }
 
+  emailInput() {
+    if (this.props.formType === 'Sign Up') {
+      return (
+        <label>Email:
+          <input type="text"
+            value={this.state.email}
+            onChange={this.update('email')}
+            className="login-input"
+          />
+        <br/>
+        </label>
+      )
+    }
+  };
+
   render() {
-    debugger
+
     return (
       <div>
-        <h2>Welcome to Sequoia!</h2>
         <form onSubmit={this.handleSubmit} className='login-form-box'>
           <h2>{this.props.formType}</h2>
           <br/>
@@ -42,7 +56,7 @@ class SessionForm extends React.Component {
           {this.renderErrors()}
 
           <div className="login-form">
-            <br/>
+
             <label>Username:
               <input type="text"
                 value={this.state.username}
@@ -50,15 +64,11 @@ class SessionForm extends React.Component {
                 className="login-input"
               />
             </label>
+
             <br/>
-              <label>Email:
-                <input type="text"
-                  value={this.state.email}
-                  onChange={this.update('email')}
-                  className="login-input"
-                />
-              </label>
-            <br/>
+
+            {this.emailInput()}
+
             <label>Password:
               <input type="password"
                 value={this.state.password}
@@ -66,6 +76,7 @@ class SessionForm extends React.Component {
                 className="login-input"
               />
             </label>
+
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
           </div>
