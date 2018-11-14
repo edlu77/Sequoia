@@ -6,7 +6,7 @@ import SessionForm from './session_form';
 const mapStateToProps = (state, ownProps) => {
   return ({
     errors: state.errors.session.responseJSON,
-    formType: 'login',
+    formType: 'Log In',
   });
 };
 

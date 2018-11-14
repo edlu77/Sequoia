@@ -32,14 +32,15 @@ class SessionForm extends React.Component {
     debugger
     return (
       <div>
+        <h2>Welcome to Sequoia!</h2>
         <form onSubmit={this.handleSubmit} className='login-form-box'>
-          <h2>Welcome to Sequoia!</h2>
+          <h2>{this.props.formType}</h2>
           <br/>
-          <Link to="/signup">Sign Up</Link>
+          {this.props.formType === "Sign Up" ? <Link to="/login">Already a member? Log in!</Link> : <Link to="/signup">Not a member? Sign Up!</Link>}
           <br/>
-          <Link to="/login">Log In</Link>
-          <br/>
+
           {this.renderErrors()}
+
           <div className="login-form">
             <br/>
             <label>Username:
@@ -57,6 +58,7 @@ class SessionForm extends React.Component {
                   className="login-input"
                 />
               </label>
+            <br/>
             <label>Password:
               <input type="password"
                 value={this.state.password}

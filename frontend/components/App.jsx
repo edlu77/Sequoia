@@ -6,7 +6,8 @@ import SignupFormContainer from './signup_form_container';
 const App = () => {
   return (
     <div>
-      <h1>Sequoia (go to /login to login)</h1>
+      <h1>Sequoia</h1>
+      <Route exact path="/" component = {LoginFormContainer} />
       <Route path="/login" component={LoginFormContainer} />
       <Route path="/signup" component={SignupFormContainer} />
     </div>
