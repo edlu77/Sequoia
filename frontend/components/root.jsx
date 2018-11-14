@@ -1,4 +1,4 @@
-import App from './app.jsx';
+import App from './app2';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
