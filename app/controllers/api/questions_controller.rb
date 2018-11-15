@@ -1,5 +1,5 @@
 class Api::QuestionsController < ApplicationController
-  before_action :require_logged_in
+  before_action :ensure_logged_in
 
   def index
     @questions = Question.all
