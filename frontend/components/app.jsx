@@ -9,7 +9,6 @@ const App = () => {
   return (
     <div>
       <header className="header">
-        <h1>Sequoia</h1>
         <GreetingContainer />
       </header>
       <Switch>

@@ -4,14 +4,12 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 class SessionForm extends React.Component {
   constructor(props) {
     super(props);
-    debugger
     this.state = {username: "", email: "", password: ""};
     this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger
     const user = Object.assign({}, this.state);
     this.props.processForm(user);
   }
@@ -43,9 +41,9 @@ class SessionForm extends React.Component {
     return (
       <div className="login-signup-form">
         <div className="sequoia-logo">
-          <span>Sequoia</span>
+          <span>SeQuoia</span>
         </div>
-        <h2 className="slogan">A place to ask questions and become smarter (maybe).</h2>
+        <h2 className="tagline">A place to ask questions and become smarter (maybe).</h2>
 
         <form onSubmit={this.handleSubmit} className='login-form-box'>
           <h2>{this.props.formType}</h2>

@@ -180,7 +180,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
     className: "header"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Sequoia"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     path: "/login",
     component: _login_form_container__WEBPACK_IMPORTED_MODULE_2__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
@@ -212,16 +212,6 @@ var Greeting = function Greeting(_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
 
-  var sessionLinks = function sessionLinks() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-      className: "login-signup"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/login"
-    }, "Login"), "\xA0or\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      to: "/signup"
-    }, "Sign up!"));
-  };
-
   var personalGreeting = function personalGreeting() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hgroup", {
       className: "header-group"
@@ -233,7 +223,7 @@ var Greeting = function Greeting(_ref) {
     }, "Log Out"));
   };
 
-  return currentUser ? personalGreeting() : sessionLinks();
+  return currentUser ? personalGreeting() : "";
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Greeting);
@@ -391,7 +381,6 @@ function (_React$Component) {
     _classCallCheck(this, SessionForm);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SessionForm).call(this, props));
-    debugger;
     _this.state = {
       username: "",
       email: "",
@@ -405,7 +394,6 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
       var user = Object.assign({}, this.state);
       this.props.processForm(user);
     }
@@ -437,8 +425,8 @@ function (_React$Component) {
         className: "login-signup-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sequoia-logo"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Sequoia")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "slogan"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "SeQuoia")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "tagline"
       }, "A place to ask questions and become smarter (maybe)."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "login-form-box"
