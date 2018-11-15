@@ -14,6 +14,43 @@
  *= require_self
  */
 
-.login-form {
-  background: red;
+ body {
+   background-image: url("sequoias.jpg");
+   display: flex;
+   justify-content: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+ }
+
+.login-signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid grey;
+  border-radius: 4px;
+  width: 650px;
+  background: white;
+  margin: 0 auto;
+}
+
+.sequoia-logo {
+  font-size: 70px;
+  font-weight: bolder;
+  color: #cb0000;
+  margin: 0 auto;
+}
+
+.slogan {
+  color: #949494;
+  margin: 0 auto;
+}
+
+.login-form-box {
+  margin: 0 auto;
+  height: 300px;
+}
+
+.header {
+  background: white;
 }

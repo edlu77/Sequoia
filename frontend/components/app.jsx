@@ -8,7 +8,7 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 const App = () => {
   return (
     <div>
-      <header>
+      <header className="header">
         <h1>Sequoia</h1>
         <GreetingContainer />
       </header>
