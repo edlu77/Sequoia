@@ -4,8 +4,10 @@ import QuestionShow from './question_show';
 import { fetchQuestion } from '../actions/question_actions';
 
 const mapStateToProps = (state, ownProps) => {
+  
   const questionId = ownProps.match.params.questionId;
   const question = state.entities.questions[questionId];
+  
   return ({
     question: question,
   })

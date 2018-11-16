@@ -31,6 +31,7 @@ export const fetchQuestions = () => dispatch => {
 };
 
 export const fetchQuestion = (id) => dispatch => {
+
   return QuestionApiUtil.fetchQuestion(id).then(
     (question) => dispatch(receiveQuestion(question))
   )
@@ -49,7 +50,7 @@ export const updateQuestion = (question) => dispatch => {
 };
 
 export const deleteQuestion = (questionId) => dispatch => {
-  return QuestionApiUtil.fetchQuestion(questionId).then(
+  return QuestionApiUtil.deleteQuestion(questionId).then(
     (questionId) => dispatch(removeQuestion(questionId))
   )
 };

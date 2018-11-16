@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root';
-import configureStore from './store/store'
+import configureStore from './store/store';
+import { fetchQuestions } from './actions/question_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -25,3 +26,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.dispatch = store.dispatch;
   ReactDOM.render(<Root store={ store } />, root);
 });
+
+window.fetchQuestions = fetchQuestions

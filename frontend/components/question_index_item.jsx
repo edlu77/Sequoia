@@ -6,7 +6,7 @@ const QuestionIndexItem = (props) => {
     <li key={props.question.id} className="question-index-item">
       <Link to={`/questions/${props.question.id}`}>
         {props.question.title}
-      </Link>&nbsp;
+      </Link>
       <button onClick={() => props.deleteQuestion(props.question.id)}>Delete</button>
     </li>
   );
