@@ -21,7 +21,7 @@ class QuestionForm extends React.Component {
   };
 
   render () {
-    debugger
+    
     return (
       <div className="question-form">
         <h3>{this.props.formType}</h3>

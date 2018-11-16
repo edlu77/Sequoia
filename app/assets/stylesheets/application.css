@@ -69,10 +69,33 @@
   background: white;
 }
 
-.question-show {
+.question-form {
   background: white;
 }
 
-.question-form {
+.feed-index {
+  width: 602px
+}
+
+.question-index-item {
+  font-style: serif;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 16px;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.question-show {
   background: white;
+  font-style: serif;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 16px;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e2e2;
 }
