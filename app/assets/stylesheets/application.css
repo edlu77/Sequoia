@@ -19,8 +19,8 @@
    display: flex;
    justify-content: center;
    background-repeat: no-repeat;
-   background-size: auto;
-   background-position: center;
+   background-size: cover;
+   background-position: top;
  }
 
 .login-signup-form {
@@ -62,5 +62,17 @@
 }
 
 .header {
+  background: white;
+}
+
+.feed-index {
+  background: white;
+}
+
+.question-show {
+  background: white;
+}
+
+.question-form {
   background: white;
 }

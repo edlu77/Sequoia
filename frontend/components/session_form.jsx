@@ -36,6 +36,21 @@ class SessionForm extends React.Component {
     }
   };
 
+  renderErrors() {
+    const errors = this.props.errors.responseJSON || [];
+    return (
+      <ul>
+        {errors.map((error) => {
+          return (
+            <li>
+              {error}
+            </li>
+          )
+        })}
+      </ul>
+    )
+  };
+
   render() {
 
     return (
@@ -50,6 +65,8 @@ class SessionForm extends React.Component {
           <br/>
           {this.props.formType === "Sign Up" ? <Link to="/login">Already a member? Log in!</Link> : <Link to="/signup">Not a member? Sign Up!</Link>}
           <br/>
+
+        {this.renderErrors()}
 
           <div>
 
