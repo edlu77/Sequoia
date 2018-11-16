@@ -6,7 +6,7 @@ export const fetchQuestions = () => {
 };
 
 export const fetchQuestion = id => {
-  
+
   return $.ajax({
     method: "GET",
     url: `/api/questions/${id}`,
@@ -30,6 +30,7 @@ export const updateQuestion = question => {
 };
 
 export const deleteQuestion = id => {
+
   return $.ajax({
     method: "DELETE",
     url: `/api/questions/${id}`,

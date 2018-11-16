@@ -11,6 +11,7 @@ const receiveQuestions = (questions) => {
 };
 
 const receiveQuestion = (question) => {
+
   return ({
     type: RECEIVE_QUESTION,
     question: question,
@@ -18,6 +19,7 @@ const receiveQuestion = (question) => {
 };
 
 const removeQuestion = (questionId) => {
+
   return ({
     type: REMOVE_QUESTION,
     questionId: questionId,
@@ -31,7 +33,6 @@ export const fetchQuestions = () => dispatch => {
 };
 
 export const fetchQuestion = (id) => dispatch => {
-
   return QuestionApiUtil.fetchQuestion(id).then(
     (question) => dispatch(receiveQuestion(question))
   )
@@ -50,7 +51,11 @@ export const updateQuestion = (question) => dispatch => {
 };
 
 export const deleteQuestion = (questionId) => dispatch => {
+
   return QuestionApiUtil.deleteQuestion(questionId).then(
-    (questionId) => dispatch(removeQuestion(questionId))
+    () => {
+
+      return dispatch(removeQuestion(questionId))
+    }
   )
 };

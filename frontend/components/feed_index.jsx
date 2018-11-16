@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import QuestionIndexItem from './question_index_item';
 
-class feedIndex extends Component {
+class FeedIndex extends Component {
 
   componentDidMount() {
     this.props.fetchQuestions();
@@ -28,4 +28,4 @@ class feedIndex extends Component {
   }
 };
 
-export default feedIndex;
+export default FeedIndex;
