@@ -20,7 +20,7 @@ class FeedIndex extends Component {
 
     return (
       <div className="feed-index">
-        <ul>
+        <ul className="question-list">
           {questions}
         </ul>
       </div>

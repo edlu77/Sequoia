@@ -21,6 +21,7 @@
    background-repeat: no-repeat;
    background-size: cover;
    background-position: top;
+   font-family: serif;
  }
 
 .login-signup-form {
@@ -63,18 +64,65 @@
 
 .header {
   background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 50px;
+  box-sizing: border-box;
+  z-index: 800;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  line-height: 50px;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 3px 2px -2px rgba(200,200,200,0.2);
 }
+
+.ask-question-button {
+  margin-left: 8px;
+  min-width: 96px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(200,200,200,0.2);
+  display: inline-block;
+  font-weight: 500;
+  padding: 3px 7px 4px 7px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #b92b27;
+  background: #b92b27;
+  color: #fff;
+  text-decoration:;
+}
+
+.header-logo {
+  font-size: 25px;
+  font-weight: bolder;
+  color: #b93029;
+}
+
+.header-list-left {
+  float: left;
+}
+
+.header-list-right {
+  float: right;
+}
+
 
 .feed-index {
   background: white;
+  width: 602px;
 }
 
 .question-form {
   background: white;
 }
 
-.feed-index {
-  width: 602px
+
+ul {
+  list-style: none;
 }
 
 .question-index-item {

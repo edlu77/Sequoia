@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
+import NavbarContainer from './navbar_container';
 import LoginFormContainer from './login_form_container';
 import SignupFormContainer from './signup_form_container';
-import GreetingContainer from './greeting_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import FeedIndexContainer from './feed_index_container';
 import QuestionShowContainer from './question_show_container';
@@ -12,8 +12,11 @@ const App = () => {
   return (
     <div>
       <header className="header">
-        <GreetingContainer />
+        <NavbarContainer />
       </header>
+      <br/>
+      <br/>
+      <br/>
       <Switch>
         <ProtectedRoute exact path="/" component={FeedIndexContainer}/>
         <AuthRoute path="/login" component={LoginFormContainer} />
