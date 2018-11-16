@@ -13,6 +13,8 @@ class QuestionShow extends React.Component {
 
     return (
       <div className="question-show">
+        {question.topic}
+        <br></br>
         {question.title}
         <br></br>
         <Link to="/">Back to main page</Link>
