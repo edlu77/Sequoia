@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action: :ensure_logged_in
+  before_action :ensure_logged_in
 
   def index
     @answers = Answer.find_by_question_id(params[:question_id])
