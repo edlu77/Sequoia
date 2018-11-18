@@ -467,7 +467,6 @@ function (_Component) {
       var _this = this;
 
       var questions = this.props.questions.map(function (question) {
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: question.id,
           question: question,
