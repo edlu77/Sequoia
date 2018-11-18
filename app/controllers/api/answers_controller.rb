@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
       @answers = Answer.find_by_question_id(params[:question_id])
       render :index
     else
-      render :json @answer.errors.full_messages, status: 422
+      render json: @answer.errors.full_messages, status: 422
     end
   end
 
