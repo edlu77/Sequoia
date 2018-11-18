@@ -111,7 +111,7 @@ var REMOVE_ANSWER = 'REMOVE_ANSWER';
 
 var receiveAnswers = function receiveAnswers(answers) {
   return {
-    type: RECEIVE_ALL_QUESTIONS,
+    type: RECEIVE_ALL_ANSWERS,
     answers: answers
   };
 };
@@ -130,15 +130,16 @@ var removeAnswer = function removeAnswer(answerId) {
   };
 };
 
-var fetchAnswers = function fetchAnswers() {
+var fetchAnswers = function fetchAnswers(questionId) {
   return function (dispatch) {
-    return _util_answers_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAnswers"]().then(function (answers) {
+    return _util_answers_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAnswers"](questionId).then(function (answers) {
       return dispatch(receiveAnswers(answers));
     });
   };
 };
 var fetchAnswer = function fetchAnswer(id) {
   return function (dispatch) {
+    debugger;
     return _util_answers_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAnswer"](id).then(function (answer) {
       return dispatch(receiveAnswer(answer));
     });
@@ -1105,8 +1106,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -1120,7 +1119,7 @@ var answersReducer = function answersReducer() {
       return action.answers;
 
     case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ANSWER"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, oldState, _defineProperty({}, action.answer.id, action.answer));
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, oldState, action.answer);
 
     case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_ANSWER"]:
       var newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, oldState);
@@ -1378,13 +1377,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/question_actions */ "./frontend/actions/question_actions.js");
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/answer_actions */ "./frontend/actions/answer_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
+ // import * as AnswersApiUtil from './util/answers_api_util'
 
 document.addEventListener('DOMContentLoaded', function () {
   var store;
@@ -1404,14 +1404,16 @@ document.addEventListener('DOMContentLoaded', function () {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   }
 
-  var root = document.getElementById('root');
   window.getState = store.getState;
   window.dispatch = store.dispatch;
+  var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
 });
-window.fetchQuestions = _actions_question_actions__WEBPACK_IMPORTED_MODULE_4__["fetchQuestions"];
+window.fetchAnswers = _actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__["fetchAnswers"];
+window.fetchAnswer = _actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__["fetchAnswer"];
+window.createAnswer = _actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__["createAnswer"];
 
 /***/ }),
 
@@ -1457,10 +1459,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAnswer", function() { return createAnswer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateAnswer", function() { return updateAnswer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAnswer", function() { return deleteAnswer; });
-var fetchAnswers = function fetchAnswers() {
+var fetchAnswers = function fetchAnswers(questionId) {
   return $.ajax({
     method: "GET",
-    url: "/api/answers"
+    url: "/api/questions/".concat(questionId, "/answers"),
+    data: {
+      questionId: questionId
+    }
   });
 };
 var fetchAnswer = function fetchAnswer(id) {
