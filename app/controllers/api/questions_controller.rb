@@ -10,7 +10,8 @@ class Api::QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.author_id = current_user.id
     if @question.save
-      render :show
+      @questions = Question.all
+      render :index
     else
       render json: @question.errors.full_messages, status: 422
     end

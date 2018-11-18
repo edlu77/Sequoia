@@ -10,6 +10,7 @@ class FeedIndex extends Component {
 
   render() {
     const questions = this.props.questions.map((question) => {
+      debugger
       return (
         <QuestionIndexItem
           key={question.id}

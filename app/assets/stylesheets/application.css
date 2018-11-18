@@ -72,7 +72,6 @@
   box-sizing: border-box;
   z-index: 800;
   font-size: 14px;
-  font-weight: 500;
   color: #666;
   line-height: 50px;
   border-bottom: 1px solid #ddd;
@@ -109,7 +108,6 @@
   float: right;
 }
 
-
 .feed-index {
   background: white;
   width: 602px;
@@ -118,7 +116,6 @@
 .question-form {
   background: white;
 }
-
 
 ul {
   list-style: none;

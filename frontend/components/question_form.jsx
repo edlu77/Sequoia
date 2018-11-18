@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class QuestionForm extends React.Component {
 
@@ -18,10 +18,11 @@ class QuestionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.submitAction(this.state)
+    this.props.history.push('/')
   };
 
   render () {
-    
+
     return (
       <div className="question-form">
         <h3>{this.props.formType}</h3>
