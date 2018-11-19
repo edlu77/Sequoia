@@ -7,7 +7,6 @@ const questionsReducer = (oldState = {}, action) => {
     case RECEIVE_ALL_QUESTIONS:
       return action.questions;
     case RECEIVE_QUESTION:
-    debugger
       return merge({}, oldState, {[action.question.id]: action.question});
     case REMOVE_QUESTION:
       let newState = merge({}, oldState);

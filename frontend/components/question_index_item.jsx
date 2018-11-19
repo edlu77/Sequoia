@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const QuestionIndexItem = (props) => {
-  debugger
   return (
     <li key={props.question.id} className="question-index-item">
       {props.question.topic}

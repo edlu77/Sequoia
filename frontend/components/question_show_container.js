@@ -5,7 +5,6 @@ import { fetchQuestion } from '../actions/question_actions';
 import { fetchAnswers } from '../actions/answer_actions';
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
 
   const questionId = ownProps.match.params.questionId;
   const question = state.entities.questions[questionId];

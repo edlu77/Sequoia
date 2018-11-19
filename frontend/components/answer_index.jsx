@@ -4,12 +4,10 @@ import AnswerIndexItem from './answer_index_item';
 class AnswerIndex extends React.Component {
 
   componentDidMount() {
-    debugger
     this.props.fetchAnswers(this.props.questionId);
   };
 
   render() {
-    debugger
     const answers = this.props.answers.map ((answer) => {
       return (
         <AnswerIndexItem

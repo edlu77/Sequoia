@@ -6,7 +6,6 @@ const mapStateToProps = (state) => {
   // this is for later when we want to filter out questions based on currentUser's subscribed topics
   // const currentUserId = state.session.id;
   // const currentUser = state.entities.users[currentUserId];
-  debugger
   const questions = Object.values(state.entities.questions);
   const answers = Object.values(state.entities.answers);
   return ({

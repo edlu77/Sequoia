@@ -25,14 +25,12 @@ const removeAnswer = (answerId) => {
 };
 
 export const fetchAnswers = (questionId) => dispatch => {
-  debugger
   return AnswerApiUtil.fetchAnswers(questionId).then(
     (answers) => dispatch(receiveAnswers(answers))
   )
 };
 
 export const fetchAnswer = (id) => dispatch => {
-  debugger
   return AnswerApiUtil.fetchAnswer(id).then(
     (answer) => dispatch(receiveAnswer(answer))
   )

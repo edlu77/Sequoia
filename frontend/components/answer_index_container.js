@@ -5,7 +5,6 @@ import AnswerIndex from './answer_index';
 const mapStateToProps = (state, ownProps) => {
   const answers = Object.values(state.entities.answers);
   const questionId = ownProps.questionId
-  debugger
   return ({
     answers: answers,
     questionId: questionId,

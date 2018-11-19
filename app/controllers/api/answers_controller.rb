@@ -15,7 +15,7 @@ class Api::AnswersController < ApplicationController
   def create
     @answer = Answer.new(answer_params)
     @answer.author_id = current_user.id
-    @answer.question_id = params[:answer][:question_id]
+    @answer.question_id = params[:answer][:questionId]
     if @answer.save
       @answers = Answer.where(question_id: @answer.question_id)
       render :index
