@@ -1261,6 +1261,7 @@ function (_React$Component) {
       password: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleDemoSubmit = _this.handleDemoSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -1301,6 +1302,16 @@ function (_React$Component) {
       }));
     }
   }, {
+    key: "handleDemoSubmit",
+    value: function handleDemoSubmit(e) {
+      e.preventDefault();
+      var user = Object.assign({}, {
+        username: "DemoUser",
+        password: "starwars"
+      });
+      this.props.processForm(user);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1330,7 +1341,11 @@ function (_React$Component) {
         className: "session-submit",
         type: "submit",
         value: this.props.formType
-      }))));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "demo-submit-button",
+        type: "submit",
+        onClick: this.handleDemoSubmit
+      }, "Demo"))));
     }
   }]);
 
