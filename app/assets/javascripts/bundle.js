@@ -1748,10 +1748,7 @@ __webpack_require__.r(__webpack_exports__);
 var fetchAnswers = function fetchAnswers(questionId) {
   return $.ajax({
     method: "GET",
-    url: "/api/questions/".concat(questionId, "/answers"),
-    data: {
-      questionId: questionId
-    }
+    url: "/api/questions/".concat(questionId)
   });
 };
 var fetchAnswer = function fetchAnswer(id) {
