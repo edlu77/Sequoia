@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import QuestionIndexItem from './question_index_item';
+import AnswerIndex from './answer_index';
 
 class FeedIndex extends Component {
 

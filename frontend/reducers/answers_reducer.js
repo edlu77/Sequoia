@@ -5,6 +5,7 @@ const answersReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_ALL_ANSWERS:
+    debugger
       return action.answers;
     case RECEIVE_ANSWER:
       return merge({}, oldState, action.answer)

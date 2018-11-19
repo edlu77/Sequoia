@@ -25,6 +25,7 @@ const removeAnswer = (answerId) => {
 };
 
 export const fetchAnswers = (questionId) => dispatch => {
+  debugger
   return AnswerApiUtil.fetchAnswers(questionId).then(
     (answers) => dispatch(receiveAnswers(answers))
   )
