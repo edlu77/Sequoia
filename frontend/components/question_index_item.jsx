@@ -10,6 +10,7 @@ const QuestionIndexItem = (props) => {
         {props.question.title}
       </Link>
       <button onClick={() => props.deleteQuestion(props.question.id)}>Delete</button>
+      <br/>
     </li>
   );
 };

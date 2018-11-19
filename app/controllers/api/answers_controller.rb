@@ -1,17 +1,23 @@
-class AnswersController < ApplicationController
+class Api::AnswersController < ApplicationController
   before_action :ensure_logged_in
 
   def index
-    @answers = Answer.find_by_question_id(params[:question_id])
+    question_id = params[:questionId]
+    @answers = Answer.where(question_id: question_id)
     render :index
+  end
+
+  def show
+    @answer = Answer.find(params[:id])
+    render :show
   end
 
   def create
     @answer = Answer.new(answer_params)
     @answer.author_id = current_user.id
-    @answer.question_id = params[:question_id]
+    @answer.question_id = params[:answer][:questionId]
     if @answer.save
-      @answers = Answer.find_by_question_id(params[:question_id])
+      @answers = Answer.where(question_id: @answer.question_id)
       render :index
     else
       render json: @answer.errors.full_messages, status: 422

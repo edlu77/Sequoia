@@ -5,7 +5,7 @@ export const REMOVE_ANSWER = 'REMOVE_ANSWER';
 
 const receiveAnswers = (answers) => {
   return ({
-    type: RECEIVE_ALL_QUESTIONS,
+    type: RECEIVE_ALL_ANSWERS,
     answers: answers,
   })
 };
@@ -24,8 +24,8 @@ const removeAnswer = (answerId) => {
   })
 };
 
-export const fetchAnswers = () => dispatch => {
-  return AnswerApiUtil.fetchAnswers().then(
+export const fetchAnswers = (questionId) => dispatch => {
+  return AnswerApiUtil.fetchAnswers(questionId).then(
     (answers) => dispatch(receiveAnswers(answers))
   )
 };
