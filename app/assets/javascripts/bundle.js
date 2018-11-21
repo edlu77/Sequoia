@@ -1430,7 +1430,7 @@ function (_React$Component) {
         className: "login-signup-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sequoia-logo"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "SeQuoia")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "seQuoia")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "tagline"
       }, "A place to ask questions and become smarter (maybe)."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,

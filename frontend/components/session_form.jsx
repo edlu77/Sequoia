@@ -62,7 +62,7 @@ class SessionForm extends React.Component {
       <div className="login-page">
         <div className="login-signup-form">
           <div className="sequoia-logo">
-            <span>SeQuoia</span>
+            <span>seQuoia</span>
           </div>
           <h2 className="tagline">A place to ask questions and become smarter (maybe).</h2>
 
