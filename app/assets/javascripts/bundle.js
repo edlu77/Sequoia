@@ -331,6 +331,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -370,13 +372,11 @@ function (_React$Component) {
 
   _createClass(AnswerForm, [{
     key: "update",
-    value: function update() {
+    value: function update(field) {
       var _this2 = this;
 
       return function (e) {
-        _this2.setState({
-          body: e.target.value
-        });
+        _this2.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
@@ -384,6 +384,7 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       this.props.createAnswer(this.state);
+      this.props.history.push("/questions/".concat(state.questionId));
     }
   }, {
     key: "render",
@@ -393,7 +394,7 @@ function (_React$Component) {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: this.state.body,
-        onChange: this.update()
+        onChange: this.update("body")
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         class: "answer-submit-button",
         type: "submit",
@@ -725,9 +726,13 @@ __webpack_require__.r(__webpack_exports__);
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "answer-question-title"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/questions/".concat(props.question.id)
-  }, props.question.title), "(asked by ", props.author.username, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, props.answer.body));
+  }, props.question.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "answer-body"
+  }, props.answer.body));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (FeedAnswerIndexItem);
@@ -1146,6 +1151,7 @@ var QuestionIndexItem = function QuestionIndexItem(props) {
     key: props.question.id,
     className: "question-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Question added - ", props.question.topic), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    className: "question-index-title",
     to: "/questions/".concat(props.question.id)
   }, props.question.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
 };

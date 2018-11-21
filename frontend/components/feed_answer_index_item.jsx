@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom';
 const FeedAnswerIndexItem = (props) => {
   return (
     <li className="feed-answer-index-item">
-      <div>
+      <div className="answer-question-title">
         <Link to={`/questions/${props.question.id}`}>
           {props.question.title}
         </Link>
-         (asked by {props.author.username})
+         <div>
+         </div>
       </div>
       <br/>
-      <div>
+      <div className="answer-body">
         {props.answer.body}
       </div>
     </li>

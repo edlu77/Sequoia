@@ -8,7 +8,7 @@ const QuestionIndexItem = (props) => {
         Question added - {props.question.topic}
       </div>
       <br/>
-      <Link to={`/questions/${props.question.id}`}>
+      <Link className="question-index-title" to={`/questions/${props.question.id}`}>
         {props.question.title}
       </Link>
       <br/>

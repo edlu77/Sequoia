@@ -24,7 +24,6 @@
 
 .question-index-item, .feed-answer-index-item, .answer-index-item {
  font-style: serif;
- font-weight: bold;
  font-size: 18px;
  padding: 16px;
  border-radius: 4px;
@@ -48,6 +47,14 @@
   align-items: center;
   margin: 0 auto;
   background-color: white;
+}
+
+.answer-question-title{
+  font-weight: bold;
+}
+
+.question-index-title{
+  font-weight: bold;
 }
 
 .question-show {

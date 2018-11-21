@@ -10,15 +10,16 @@ class AnswerForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   };
 
-  update() {
+  update(field) {
     return (e) => {
-      this.setState({body: e.target.value})
-    }
-  }
+      this.setState({[field]: e.target.value});
+    };
+  };
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.createAnswer(this.state)
+    this.props.history.push(`/questions/${state.questionId}`)
   }
 
   render() {
@@ -27,7 +28,7 @@ class AnswerForm extends React.Component {
         <form className="answer-form" onSubmit={this.handleSubmit}>
           <textarea
             value={this.state.body}
-            onChange={this.update()} />
+            onChange={this.update("body")} />
           <input class="answer-submit-button" type="submit" value="Answer" />
         </form>
       </div>
