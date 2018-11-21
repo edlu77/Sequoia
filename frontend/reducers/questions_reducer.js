@@ -2,10 +2,11 @@ import { RECEIVE_ALL_QUESTIONS, RECEIVE_QUESTION, REMOVE_QUESTION } from '../act
 import merge from 'lodash/merge';
 
 const questionsReducer = (oldState = {}, action) => {
+
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_ALL_QUESTIONS:
-      return action.questions;
+      return action.payload.questions;
     case RECEIVE_QUESTION:
       return merge({}, oldState, {[action.question.id]: action.question});
     case REMOVE_QUESTION:

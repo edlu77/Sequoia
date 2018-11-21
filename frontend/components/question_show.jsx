@@ -11,8 +11,8 @@ class QuestionShow extends React.Component {
   };
 
   render() {
-    const question = this.props.question || {title: ""};
-
+    const question = this.props.question || {topic: "", title: ""}
+    const answers = this.props.answers || []
     return (
       <div className="question-show">
         {question.topic}
@@ -23,8 +23,10 @@ class QuestionShow extends React.Component {
           questionId={this.props.questionId}/>
         <br/>
         <AnswerIndexContainer
-          answers={this.props.answers}
-          questionId={this.props.questionId} />
+          answers={answers}
+          questionId={this.props.questionId}
+          question={question}
+          users={this.props.users} />
         <Link to="/">Back to main page</Link>
       </div>
     )

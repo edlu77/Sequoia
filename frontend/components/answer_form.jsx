@@ -23,8 +23,8 @@ class AnswerForm extends React.Component {
 
   render() {
     return (
-      <div className="answer-form">
-        <form onSubmit={this.handleSubmit}>
+      <div>
+        <form className="answer-form" onSubmit={this.handleSubmit}>
           <textarea
             value={this.state.body}
             onChange={this.update()} />

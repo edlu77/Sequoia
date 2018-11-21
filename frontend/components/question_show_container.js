@@ -5,19 +5,20 @@ import { fetchQuestion } from '../actions/question_actions';
 import { fetchAnswers } from '../actions/answer_actions';
 
 const mapStateToProps = (state, ownProps) => {
-
   const questionId = ownProps.match.params.questionId;
   const question = state.entities.questions[questionId];
-  const answers = state.entities.answers[questionId];
+  const answers = Object.values(state.entities.answers).filter(answer => answer.question_id == questionId);
+  const users = Object.values(state.entities.users);
 
   return ({
     questionId: questionId,
     question: question,
     answers: answers,
+    users: users,
   })
 };
 
-const mapDispatchToProps = (dispath) => {
+const mapDispatchToProps = (dispatch) => {
   return ({
     fetchQuestion: (id) => dispatch(fetchQuestion(id)),
     fetchAnswers: (id) => dispatch(fetchAnswers(id)),

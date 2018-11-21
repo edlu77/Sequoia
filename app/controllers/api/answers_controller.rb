@@ -3,7 +3,8 @@ class Api::AnswersController < ApplicationController
 
   def index
     question_id = params[:questionId]
-    @answers = Answer.where(question_id: question_id)
+    @answers = Answer.where(question_id: question_id).includes(:question)
+    @users = User.all
     render :index
   end
 

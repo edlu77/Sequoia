@@ -6,17 +6,15 @@ const Navbar = ( {currentUser, logout} ) => {
   const loggedInNav = () => {
     return (
       <nav className="nav-main">
-        <div className="header-list-left group">
-          <span className="header-logo">seQuoia</span>
-          <Link to="/">Home</Link>
-        </div>
+        <ul className="header-list-left group">
+          <li><h1 className="header-logo">seQuoia</h1></li>
+          <li><Link className="home-button" to="/">Home</Link></li>
+        </ul>
 
-        <div className="header-list-right group">
-          <div className="ask-question-button">
-            <Link to="/questions">Add Question</Link>
-          </div>
-          <button className="logout-button" onClick={logout}>Log Out</button>
-        </div>
+        <ul className="header-list-right group">
+          <li><Link className="ask-question-button" to="/questions">Add Question</Link></li>
+          <li><button className="logout-button" onClick={logout}>Log Out</button></li>
+        </ul>
       </nav>
     )
   }

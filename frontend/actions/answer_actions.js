@@ -3,10 +3,10 @@ export const RECEIVE_ALL_ANSWERS = 'RECEIVE_ALL_ANSWERS';
 export const RECEIVE_ANSWER = 'RECEIVE_ANSWER';
 export const REMOVE_ANSWER = 'REMOVE_ANSWER';
 
-const receiveAnswers = (answers) => {
+const receiveAnswers = (payload) => {
   return ({
     type: RECEIVE_ALL_ANSWERS,
-    answers: answers,
+    payload: payload,
   })
 };
 
@@ -26,7 +26,7 @@ const removeAnswer = (answerId) => {
 
 export const fetchAnswers = (questionId) => dispatch => {
   return AnswerApiUtil.fetchAnswers(questionId).then(
-    (answers) => dispatch(receiveAnswers(answers))
+    (payload) => dispatch(receiveAnswers(payload))
   )
 };
 

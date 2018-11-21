@@ -1,0 +1,83 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: white;
+  color: white;
+  border-top: 0;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  min-height: 50px;
+  box-sizing: border-box;
+  z-index: 800;
+  font-size: 14px;
+  box-shadow: 0 3px 2px -2px rgba(200,200,200,0.2);
+}
+
+.nav-main {
+  margin: 0 auto;
+  width: 1000px;
+}
+
+.header-list-left {
+  display: flex;
+  float: left;
+}
+
+.header-logo {
+  display: block;
+  font-size: 25px;
+  font-weight: bolder;
+  color: #b93029;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+.home-button {
+  display: block;
+  margin-left: 8px;
+  min-width: 96px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  line-height: 50px;
+  text-align: center;
+  color: #b93029;
+  border-radius: 3px;
+}
+
+.header-list-right {
+  display: flex;
+  float: right;
+  transform: translateY(50%);
+}
+
+.ask-question-button {
+  display: table-cell;
+  padding: 3px 7px 4px 7px;
+  margin-left: 8px;
+  min-width: 96px;
+  box-sizing: border-box;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 1px 1px 0 rgba(200,200,200,0.2);
+  border: 1px solid #b92b27;
+  border-radius: 3px;
+  background: #b92b27;
+}
+
+.logout-button {
+  display: block;
+  padding: 3px 7px 4px 7px;
+  margin-left: 8px;
+  min-width: 96px;
+  box-sizing: border-box;
+  font-weight: 500;
+  text-align: center;
+  color: black;
+  box-shadow: 0 1px 1px 0 rgba(200,200,200,0.2);
+  border: 1px solid #b92b27;
+  border-radius: 3px;
+}

@@ -2,7 +2,9 @@ class Api::QuestionsController < ApplicationController
   before_action :ensure_logged_in
 
   def index
-    @questions = Question.all
+    @questions = Question.all.includes(:answers)
+    @answers = Answer.all
+    @users = User.all
     render :index
   end
 

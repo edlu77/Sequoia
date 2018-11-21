@@ -3,15 +3,14 @@ export const RECEIVE_ALL_QUESTIONS = 'RECEIVE_ALL_QUESTIONS';
 export const RECEIVE_QUESTION = 'RECEIVE_QUESTION';
 export const REMOVE_QUESTION = 'REMOVE_QUESTION';
 
-const receiveQuestions = (questions) => {
+const receiveQuestions = (payload) => {
   return ({
     type: RECEIVE_ALL_QUESTIONS,
-    questions: questions,
+    payload: payload,
   })
 };
 
 const receiveQuestion = (question) => {
-
   return ({
     type: RECEIVE_QUESTION,
     question: question,
@@ -19,7 +18,6 @@ const receiveQuestion = (question) => {
 };
 
 const removeQuestion = (questionId) => {
-
   return ({
     type: REMOVE_QUESTION,
     questionId: questionId,
@@ -28,7 +26,7 @@ const removeQuestion = (questionId) => {
 
 export const fetchQuestions = () => dispatch => {
   return QuestionApiUtil.fetchQuestions().then(
-    (questions) => dispatch(receiveQuestions(questions))
+    (payload) => dispatch(receiveQuestions(payload))
   )
 };
 

@@ -14,16 +14,17 @@ const App = () => {
       <header className="header">
         <NavbarContainer />
       </header>
-      <br/>
-      <br/>
-      <br/>
-      <Switch>
-        <ProtectedRoute exact path="/" component={FeedIndexContainer}/>
-        <AuthRoute path="/login" component={LoginFormContainer} />
-        <AuthRoute path="/signup" component={SignupFormContainer} />
-        <ProtectedRoute path="/questions/:questionId" component={QuestionShowContainer} />
-        <ProtectedRoute path="/questions" component={CreateQuestionFormContainer} />
-      </Switch>
+      <div className="content">
+        <div className="content-main">
+          <Switch>
+            <ProtectedRoute exact path="/" component={FeedIndexContainer}/>
+            <AuthRoute path="/login" component={LoginFormContainer} />
+            <AuthRoute path="/signup" component={SignupFormContainer} />
+            <ProtectedRoute path="/questions/:questionId" component={QuestionShowContainer} />
+            <ProtectedRoute path="/questions" component={CreateQuestionFormContainer} />
+          </Switch>
+        </div>
+      </div>
     </div>
   );
 };

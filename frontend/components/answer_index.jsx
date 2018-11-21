@@ -5,14 +5,26 @@ class AnswerIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchAnswers(this.props.questionId);
+    this.props.fetchQuestion(this.props.questionId);
   };
+
+  getAuthorFromItem(item) {
+    for (let i = 0; i < this.props.users.length; i++) {
+      if (item.author_id === this.props.users[i].id) {
+        return this.props.users[i]
+      };
+    }
+  };
+
 
   render() {
     const answers = this.props.answers.map ((answer) => {
       return (
         <AnswerIndexItem
           key={answer.id}
-          answer={answer} />
+          answer={answer}
+          question={this.props.question}
+          author={this.getAuthorFromItem(answer)} />
       );
     });
 

@@ -25,14 +25,12 @@ class SessionForm extends React.Component {
   emailInput() {
     if (this.props.formType === 'Sign Up') {
       return (
-        <label>Email:
           <input type="text"
             value={this.state.email}
             onChange={this.update('email')}
             className="login-input"
+            placeholder="Email"
           />
-        <br/>
-        </label>
       )
     }
   };
@@ -61,49 +59,45 @@ class SessionForm extends React.Component {
   render() {
 
     return (
-      <div className="login-signup-form">
-        <div className="sequoia-logo">
-          <span>SeQuoia</span>
-        </div>
-        <h2 className="tagline">A place to ask questions and become smarter (maybe).</h2>
-
-        <form onSubmit={this.handleSubmit} className='login-form-box'>
-          <h2>{this.props.formType}</h2>
-          <br/>
-          {this.props.formType === "Sign Up" ? <Link to="/login">Already a member? Log in!</Link> : <Link to="/signup">Not a member? Sign Up!</Link>}
-          <br/>
-
-        {this.renderErrors()}
-
-          <div>
-
-            <label>Username:
-              <input type="text"
-                value={this.state.username}
-                onChange={this.update('username')}
-                className="login-input"
-              />
-            </label>
-
-            <br/>
-
-            {this.emailInput()}
-
-            <label>Password:
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                className="login-input"
-              />
-            </label>
-
-            <br/>
-            <input className="session-submit" type="submit" value={this.props.formType} />
-            <button className="demo-submit-button" type="submit" onClick={this.handleDemoSubmit}>Demo</button>
+      <div className="login-page">
+        <div className="login-signup-form">
+          <div className="sequoia-logo">
+            <span>SeQuoia</span>
           </div>
+          <h2 className="tagline">A place to ask questions and become smarter (maybe).</h2>
 
-        </form>
-      </div>
+          <form onSubmit={this.handleSubmit} className='login-form-box'>
+            <div className="login-title">{this.props.formType}</div>
+
+          {this.renderErrors()}
+
+            <div className="session-input">
+                <input type="text"
+                  value={this.state.username}
+                  onChange={this.update('username')}
+                  className="login-input"
+                  placeholder="Username"
+                />
+                <br/>
+                {this.emailInput()}
+                <br/>
+                <input type="password"
+                  value={this.state.password}
+                  onChange={this.update('password')}
+                  className="login-input"
+                  placeholder="Password"
+                />
+              <br/>
+
+              {this.props.formType === "Sign Up" ? <Link to="/login">Already a member? Log in!</Link> : <Link to="/signup">Not a member? Sign Up!</Link>}
+              <br/>
+              <button className="demo-submit-button" type="submit" onClick={this.handleDemoSubmit}>Demo</button>
+              <input className="session-submit" type="submit" value={this.props.formType} />
+            </div>
+
+          </form>
+        </div>
+    </div>
     )
   };
 };

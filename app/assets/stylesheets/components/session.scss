@@ -1,0 +1,87 @@
+.login-page {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  margin: 0 auto;
+  background-image: url("../quora.png");
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: 900;
+}
+
+.login-signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  padding-top: 25px;
+  position: absolute;
+  bottom: initial;
+  left: 0;
+  right: 0;
+  width: 650px;
+  background: white;
+  margin: 0 auto;
+  top: 10%;
+}
+
+.login-input {
+  width: 100%;
+  font-size: 15px;
+  line-height: 1.4;
+  padding-left: 8px;
+  padding-right: 8px;
+  min-height: 32px;
+  margin-bottom: 8px;
+  background-color: #EEE;
+  box-sizing: border-box;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 1px rgba(200,200,200,0.3);
+}
+
+.sequoia-logo {
+  font-size: 70px;
+  font-weight: bolder;
+  color: #b93029;
+  margin: 0 auto;
+}
+
+.tagline {
+  font-family: serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: #949494;
+  text-align: center;
+  margin: 8px 0 32px;
+}
+
+.login-form-box {
+  margin: 0 auto;
+  height: 300px;
+}
+
+.login-title {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.session-input {
+  width: 350px;
+}
+
+.session-submit, .demo-submit-button {
+  float: right;
+  font-size: 15px;
+  line-height: 1.4;
+  border-radius: 3px;
+  font-weight: 500;
+  padding: 3px 7px 4px 7px;
+  margin-left: 5px;
+  background: #3a66ad;
+  color: white;
+  box-shadow: 0 1px 1px 0 rgba(200,200,200,0.6);
+}
