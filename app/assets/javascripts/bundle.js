@@ -395,8 +395,9 @@ function (_React$Component) {
         value: this.state.body,
         onChange: this.update()
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        class: "answer-submit-button",
         type: "submit",
-        value: "Comment"
+        value: "Answer"
       })));
     }
   }]);
@@ -1216,6 +1217,8 @@ function (_React$Component) {
       };
       var answers = this.props.answers || [];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "question-show-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show"
       }, question.topic, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), question.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         questionId: this.props.questionId
@@ -1226,7 +1229,7 @@ function (_React$Component) {
         users: this.props.users
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
-      }, "Back to main page"));
+      }, "Back to main page")));
     }
   }]);
 

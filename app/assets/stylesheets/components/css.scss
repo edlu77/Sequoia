@@ -27,11 +27,27 @@
  font-weight: bold;
  font-size: 18px;
  padding: 16px;
- border: 1px solid #efefef;
  border-radius: 4px;
  margin-bottom: 8px;
  border-bottom: 1px solid #e2e2e2;
  background: white;
+}
+
+.feed-answer-index-item {
+ border: 1px solid #efefef;
+}
+
+.question-show-wrapper {
+  width: 1002px;
+  margin: 0 auto;
+  padding-top: 83px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  background-color: white;
 }
 
 .question-show {
@@ -43,7 +59,6 @@
  font-weight: bold;
  font-size: 18px;
  padding: 16px;
- border: 1px solid #efefef;
  border-radius: 4px;
  margin-bottom: 8px;
  border-bottom: 1px solid #e2e2e2;

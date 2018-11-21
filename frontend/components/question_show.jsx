@@ -14,20 +14,22 @@ class QuestionShow extends React.Component {
     const question = this.props.question || {topic: "", title: ""}
     const answers = this.props.answers || []
     return (
-      <div className="question-show">
-        {question.topic}
-        <br/>
-        {question.title}
-        <br/>
-        <CreateAnswerFormContainer
-          questionId={this.props.questionId}/>
-        <br/>
-        <AnswerIndexContainer
-          answers={answers}
-          questionId={this.props.questionId}
-          question={question}
-          users={this.props.users} />
-        <Link to="/">Back to main page</Link>
+      <div className="question-show-wrapper">
+        <div className="question-show">
+          {question.topic}
+          <br/>
+          {question.title}
+          <br/>
+          <CreateAnswerFormContainer
+            questionId={this.props.questionId}/>
+          <br/>
+          <AnswerIndexContainer
+            answers={answers}
+            questionId={this.props.questionId}
+            question={question}
+            users={this.props.users} />
+          <Link to="/">Back to main page</Link>
+        </div>
       </div>
     )
   };

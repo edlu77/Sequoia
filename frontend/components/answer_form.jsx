@@ -28,7 +28,7 @@ class AnswerForm extends React.Component {
           <textarea
             value={this.state.body}
             onChange={this.update()} />
-          <input type="submit" value="Comment" />
+          <input class="answer-submit-button" type="submit" value="Answer" />
         </form>
       </div>
     )
