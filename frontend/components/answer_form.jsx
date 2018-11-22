@@ -1,4 +1,15 @@
 import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import SearchContainer from './search_container'
+
+var quillModules = {
+			toolbar: [
+				['bold', 'italic', 'underline'],
+				[{'list': 'ordered'}, {'list': 'bullet'}],
+				['link']
+			]
+		};
 
 class AnswerForm extends React.Component {
   constructor(props) {
@@ -8,6 +19,7 @@ class AnswerForm extends React.Component {
       questionId: this.props.questionId
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   };
 
   update(field) {
@@ -16,21 +28,34 @@ class AnswerForm extends React.Component {
     };
   };
 
+  stripHtml(html){
+    var temporalDivElement = document.createElement("div");
+    temporalDivElement.innerHTML = html;
+    return temporalDivElement.textContent || temporalDivElement.innerText || "";
+  }
+
   handleSubmit(e) {
     e.preventDefault();
+    this.state.body = this.stripHtml(this.state.body)
     this.props.createAnswer(this.state)
-    this.props.history.push(`/questions/${state.questionId}`)
   }
+
+  handleChange(value) {
+    this.setState({ body: value })
+  }
+
 
   render() {
     return (
       <div>
-        <form className="answer-form" onSubmit={this.handleSubmit}>
-          <textarea
-            value={this.state.body}
-            onChange={this.update("body")} />
-          <input class="answer-submit-button" type="submit" value="Answer" />
-        </form>
+				<SearchContainer />
+        <ReactQuill
+          theme="snow"
+          onChange={this.handleChange}
+          value={this.state.body}
+          formats={this.formats}
+          modules={quillModules} />
+        <button onClick={this.handleSubmit}>Submit</button>
       </div>
     )
   };

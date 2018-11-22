@@ -37,10 +37,10 @@ class FeedIndex extends Component {
     const questions = this.props.questions.map((question) => {
       return (
         <QuestionIndexItem
-          key={question.id}
+          key={question.created_at}
           question={question}
           author={this.getAuthorFromItem(question)}
-          deleteQuestion={this.props.deleteQuestion} />
+          deleteQuestion={this.props.deleteQuestion}/>
       );
     });
 
@@ -48,7 +48,7 @@ class FeedIndex extends Component {
     const answers = this.props.answers.map((answer) => {
       return (
         <FeedAnswerIndexItem
-          key={answer.id}
+          key={answer.created_at}
           answer={answer}
           author={this.getAuthorFromItem(answer)}
           question={this.getQuestionFromAnswer(answer)}

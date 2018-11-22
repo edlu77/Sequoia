@@ -4,13 +4,11 @@ import { Link } from 'react-router-dom';
 const AnswerIndexItem = (props) => {
   return (
     <li className="answer-index-item">
-      <div>
+      <div className="answer-author">
         {props.author.username}
       </div>
       <br/>
-      <div>
-        {props.answer.body}
-      </div>
+      {props.answer.body}
     </li>
   )
 }

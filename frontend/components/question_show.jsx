@@ -16,9 +16,12 @@ class QuestionShow extends React.Component {
     return (
       <div className="question-show-wrapper">
         <div className="question-show">
-          {question.topic}
-          <br/>
-          {question.title}
+          <div className="question-show-topic">
+            {question.topic}
+          </div>
+          <div className="question-show-title">
+            {question.title}
+          </div>
           <br/>
           <CreateAnswerFormContainer
             questionId={this.props.questionId}/>
@@ -28,7 +31,6 @@ class QuestionShow extends React.Component {
             questionId={this.props.questionId}
             question={question}
             users={this.props.users} />
-          <Link to="/">Back to main page</Link>
         </div>
       </div>
     )

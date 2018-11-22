@@ -3,8 +3,8 @@ class Api::QuestionsController < ApplicationController
 
   def index
     @questions = Question.all.includes(:answers)
-    @answers = Answer.all
-    @users = User.all
+    @answers = Answer.all || []
+    @users = User.all || []
     render :index
   end
 
@@ -13,6 +13,8 @@ class Api::QuestionsController < ApplicationController
     @question.author_id = current_user.id
     if @question.save
       @questions = Question.all
+      @answers = []
+      @users = []
       render :index
     else
       render json: @question.errors.full_messages, status: 422

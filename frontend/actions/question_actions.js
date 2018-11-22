@@ -24,6 +24,7 @@ const removeQuestion = (questionId) => {
   })
 };
 
+
 export const fetchQuestions = () => dispatch => {
   return QuestionApiUtil.fetchQuestions().then(
     (payload) => dispatch(receiveQuestions(payload))

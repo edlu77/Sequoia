@@ -19,6 +19,7 @@ class Api::AnswersController < ApplicationController
     @answer.question_id = params[:answer][:questionId]
     if @answer.save
       @answers = Answer.where(question_id: @answer.question_id)
+      @users = []
       render :index
     else
       render json: @answer.errors.full_messages, status: 422
