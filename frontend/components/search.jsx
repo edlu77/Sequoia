@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Search extends React.Component {
   constructor(props) {
@@ -9,26 +9,36 @@ class Search extends React.Component {
   }
 
   handleSearch(e) {
-    this.props.fetchQuestions()
-    const filteredQuestions = this.props.questions.filter(
-      (question) => question.title.includes(e.target.value)
-    )
-    this.setState({
-      query: e.target.value,
-      questions: filteredQuestions
-    })
-    console.log(this.state.questions)
+    if (e.target.value === "") {
+      this.setState({
+        query: "",
+        questions: []
+      })
+    } else {
+      this.props.fetchQuestions()
+      const filteredQuestions = this.props.questions.filter(
+        (question) => question.title.includes(e.target.value)
+      )
+      this.setState({
+        query: e.target.value,
+        questions: filteredQuestions
+      })
+    }
   }
 
-  getTitles(object) {
-    return Object.values(object).map((object) => {
+  getMatches(questions) {
+    return Object.values(questions).map((question) => {
       return (
-        <li><{object.title}</li>
-    )})
+        <li>
+          <Link to={`/questions/${question.id}`}>{question.title}</Link>
+        </li>
+      )
+    })
   }
 
   render() {
-    const titles = this.getTitles(this.state.questions)
+
+    const matches = this.getMatches(this.state.questions)
     return (
       <div className="search-form">
         <form>
@@ -39,7 +49,7 @@ class Search extends React.Component {
             onKeyUp={this.handleSearch} />
         </form>
         <ul>
-          {titles}
+          {matches}
         </ul>
       </div>
     )

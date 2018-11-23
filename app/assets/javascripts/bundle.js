@@ -751,13 +751,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
+  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-question-title"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/questions/".concat(props.question.id)
-  }, props.question.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-body"
   }, props.answer.body));
 };
@@ -1385,9 +1386,100 @@ var Root = function Root(_ref) {
   !*** ./frontend/components/search.jsx ***!
   \****************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/edwardlu/Documents/App Academy/Sequoia/frontend/components/search.jsx: Unexpected token (26:13)\n\n\u001b[0m \u001b[90m 24 | \u001b[39m    \u001b[36mreturn\u001b[39m \u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mvalues(object)\u001b[33m.\u001b[39mmap((object) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 25 | \u001b[39m      \u001b[36mreturn\u001b[39m (\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 | \u001b[39m        \u001b[33m<\u001b[39m\u001b[33mli\u001b[39m\u001b[33m>\u001b[39m\u001b[33m<\u001b[39m{object\u001b[33m.\u001b[39mtitle}\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mli\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 27 | \u001b[39m    )})\u001b[0m\n\u001b[0m \u001b[90m 28 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 29 | \u001b[39m\u001b[0m\n    at _class.raise (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:4021:15)\n    at _class.unexpected (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5330:16)\n    at _class.jsxParseIdentifier (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3500:14)\n    at _class.jsxParseNamespacedName (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3510:23)\n    at _class.jsxParseElementName (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3521:23)\n    at _class.jsxParseOpeningElementAt (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3606:24)\n    at _class.jsxParseElementAt (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3639:33)\n    at _class.jsxParseElementAt (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3655:34)\n    at _class.jsxParseElement (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3708:19)\n    at _class.parseExprAtom (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3715:21)\n    at _class.parseExprSubscripts (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6006:21)\n    at _class.parseMaybeUnary (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5985:21)\n    at _class.parseExprOps (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5894:21)\n    at _class.parseMaybeConditional (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5866:21)\n    at _class.parseMaybeAssign (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5813:21)\n    at _class.parseParenAndDistinguishExpression (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6572:28)\n    at _class.parseExprAtom (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6374:21)\n    at _class.parseExprAtom (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:3717:52)\n    at _class.parseExprSubscripts (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6006:21)\n    at _class.parseMaybeUnary (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5985:21)\n    at _class.parseExprOps (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5894:21)\n    at _class.parseMaybeConditional (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5866:21)\n    at _class.parseMaybeAssign (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5813:21)\n    at _class.parseExpression (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5766:21)\n    at _class.parseReturnStatement (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7607:28)\n    at _class.parseStatementContent (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7287:21)\n    at _class.parseStatement (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7253:17)\n    at _class.parseBlockOrModuleBlockBody (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7805:23)\n    at _class.parseBlockBody (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7792:10)\n    at _class.parseBlock (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7781:10)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+var Search =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Search, _React$Component);
+
+  function Search(props) {
+    var _this;
+
+    _classCallCheck(this, Search);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Search).call(this, props));
+    _this.state = {
+      query: "",
+      questions: _this.props.questions
+    };
+    _this.handleSearch = _this.handleSearch.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(Search, [{
+    key: "handleSearch",
+    value: function handleSearch(e) {
+      if (e.target.value === "") {
+        this.setState({
+          query: "",
+          questions: []
+        });
+      } else {
+        this.props.fetchQuestions();
+        var filteredQuestions = this.props.questions.filter(function (question) {
+          return question.title.includes(e.target.value);
+        });
+        this.setState({
+          query: e.target.value,
+          questions: filteredQuestions
+        });
+      }
+    }
+  }, {
+    key: "getMatches",
+    value: function getMatches(questions) {
+      return Object.values(questions).map(function (question) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/questions/".concat(question.id)
+        }, question.title));
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var matches = this.getMatches(this.state.questions);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "search-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "search-input",
+        type: "text",
+        placeholder: "Search for...",
+        onKeyUp: this.handleSearch
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, matches));
+    }
+  }]);
+
+  return Search;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Search);
 
 /***/ }),
 
@@ -1409,7 +1501,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   var questions = Object.values(state.entities.questions);
-  debugger;
   return {
     query: "",
     questions: questions
