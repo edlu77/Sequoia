@@ -8,7 +8,9 @@ const AnswerIndexItem = (props) => {
         {props.author.username}
       </div>
       <br/>
-      {props.answer.body}
+      <div className="answer-body">
+        {props.answer.body}
+      </div>
     </li>
   )
 }

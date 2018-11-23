@@ -2,7 +2,7 @@
   width: 100%;
   margin: 0 auto;
   padding-top: 83px;
-
+  position: relative;
   padding-bottom: 32px;
   display: flex;
   align-items: center;
@@ -51,4 +51,12 @@
   background: #3a66ad;
   color: white;
   box-shadow: 0 1px 1px 0 rgba(200,200,200,0.6);
+}
+
+.answer-author {
+  font-size: 15px;
+}
+
+.answer-body {
+  font-size: 16px;
 }

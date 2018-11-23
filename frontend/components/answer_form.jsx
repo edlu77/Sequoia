@@ -53,7 +53,7 @@ class AnswerForm extends React.Component {
           value={this.state.body}
           formats={this.formats}
           modules={quillModules} />
-        <button onClick={this.handleSubmit}>Submit</button>
+				<button className="answer-submit-button" onClick={this.handleSubmit}>Submit</button>
       </div>
     )
   };

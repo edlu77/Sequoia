@@ -423,6 +423,7 @@ function (_React$Component) {
         formats: this.formats,
         modules: quillModules
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "answer-submit-button",
         onClick: this.handleSubmit
       }, "Submit"));
     }
@@ -591,7 +592,9 @@ var AnswerIndexItem = function AnswerIndexItem(props) {
     className: "answer-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-author"
-  }, props.author.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), props.answer.body);
+  }, props.author.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "answer-body"
+  }, props.answer.body));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AnswerIndexItem);
@@ -1469,9 +1472,11 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "search-input",
         type: "text",
-        placeholder: "Search for...",
+        placeholder: "Search seQuoia",
         onKeyUp: this.handleSearch
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, matches));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "search-match-list"
+      }, matches));
     }
   }]);
 

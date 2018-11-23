@@ -45,10 +45,10 @@ class Search extends React.Component {
           <input
             className="search-input"
             type="text"
-            placeholder="Search for..."
+            placeholder="Search seQuoia"
             onKeyUp={this.handleSearch} />
         </form>
-        <ul>
+        <ul className="search-match-list">
           {matches}
         </ul>
       </div>
