@@ -751,7 +751,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
