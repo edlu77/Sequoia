@@ -1201,7 +1201,7 @@ var QuestionIndexItem = function QuestionIndexItem(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: props.question.id,
     className: "question-index-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Question added - ", props.question.topic), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Question added"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "question-index-title",
     to: "/questions/".concat(props.question.id)
   }, props.question.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));

@@ -84,8 +84,11 @@
 
 .search-form {
   position: fixed;
-  top: 5px;
-  right: 210px;
+  font-size: 15px;
+  right: 250px;
   border: 1px solid #e2e2e2;
+  border-radius: 4px;
   background: white;
+  width: 250px;
+  padding: 3px 8px;
 }

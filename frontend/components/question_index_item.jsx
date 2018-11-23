@@ -5,7 +5,7 @@ const QuestionIndexItem = (props) => {
   return (
     <li key={props.question.id} className="question-index-item">
       <div>
-        Question added - {props.question.topic}
+        Question added
       </div>
       <br/>
       <Link className="question-index-title" to={`/questions/${props.question.id}`}>
