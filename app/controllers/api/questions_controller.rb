@@ -15,7 +15,7 @@ class Api::QuestionsController < ApplicationController
       @questions = Question.all
       @answers = []
       @users = []
-      render :index
+      render :show
     else
       render json: @question.errors.full_messages, status: 422
     end
@@ -46,7 +46,7 @@ class Api::QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :topic)
+    params.require(:question).permit(:title, :author_id)
   end
 
 end
