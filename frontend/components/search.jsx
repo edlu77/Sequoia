@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 class Search extends React.Component {
@@ -9,16 +10,11 @@ class Search extends React.Component {
 
   handleSearch(e) {
     this.props.fetchQuestions()
-    debugger
-    this.setState({
-      query: e.target.value,
-      questions: this.props.questions,
-    })
-    debugger
     const filteredQuestions = this.props.questions.filter(
-      (question) => question.title.includes(this.state.query)
+      (question) => question.title.includes(e.target.value)
     )
     this.setState({
+      query: e.target.value,
       questions: filteredQuestions
     })
     console.log(this.state.questions)
@@ -27,19 +23,20 @@ class Search extends React.Component {
   getTitles(object) {
     return Object.values(object).map((object) => {
       return (
-        <li>{object.title}</li>
+        <li><{object.title}</li>
     )})
   }
 
   render() {
     const titles = this.getTitles(this.state.questions)
     return (
-      <div>
+      <div className="search-form">
         <form>
           <input
+            className="search-input"
             type="text"
             placeholder="Search for..."
-            onChange={this.handleSearch} />
+            onKeyUp={this.handleSearch} />
         </form>
         <ul>
           {titles}

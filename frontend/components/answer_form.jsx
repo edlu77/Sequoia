@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import ReactQuill from 'react-quill';
-import SearchContainer from './search_container'
 
 var quillModules = {
 			toolbar: [
@@ -48,7 +47,6 @@ class AnswerForm extends React.Component {
   render() {
     return (
       <div>
-				<SearchContainer />
         <ReactQuill
           theme="snow"
           onChange={this.handleChange}

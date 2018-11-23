@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SearchContainer from './search_container'
 
 const Navbar = ( {currentUser, logout} ) => {
 
@@ -12,6 +13,7 @@ const Navbar = ( {currentUser, logout} ) => {
         </ul>
 
         <ul className="header-list-right group">
+          <li><SearchContainer /></li>
           <li><Link className="ask-question-button" to="/questions">Add Question</Link></li>
           <li><button className="logout-button" onClick={logout}>Log Out</button></li>
         </ul>
