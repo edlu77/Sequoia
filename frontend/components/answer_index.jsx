@@ -18,6 +18,7 @@ class AnswerIndex extends React.Component {
 
 
   render() {
+    
     const answers = this.props.answers.map ((answer) => {
       return (
         <AnswerIndexItem

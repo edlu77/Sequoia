@@ -6,25 +6,27 @@ import CreateAnswerFormContainer from './create_answer_form_container';
 class QuestionShow extends React.Component {
 
   componentDidMount() {
+    
     this.props.fetchQuestion(this.props.match.params.questionId);
     this.props.fetchAnswers(this.props.match.params.questionId);
   };
 
   render() {
-    const question = this.props.question || {topic: "", title: ""}
+    
+    const question = this.props.question || { title: ""}
     const answers = this.props.answers || []
     return (
       <div className="question-show-wrapper">
         <div className="question-show">
           <div className="question-show-topic">
-            {question.topic}
           </div>
           <div className="question-show-title">
             {question.title}
           </div>
           <br/>
           <CreateAnswerFormContainer
-            questionId={this.props.questionId}/>
+            questionId={this.props.questionId}
+            answers={answers} />
           <br/>
           <AnswerIndexContainer
             answers={answers}

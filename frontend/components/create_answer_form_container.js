@@ -1,19 +1,22 @@
 import { connect } from 'react-redux';
 import AnswerForm from './answer_form';
-import { createAnswer } from '../actions/answer_actions';
+import { createAnswer, fetchAnswers } from '../actions/answer_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.questionId;
+  const answers = ownProps.answers;
+  
   return ({
     answer: {body: ""},
-    formType: "create answer",
+    answers: answers,
     questionId: questionId,
   })
 };
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    createAnswer: (answer) => dispatch(createAnswer(answer))
+    createAnswer: (answer) => dispatch(createAnswer(answer)),
+    fetchAnswers: (questionId) => dispatch(fetchAnswers(questionId)),
   })
 };
 

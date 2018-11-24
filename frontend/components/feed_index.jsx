@@ -46,6 +46,7 @@ class FeedIndex extends Component {
 
 
     const answers = this.props.answers.map((answer) => {
+      
       return (
         <FeedAnswerIndexItem
           key={answer.created_at}

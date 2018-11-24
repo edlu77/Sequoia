@@ -678,11 +678,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questionId = ownProps.questionId;
+  var answers = ownProps.answers;
   return {
     answer: {
       body: ""
     },
-    formType: "create answer",
+    answers: answers,
     questionId: questionId
   };
 };
@@ -691,6 +692,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createAnswer: function createAnswer(answer) {
       return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["createAnswer"])(answer));
+    },
+    fetchAnswers: function fetchAnswers(questionId) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAnswers"])(questionId));
     }
   };
 };
@@ -1272,7 +1276,6 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var question = this.props.question || {
-        topic: "",
         title: ""
       };
       var answers = this.props.answers || [];
@@ -1282,10 +1285,11 @@ function (_React$Component) {
         className: "question-show"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show-topic"
-      }, question.topic), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show-title"
       }, question.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        questionId: this.props.questionId
+        questionId: this.props.questionId,
+        answers: answers
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         answers: answers,
         questionId: this.props.questionId,
@@ -1323,12 +1327,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var sortByTime = function sortByTime(a, b) {
+  if (a.created_at < b.created_at) {
+    return 1;
+  } else if (a.created_at > b.created_at) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questionId = ownProps.match.params.questionId;
   var question = state.entities.questions[questionId];
   var answers = Object.values(state.entities.answers).filter(function (answer) {
     return answer.question_id == questionId;
-  });
+  }).sort(sortByTime);
   var users = Object.values(state.entities.users);
   return {
     questionId: questionId,
@@ -1731,6 +1745,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_2__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1748,7 +1764,7 @@ var answersReducer = function answersReducer() {
       return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, oldState, action.payload.answers);
 
     case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ANSWER"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, oldState, action.answer);
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, oldState, _defineProperty({}, action.answer.id, action.answer));
 
     case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_ANSWER"]:
       var newState = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, oldState);

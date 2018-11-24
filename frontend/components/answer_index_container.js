@@ -4,6 +4,7 @@ import { fetchQuestion } from '../actions/question_actions';
 import AnswerIndex from './answer_index';
 
 const mapStateToProps = (state, ownProps) => {
+  
   const answers = ownProps.answers || [];
   const questionId = ownProps.questionId;
   const users = ownProps.users;
