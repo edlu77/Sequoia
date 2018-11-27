@@ -4,10 +4,9 @@ import merge from 'lodash/merge';
 
 const answersReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
-  
+
   switch (action.type) {
     case RECEIVE_ALL_QUESTIONS:
-      return merge({}, oldState, action.payload.answers)
     case RECEIVE_ALL_ANSWERS:
       return merge({}, oldState, action.payload.answers)
     case RECEIVE_ANSWER:

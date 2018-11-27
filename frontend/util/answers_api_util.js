@@ -7,7 +7,6 @@ export const fetchAnswers = (questionId) => {
 };
 
 export const fetchAnswer = id => {
-  
   return $.ajax({
     method: "GET",
     url: `/api/answers/${id}`,
@@ -15,7 +14,6 @@ export const fetchAnswer = id => {
 };
 
 export const createAnswer = answer => {
-  
   return $.ajax({
     method: "POST",
     url: '/api/answers',

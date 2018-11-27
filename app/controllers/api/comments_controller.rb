@@ -4,7 +4,7 @@ class Api::CommentsController < ApplicationController
   def index
     @comments = Comment.where(parent_id: params[:parentId])
     @users = User.all
-    render: index
+    render :index
   end
 
   def show

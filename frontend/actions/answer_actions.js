@@ -11,7 +11,6 @@ const receiveAnswers = (payload) => {
 };
 
 const receiveAnswer = (answer) => {
-  
   return ({
     type: RECEIVE_ANSWER,
     answer: answer,
@@ -38,7 +37,7 @@ export const fetchAnswer = (id) => dispatch => {
 };
 
 export const createAnswer = (answer) => dispatch => {
-  
+
   return AnswerApiUtil.createAnswer(answer).then(
     (answer) => dispatch(receiveAnswer(answer))
   )

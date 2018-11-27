@@ -18,13 +18,14 @@ class AnswerIndex extends React.Component {
 
 
   render() {
-    
+
     const answers = this.props.answers.map ((answer) => {
       return (
         <AnswerIndexItem
           key={answer.id}
           answer={answer}
           question={this.props.question}
+          users={this.props.users}
           author={this.getAuthorFromItem(answer)} />
       );
     });
