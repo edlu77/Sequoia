@@ -1711,7 +1711,6 @@ function (_React$Component) {
         query: e.target.value,
         questions: []
       });
-      debugger;
     }
   }, {
     key: "getMatches",

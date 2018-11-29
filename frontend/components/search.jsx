@@ -29,7 +29,6 @@ class Search extends React.Component {
 
   resetSearch(e) {
     this.setState({query: e.target.value, questions: []})
-    debugger
   }
 
   getMatches(questions) {
