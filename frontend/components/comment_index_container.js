@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => {
   const users = ownProps.users;
   const parentId = ownProps.answer.id;
   const comments = Object.values(state.entities.comments)
-  debugger
+
   return ({
     comments: comments,
     users: users,

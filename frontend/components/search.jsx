@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {query: "", questions: this.props.questions}
+    this.state = {query: "", questions: []}
     this.handleSearch = this.handleSearch.bind(this)
+    this.resetSearch = this.resetSearch.bind(this)
   }
 
   handleSearch(e) {
@@ -26,11 +27,19 @@ class Search extends React.Component {
     }
   }
 
+  resetSearch(e) {
+    this.setState({query: e.target.value, questions: []})
+    debugger
+  }
+
   getMatches(questions) {
     return Object.values(questions).map((question) => {
       return (
         <li>
-          <Link to={`/questions/${question.id}`}>{question.title}</Link>
+          <Link
+            onClick={this.resetSearch}
+            to={`/questions/${question.id}`}>{question.title}
+          </Link>
         </li>
       )
     })
@@ -46,7 +55,7 @@ class Search extends React.Component {
             className="search-input"
             type="text"
             placeholder="Search seQuoia"
-            onKeyUp={this.handleSearch} />
+            onKeyDown={this.handleSearch} />
         </form>
         <ul className="search-match-list">
           {matches}

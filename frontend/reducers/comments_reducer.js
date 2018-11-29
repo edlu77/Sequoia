@@ -3,7 +3,6 @@ import { RECEIVE_ANSWER } from '../actions/answer_actions';
 import merge from 'lodash/merge';
 
 const commentsReducer = (oldState = {}, action) => {
-  debugger
   Object.freeze(oldState);
 
   switch (action.type) {

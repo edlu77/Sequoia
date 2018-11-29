@@ -810,7 +810,6 @@ function (_React$Component) {
           author: _this.getAuthorFromItem(comment)
         });
       });
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comment-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -847,7 +846,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var users = ownProps.users;
   var parentId = ownProps.answer.id;
   var comments = Object.values(state.entities.comments);
-  debugger;
   return {
     comments: comments,
     users: users,
@@ -1217,6 +1215,9 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     processForm: function processForm(user) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
+    },
+    login: function login(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
     }
   };
@@ -1677,9 +1678,10 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Search).call(this, props));
     _this.state = {
       query: "",
-      questions: _this.props.questions
+      questions: []
     };
     _this.handleSearch = _this.handleSearch.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.resetSearch = _this.resetSearch.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -1703,10 +1705,22 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "resetSearch",
+    value: function resetSearch(e) {
+      this.setState({
+        query: e.target.value,
+        questions: []
+      });
+      debugger;
+    }
+  }, {
     key: "getMatches",
     value: function getMatches(questions) {
+      var _this2 = this;
+
       return Object.values(questions).map(function (question) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          onClick: _this2.resetSearch,
           to: "/questions/".concat(question.id)
         }, question.title));
       });
@@ -1721,7 +1735,7 @@ function (_React$Component) {
         className: "search-input",
         type: "text",
         placeholder: "Search seQuoia",
-        onKeyUp: this.handleSearch
+        onKeyDown: this.handleSearch
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "search-match-list"
       }, matches));
@@ -1872,7 +1886,7 @@ function (_React$Component) {
         username: "DemoUser",
         password: "starwars"
       });
-      this.props.processForm(user);
+      this.props.login(user);
     }
   }, {
     key: "render",
@@ -1947,6 +1961,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     errors: state.errors.session,
@@ -1958,6 +1973,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     processForm: function processForm(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["signup"])(user));
+    },
+    login: function login(user) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
     }
   };
 };
@@ -2036,7 +2054,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var commentsReducer = function commentsReducer() {
   var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
   Object.freeze(oldState);
 
   switch (action.type) {

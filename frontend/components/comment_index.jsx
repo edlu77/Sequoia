@@ -17,7 +17,10 @@ class CommentIndex extends React.Component {
   };
 
   render() {
-    const ownComments = this.props.comments.filter((comment) => comment.parent_id === this.props.parentId)
+    const ownComments = this.props.comments.filter(
+      (comment) => comment.parent_id === this.props.parentId
+    )
+
     const coms = ownComments.map((comment) => {
       return (
         <CommentIndexItem
@@ -26,7 +29,6 @@ class CommentIndex extends React.Component {
       )
     })
 
-    debugger
     return(
       <div className="comment-index">
 

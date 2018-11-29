@@ -53,7 +53,7 @@ class SessionForm extends React.Component {
   handleDemoSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, {username: "DemoUser", password: "starwars"});
-    this.props.processForm(user);
+    this.props.login(user);
   }
 
   render() {
