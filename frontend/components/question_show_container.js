@@ -17,7 +17,8 @@ var sortByTime = function(a, b) {
 const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.match.params.questionId;
   const question = state.entities.questions[questionId];
-  const answers = Object.values(state.entities.answers).filter(answer => answer.question_id == questionId).sort(sortByTime);
+  const answers = Object.values(state.entities.answers).filter(
+    answer => answer.question_id == questionId).sort(sortByTime);
   const users = Object.values(state.entities.users);
 
   return ({

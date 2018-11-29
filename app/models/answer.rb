@@ -11,4 +11,9 @@ class Answer < ApplicationRecord
   primary_key: :id,
   class_name: :Question
 
+  has_many :comments,
+  foreign_key: :parent_id,
+  primary_key: :id,
+  class_name: :Comment
+
 end

@@ -9,5 +9,6 @@ Rails.application.routes.draw do
       resources :answers, only: [:index]
     end
     resources :answers, only: [:create, :show, :update, :destroy]
+    resources :comments, only: [:index, :create, :show, :update, :destroy]
   end
 end

@@ -4,6 +4,6 @@ class Comment < ApplicationRecord
   belongs_to :parent,
   foreign_key: :parent_id,
   primary_key: :id,
-  class_name: :Question
+  class_name: :Answer
 
 end
