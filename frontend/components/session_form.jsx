@@ -96,6 +96,7 @@ class SessionForm extends React.Component {
             </div>
 
           </form>
+          <a href="https://github.com/edlu77/Sequoia/blob/master/README.md">LINK TO README</a>
         </div>
     </div>
     )

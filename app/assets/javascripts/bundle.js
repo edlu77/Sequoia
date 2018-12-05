@@ -1931,7 +1931,9 @@ function (_React$Component) {
         className: "session-submit",
         type: "submit",
         value: this.props.formType
-      })))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://github.com/edlu77/Sequoia/blob/master/README.md"
+      }, "LINK TO README")));
     }
   }]);
 
