@@ -5,7 +5,7 @@ import { fetchComments } from '../actions/comment_actions';
 const mapStateToProps = (state, ownProps) => {
   const users = ownProps.users;
   const parentId = ownProps.answer.id;
-  const comments = Object.values(state.entities.comments)
+  const comments = Object.values(state.entities.comments);
 
   return ({
     comments: comments,

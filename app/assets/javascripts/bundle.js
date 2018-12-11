@@ -1155,6 +1155,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _question_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./question_index_item */ "./frontend/components/question_index_item.jsx");
 /* harmony import */ var _feed_answer_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./feed_answer_index_item */ "./frontend/components/feed_answer_index_item.jsx");
+/* harmony import */ var _comment_index_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./comment_index_container */ "./frontend/components/comment_index_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1172,6 +1173,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1241,13 +1243,16 @@ function (_Component) {
         });
       });
       var answers = this.props.answers.map(function (answer) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: answer.created_at,
           answer: answer,
           author: _this.getAuthorFromItem(answer),
           question: _this.getQuestionFromAnswer(answer),
           body: answer.body
-        });
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          answer: answer,
+          users: _this.props.users
+        }));
       });
       var combinedFeed = questions.concat(answers);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QuestionIndexItem from './question_index_item';
 import FeedAnswerIndexItem from './feed_answer_index_item';
+import CommentIndexContainer from './comment_index_container';
 
 class FeedIndex extends Component {
   componentDidMount() {
@@ -46,14 +47,19 @@ class FeedIndex extends Component {
 
 
     const answers = this.props.answers.map((answer) => {
-      
+
       return (
-        <FeedAnswerIndexItem
-          key={answer.created_at}
-          answer={answer}
-          author={this.getAuthorFromItem(answer)}
-          question={this.getQuestionFromAnswer(answer)}
-          body={answer.body} />
+        <div>
+          <FeedAnswerIndexItem
+            key={answer.created_at}
+            answer={answer}
+            author={this.getAuthorFromItem(answer)}
+            question={this.getQuestionFromAnswer(answer)}
+            body={answer.body} />
+          <CommentIndexContainer
+            answer={answer}
+            users={this.props.users}/>
+        </div>
       );
     });
 
