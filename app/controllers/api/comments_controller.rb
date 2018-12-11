@@ -15,7 +15,8 @@ class Api::CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.author_id = current_user.id
-    @comment.parent_id = params[:parentId]
+    @comment.parent_id = params[:comment][:parentId]
+    debugger
     if @comment.save
       @comments = Comment.where(parent_id: @comment.parent_id)
       @users = []

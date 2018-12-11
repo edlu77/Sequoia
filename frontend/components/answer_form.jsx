@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill';
 
 var quillModules = {
 			toolbar: [
-				['bold', 'italic', 'underline'],
+				['bold', 'italic'],
 				[{'list': 'ordered'}, {'list': 'bullet'}],
 				['link']
 			]
@@ -22,7 +22,7 @@ class AnswerForm extends React.Component {
   };
 
   update(field) {
-		
+
     return (e) => {
       this.setState({[field]: e.target.value});
     };
@@ -35,7 +35,7 @@ class AnswerForm extends React.Component {
   }
 
   handleSubmit(e) {
-		
+
     e.preventDefault();
     this.state.body = this.stripHtml(this.state.body)
     this.props.createAnswer(this.state)
@@ -47,7 +47,7 @@ class AnswerForm extends React.Component {
 
 
   render() {
-		
+
     return (
       <div>
         <ReactQuill

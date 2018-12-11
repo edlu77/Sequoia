@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentIndexItem from './comment_index_item';
-// import CreateCommentFormContainer from './create_comment_form_container';
+import CreateCommentFormContainer from './create_comment_form_container';
 
 class CommentIndex extends React.Component {
 
@@ -21,7 +21,7 @@ class CommentIndex extends React.Component {
       (comment) => comment.parent_id === this.props.parentId
     )
 
-    const coms = ownComments.map((comment) => {
+    const commentIndexItems = ownComments.map((comment) => {
       return (
         <CommentIndexItem
           comment={comment}
@@ -31,9 +31,10 @@ class CommentIndex extends React.Component {
 
     return(
       <div className="comment-index">
-
+        <CreateCommentFormContainer
+          parentId = {this.props.parentId}/>
         <ul className="comments-list">
-          {coms}
+          {commentIndexItems}
         </ul>
       </div>
     )
