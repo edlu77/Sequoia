@@ -471,8 +471,8 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
-      this.state.body = this.stripHtml(this.state.body);
+      e.preventDefault(); // this.state.body = this.stripHtml(this.state.body)
+
       this.props.createAnswer(this.state);
     }
   }, {
@@ -678,8 +678,11 @@ var AnswerIndexItem = function AnswerIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-author"
   }, props.author.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-body"
-  }, props.answer.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "answer-body",
+    dangerouslySetInnerHTML: {
+      __html: props.answer.body
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
   }));

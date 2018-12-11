@@ -37,7 +37,7 @@ class AnswerForm extends React.Component {
   handleSubmit(e) {
 
     e.preventDefault();
-    this.state.body = this.stripHtml(this.state.body)
+    // this.state.body = this.stripHtml(this.state.body)
     this.props.createAnswer(this.state)
   }
 
