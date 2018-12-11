@@ -2034,7 +2034,9 @@ function (_React$Component) {
     key: "renderErrors",
     value: function renderErrors() {
       var errors = this.props.errors.responseJSON || [];
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errors.map(function (error, i) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "session-errors-list"
+      }, errors.map(function (error, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: "error-".concat(i)
         }, error);
