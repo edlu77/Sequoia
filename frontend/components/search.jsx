@@ -9,12 +9,11 @@ class Search extends React.Component {
     this.resetSearch = this.resetSearch.bind(this)
   }
 
+
+
   handleSearch(e) {
     if (e.target.value === "") {
-      this.setState({
-        query: "",
-        questions: []
-      })
+      this.resetSearch(e);
     } else {
       this.props.fetchQuestions()
       const filteredQuestions = this.props.questions.filter(
@@ -54,7 +53,7 @@ class Search extends React.Component {
             className="search-input"
             type="text"
             placeholder="Search seQuoia"
-            onKeyDown={this.handleSearch} />
+            onKeyUp={this.handleSearch} />
         </form>
         <ul className="search-match-list">
           {matches}

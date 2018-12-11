@@ -1848,10 +1848,7 @@ function (_React$Component) {
     key: "handleSearch",
     value: function handleSearch(e) {
       if (e.target.value === "") {
-        this.setState({
-          query: "",
-          questions: []
-        });
+        this.resetSearch(e);
       } else {
         this.props.fetchQuestions();
         var filteredQuestions = this.props.questions.filter(function (question) {
@@ -1893,7 +1890,7 @@ function (_React$Component) {
         className: "search-input",
         type: "text",
         placeholder: "Search seQuoia",
-        onKeyDown: this.handleSearch
+        onKeyUp: this.handleSearch
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "search-match-list"
       }, matches));
