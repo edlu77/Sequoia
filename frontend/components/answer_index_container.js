@@ -20,7 +20,6 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     fetchAnswers: (id) => dispatch(fetchAnswers(id)),
     fetchQuestion: (id) => dispatch(fetchQuestion(id)),
-    fetchComments: (id) => dispatch(fetchComments(id)),
   });
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FeedAnswerIndexItem = (props) => {
-  
+
   return (
     <li className="feed-answer-index-item">
       <div className="answer-question-title">
@@ -11,8 +11,8 @@ const FeedAnswerIndexItem = (props) => {
         </Link>
       </div>
       <br/>
-      <div className="answer-body">
-        {props.answer.body}
+      <div className="answer-body"
+        dangerouslySetInnerHTML={{__html: props.answer.body}}>
       </div>
     </li>
   )

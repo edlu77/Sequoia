@@ -5,7 +5,6 @@ import merge from 'lodash/merge';
 
 const usersReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
-
   switch (action.type) {
     case RECEIVE_ALL_QUESTIONS:
     case RECEIVE_ALL_ANSWERS:

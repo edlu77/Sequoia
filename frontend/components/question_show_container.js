@@ -20,7 +20,6 @@ const mapStateToProps = (state, ownProps) => {
   const answers = Object.values(state.entities.answers).filter(
     answer => answer.question_id == questionId).sort(sortByTime);
   const users = Object.values(state.entities.users);
-
   return ({
     questionId: questionId,
     question: question,

@@ -6,13 +6,13 @@ import CreateAnswerFormContainer from './create_answer_form_container';
 class QuestionShow extends React.Component {
 
   componentDidMount() {
-    
+
     this.props.fetchQuestion(this.props.match.params.questionId);
     this.props.fetchAnswers(this.props.match.params.questionId);
   };
 
   render() {
-    
+
     const question = this.props.question || { title: ""}
     const answers = this.props.answers || []
     return (

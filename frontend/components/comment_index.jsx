@@ -14,6 +14,7 @@ class CommentIndex extends React.Component {
         return this.props.users[i]
       };
     };
+    return {username: ""}
   };
 
   render() {

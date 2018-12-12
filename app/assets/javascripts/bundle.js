@@ -444,6 +444,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AnswerForm).call(this, props));
     _this.state = {
+      currentUser: _this.props.currentUser,
       body: _this.props.answer.body,
       questionId: _this.props.questionId
     };
@@ -462,14 +463,12 @@ function (_React$Component) {
       };
     }
   }, {
-    key: "stripHtml",
-    value: function stripHtml(html) {
-      var temporalDivElement = document.createElement("div");
-      temporalDivElement.innerHTML = html;
-      return temporalDivElement.textContent || temporalDivElement.innerText || "";
-    }
-  }, {
     key: "handleSubmit",
+    // stripHtml(html){
+    //   var temporalDivElement = document.createElement("div");
+    //   temporalDivElement.innerHTML = html;
+    //   return temporalDivElement.textContent || temporalDivElement.innerText || "";
+    // }
     value: function handleSubmit(e) {
       e.preventDefault(); // this.state.body = this.stripHtml(this.state.body)
 
@@ -485,7 +484,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.currentUser.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
         theme: "snow",
         onChange: this.handleChange,
         value: this.state.body,
@@ -634,20 +633,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchQuestion: function fetchQuestion(id) {
       return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["fetchQuestion"])(id));
-    },
-    fetchComments: function (_fetchComments) {
-      function fetchComments(_x) {
-        return _fetchComments.apply(this, arguments);
-      }
-
-      fetchComments.toString = function () {
-        return _fetchComments.toString();
-      };
-
-      return fetchComments;
-    }(function (id) {
-      return dispatch(fetchComments(id));
-    })
+    }
   };
 };
 
@@ -912,6 +898,9 @@ function (_React$Component) {
       }
 
       ;
+      return {
+        username: ""
+      };
     }
   }, {
     key: "render",
@@ -1030,12 +1019,15 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questionId = ownProps.questionId;
   var answers = ownProps.answers;
+  var currentUserId = state.session.id;
+  var currentUser = state.entities.users[currentUserId];
   return {
     answer: {
       body: ""
     },
     answers: answers,
-    questionId: questionId
+    questionId: questionId,
+    currentUser: currentUser
   };
 };
 
@@ -1151,8 +1143,11 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/questions/".concat(props.question.id)
   }, props.question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-body"
-  }, props.answer.body));
+    className: "answer-body",
+    dangerouslySetInnerHTML: {
+      __html: props.answer.body
+    }
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (FeedAnswerIndexItem);

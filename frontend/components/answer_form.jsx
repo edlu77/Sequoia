@@ -14,8 +14,9 @@ class AnswerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+			currentUser: this.props.currentUser,
       body: this.props.answer.body,
-      questionId: this.props.questionId
+      questionId: this.props.questionId,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,11 +29,11 @@ class AnswerForm extends React.Component {
     };
   };
 
-  stripHtml(html){
-    var temporalDivElement = document.createElement("div");
-    temporalDivElement.innerHTML = html;
-    return temporalDivElement.textContent || temporalDivElement.innerText || "";
-  }
+  // stripHtml(html){
+  //   var temporalDivElement = document.createElement("div");
+  //   temporalDivElement.innerHTML = html;
+  //   return temporalDivElement.textContent || temporalDivElement.innerText || "";
+  // }
 
   handleSubmit(e) {
 
@@ -50,6 +51,8 @@ class AnswerForm extends React.Component {
 
     return (
       <div>
+				{this.state.currentUser.username}
+
         <ReactQuill
           theme="snow"
           onChange={this.handleChange}
