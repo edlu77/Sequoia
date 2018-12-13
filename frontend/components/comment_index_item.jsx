@@ -1,6 +1,7 @@
 import React from 'react';
 
 const CommentIndexItem = (props) => {
+  const date = new Date(props.comment.created_at)
 
   return (
     <li className="comment-index-item">
@@ -8,7 +9,7 @@ const CommentIndexItem = (props) => {
         {props.author.username}
       </div>
       <div className="comment-created-time">
-        {props.comment.created_at}
+        {date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate()}
       </div>
 
       <div className="comment-body">

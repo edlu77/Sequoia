@@ -1018,13 +1018,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CommentIndexItem = function CommentIndexItem(props) {
+  var date = new Date(props.comment.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "comment-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "comment-author"
   }, props.author.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "comment-created-time"
-  }, props.comment.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "comment-body"
   }, props.comment.body));
 };
