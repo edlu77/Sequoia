@@ -680,6 +680,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AnswerIndexItem = function AnswerIndexItem(props) {
+  var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "answer-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -688,7 +689,7 @@ var AnswerIndexItem = function AnswerIndexItem(props) {
     className: "answer-submit-time"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "feed-answer-created-time"
-  }, "Answered at ".concat(props.answer.created_at))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Answered at ".concat(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-body",
     dangerouslySetInnerHTML: {
       __html: props.answer.body
@@ -1180,6 +1181,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
+  var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1193,7 +1195,7 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     className: "feed-answer-author-name"
   }, props.author.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "feed-answer-created-time"
-  }, "Answered at ".concat(props.answer.created_at))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Answered at ".concat(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-body",
     dangerouslySetInnerHTML: {
       __html: props.answer.body

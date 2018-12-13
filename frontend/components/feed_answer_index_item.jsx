@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import CommentIndexContainer from './comment_index_container';
 
 const FeedAnswerIndexItem = (props) => {
+  const date = new Date(props.answer.created_at)
+
 
   return (
     <li className="feed-answer-index-item">
@@ -15,7 +17,7 @@ const FeedAnswerIndexItem = (props) => {
       <div className="feed-answer-author-name">
         {props.author.username}
         <div className="feed-answer-created-time">
-          {`Answered at ${props.answer.created_at}`}
+          {`Answered at ${date.getFullYear()+'-' + (date.getMonth()+1) + '-'+date.getDate()}`}
         </div>
       </div>
 
