@@ -1,19 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CommentIndexContainer from './comment_index_container';
 
 const FeedAnswerIndexItem = (props) => {
 
   return (
     <li className="feed-answer-index-item">
+      <div className="answer-topic-list">Answer</div>
       <div className="answer-question-title">
-        <Link to={`/questions/${props.question.id}`}>
+        <Link className="feed-answer-title" to={`/questions/${props.question.id}`}>
           {props.question.title}
         </Link>
       </div>
-      <br/>
+      <div className="feed-answer-author-name">
+        {props.author.username}
+        <div className="feed-answer-created-time">
+          {`Answered at ${props.answer.created_at}`}
+        </div>
+      </div>
+
       <div className="answer-body"
         dangerouslySetInnerHTML={{__html: props.answer.body}}>
       </div>
+      <CommentIndexContainer
+        answer={props.answer}
+        users={props.users}/>
     </li>
   )
 }

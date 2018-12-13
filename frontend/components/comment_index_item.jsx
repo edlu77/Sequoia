@@ -7,7 +7,10 @@ const CommentIndexItem = (props) => {
       <div className="comment-author">
         {props.author.username}
       </div>
-      <br/>
+      <div className="comment-created-time">
+        {props.comment.created_at}
+      </div>
+
       <div className="comment-body">
         {props.comment.body}
       </div>

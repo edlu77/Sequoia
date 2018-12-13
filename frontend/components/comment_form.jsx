@@ -20,6 +20,7 @@ class CommentForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.createComment(this.state);
+    this.setState({body: ""});
   }
 
   handleChange(value) {
@@ -29,13 +30,15 @@ class CommentForm extends React.Component {
   render() {
     return (
       <div className="comment-submit-form">
-        <textarea
+        <input
+          type="text"
           className="comment-submit-area"
           onChange={this.update("body")}
+          placeholder="Add a comment..."
           value={this.state.body}>
-        </textarea>
+        </input>
 
-        <button className="comment-submit-button" onClick={this.handleSubmit}>Submit</button>
+        <button className="comment-submit-button" onClick={this.handleSubmit}>Comment</button>
       </div>
     )
   }

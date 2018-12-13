@@ -8,7 +8,12 @@ const AnswerIndexItem = (props) => {
       <div className="answer-author">
         {props.author.username}
       </div>
-      <br/>
+      <div className="answer-submit-time">
+        <div className="feed-answer-created-time">
+          {`Answered at ${props.answer.created_at}`}
+        </div>
+      </div>
+
       <div className="answer-body"
         dangerouslySetInnerHTML={{__html: props.answer.body}}>
       </div>

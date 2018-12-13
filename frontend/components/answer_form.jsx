@@ -23,7 +23,6 @@ class AnswerForm extends React.Component {
   };
 
   update(field) {
-
     return (e) => {
       this.setState({[field]: e.target.value});
     };
@@ -36,10 +35,10 @@ class AnswerForm extends React.Component {
   // }
 
   handleSubmit(e) {
-
     e.preventDefault();
     // this.state.body = this.stripHtml(this.state.body)
     this.props.createAnswer(this.state)
+		this.setState({body: ""})
   }
 
   handleChange(value) {
@@ -50,15 +49,20 @@ class AnswerForm extends React.Component {
   render() {
 
     return (
-      <div>
-				{this.state.currentUser.username}
+      <div className="answer-submit-form">
+
+				<div className="answer-submit-form-userinfo">
+					{this.state.currentUser.username}
+				</div>
 
         <ReactQuill
+					className="answer-submit-form-input"
           theme="snow"
           onChange={this.handleChange}
           value={this.state.body}
           formats={this.formats}
-          modules={quillModules} />
+          modules={quillModules}
+					placeholder="Write your answer" />
 				<button className="answer-submit-button" onClick={this.handleSubmit}>Submit</button>
       </div>
     )

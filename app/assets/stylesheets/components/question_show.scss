@@ -11,6 +11,8 @@
 }
 
 .question-show {
+  display: flex;
+  flex-direction: column;
  min-height: 1px;
  margin-left: 165px;
  width: 602px;
@@ -35,22 +37,38 @@
 .answer-text-input {
  width: 100%;
  height: 200px;
- font-weight: normal;
  border: 1px solid #e2e2e2;
  border-radius: 3px;
 }
 
+.answer-submit-form {
+  width: 100%;
+  background: #fafafa;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+}
+
+.answer-submit-form-userinfo {
+  padding: 10px 8px;
+  border-radius: 3px 3px 0 0;
+  min-height: 39px;
+}
+
 .answer-submit-button {
-  float: left;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.4;
   border-radius: 3px;
   font-weight: 500;
   padding: 3px 7px 4px 7px;
   margin-left: 5px;
-  background: #3a66ad;
+  background: #3e78ad;
+  border: 1px solid #3a66ad;
   color: white;
   box-shadow: 0 1px 1px 0 rgba(200,200,200,0.6);
+}
+
+.answer-submit-button:active {
+  background: #54a5ef;
 }
 
 .answer-author {

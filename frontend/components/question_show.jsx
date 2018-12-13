@@ -23,11 +23,11 @@ class QuestionShow extends React.Component {
           <div className="question-show-title">
             {question.title}
           </div>
-          <br/>
+
           <CreateAnswerFormContainer
             questionId={this.props.questionId}
             answers={answers} />
-          <br/>
+
           <AnswerIndexContainer
             answers={answers}
             questionId={this.props.questionId}

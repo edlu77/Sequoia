@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import QuestionIndexItem from './question_index_item';
 import FeedAnswerIndexItem from './feed_answer_index_item';
-import CommentIndexContainer from './comment_index_container';
+
 
 class FeedIndex extends Component {
+
   componentDidMount() {
     this.props.fetchQuestions();
   }
@@ -34,6 +35,23 @@ class FeedIndex extends Component {
     }
   };
 
+  filterAnswers(array) {
+    let result = [];
+    let questions = [];
+    for (let i = 0; i < array.length; i++) {
+      debugger
+      if (questions.includes(array[i].question_id)) {
+        debugger
+        continue
+      } else {
+        debugger
+        result.push(array[i]);
+        questions.push(array[i].question_id)
+      }
+    }
+    return result;
+  }
+
   render() {
     const questions = this.props.questions.map((question) => {
       return (
@@ -45,25 +63,22 @@ class FeedIndex extends Component {
       );
     });
 
+    let filteredAnswers = this.filterAnswers(this.props.answers) || []
 
-    const answers = this.props.answers.map((answer) => {
-
+    const answers = filteredAnswers.map((answer) => {
       return (
-        <div>
-          <FeedAnswerIndexItem
-            key={answer.created_at}
-            answer={answer}
-            author={this.getAuthorFromItem(answer)}
-            question={this.getQuestionFromAnswer(answer)}
-            body={answer.body} />
-          <CommentIndexContainer
-            answer={answer}
-            users={this.props.users}/>
-        </div>
+        <FeedAnswerIndexItem
+          key={answer.created_at}
+          answer={answer}
+          author={this.getAuthorFromItem(answer)}
+          question={this.getQuestionFromAnswer(answer)}
+          body={answer.body}
+          users={this.props.users} />
       );
     });
 
-    const combinedFeed = questions.concat(answers)
+
+    let combinedFeed = answers.concat(questions)
 
     return (
       <div className="feed-index-wrapper">

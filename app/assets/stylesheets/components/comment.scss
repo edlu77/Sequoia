@@ -1,0 +1,40 @@
+.comment-index {
+  font-size: 13px;
+  padding: 16px;
+  background: #fafafa;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  border-color: #efefef;
+  min-height: 32px;
+}
+
+.comment-author {
+  font-weight: bold;
+}
+
+.comment-submit-form {
+  display: flex;
+}
+
+.comment-submit-area {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+}
+
+.comment-submit-button {
+  font-size: 13px;
+  line-height: 1.4;
+  border-radius: 3px;
+  font-weight: 500;
+  padding: 3px 6px 4px 6px;
+  margin-left: 5px;
+  background: #3e78ad;
+  border: 1px solid #3a66ad;
+  color: white;
+  box-shadow: 0 1px 1px 0 rgba(200,200,200,0.6);
+}
+
+.comment-submit-button:active {
+  background: #54a5ef;
+}
