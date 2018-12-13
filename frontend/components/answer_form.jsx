@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 
-var quillModules = {
+let quillModules = {
 			toolbar: [
 				['bold', 'italic'],
 				[{'list': 'ordered'}, {'list': 'bullet'}],
@@ -22,21 +22,8 @@ class AnswerForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   };
 
-  update(field) {
-    return (e) => {
-      this.setState({[field]: e.target.value});
-    };
-  };
-
-  // stripHtml(html){
-  //   var temporalDivElement = document.createElement("div");
-  //   temporalDivElement.innerHTML = html;
-  //   return temporalDivElement.textContent || temporalDivElement.innerText || "";
-  // }
-
   handleSubmit(e) {
     e.preventDefault();
-    // this.state.body = this.stripHtml(this.state.body)
     this.props.createAnswer(this.state)
 		this.setState({body: ""})
   }

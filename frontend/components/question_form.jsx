@@ -34,16 +34,7 @@ class QuestionForm extends React.Component {
             type="text"
             value={this.state.title}
             onChange={this.update('title')}
-            placeholder="Start your question with 'What', 'How', 'Why', etc."/>
-
-          <input
-            className="question-topic-input"
-            type="text"
-            value={this.state.topic}
-            onChange={this.update('topic')}
-            placeholder="Enter question topic (optional)"/>
-
-
+            placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."/>
 
           <div className="question-form-footer">
             <input className="question-submit-button" type="submit" value="Add Question" />
@@ -54,5 +45,11 @@ class QuestionForm extends React.Component {
     );
   };
 };
+// <input
+//   className="question-topic-input"
+//   type="text"
+//   value={this.state.topic}
+//   onChange={this.update('topic')}
+//   placeholder="Enter question topic (optional)"/>
 
 export default QuestionForm;

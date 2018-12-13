@@ -403,8 +403,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_quill__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_quill__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -454,24 +452,9 @@ function (_React$Component) {
   }
 
   _createClass(AnswerForm, [{
-    key: "update",
-    value: function update(field) {
-      var _this2 = this;
-
-      return function (e) {
-        _this2.setState(_defineProperty({}, field, e.target.value));
-      };
-    }
-  }, {
     key: "handleSubmit",
-    // stripHtml(html){
-    //   var temporalDivElement = document.createElement("div");
-    //   temporalDivElement.innerHTML = html;
-    //   return temporalDivElement.textContent || temporalDivElement.innerText || "";
-    // }
     value: function handleSubmit(e) {
-      e.preventDefault(); // this.state.body = this.stripHtml(this.state.body)
-
+      e.preventDefault();
       this.props.createAnswer(this.state);
       this.setState({
         body: ""
@@ -1614,13 +1597,7 @@ function (_React$Component) {
         type: "text",
         value: this.state.title,
         onChange: this.update('title'),
-        placeholder: "Start your question with 'What', 'How', 'Why', etc."
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "question-topic-input",
-        type: "text",
-        value: this.state.topic,
-        onChange: this.update('topic'),
-        placeholder: "Enter question topic (optional)"
+        placeholder: "Start your question with \"What\", \"How\", \"Why\", etc."
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-form-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -1637,7 +1614,13 @@ function (_React$Component) {
   return QuestionForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-;
+; // <input
+//   className="question-topic-input"
+//   type="text"
+//   value={this.state.topic}
+//   onChange={this.update('topic')}
+//   placeholder="Enter question topic (optional)"/>
+
 /* harmony default export */ __webpack_exports__["default"] = (QuestionForm);
 
 /***/ }),

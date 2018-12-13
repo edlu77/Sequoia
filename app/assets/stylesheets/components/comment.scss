@@ -17,9 +17,12 @@
 }
 
 .comment-submit-area {
+  word-break: break-word;
+  padding: 3px 5px 4px;
   width: 100%;
   background: #fff;
   border: 1px solid #e2e2e2;
+  border-radius: 3px;
 }
 
 .comment-submit-button {
