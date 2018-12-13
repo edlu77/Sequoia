@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchContainer from './search_container'
 
-const Navbar = ( {currentUser, logout} ) => {
+const Navbar = ( {currentUser, logout, openForm} ) => {
 
   const loggedInNav = () => {
     return (
@@ -22,7 +22,7 @@ const Navbar = ( {currentUser, logout} ) => {
             <SearchContainer />
           </li>
           <li className="header-right-link">
-            <Link className="ask-question-button" to="/questions">Add Question</Link>
+            {openForm}
           </li>
           <li className="header-right-link">
             <button className="logout-button" onClick={logout}>Log Out</button>

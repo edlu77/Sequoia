@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Navbar from './navbar';
 import { logout } from '../actions/session_actions';
+import {openModal} from '../actions/modal_actions';
 
 const mapStateToProps = (state) => {
   return ({
@@ -11,7 +12,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    logout: () => dispatch(logout())
+    logout: (() => dispatch(logout())),
+    openForm: (
+      <button className="ask-question-button" onClick={() => dispatch(openModal('createQuestion'))}>
+        Add Question
+      </button>
+    )
 
   });
 };
