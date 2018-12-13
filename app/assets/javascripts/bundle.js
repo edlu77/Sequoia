@@ -1300,13 +1300,9 @@ function (_Component) {
       var questions = [];
 
       for (var i = 0; i < array.length; i++) {
-        debugger;
-
         if (questions.includes(array[i].question_id)) {
-          debugger;
           continue;
         } else {
-          debugger;
           result.push(array[i]);
           questions.push(array[i].question_id);
         }
@@ -1674,6 +1670,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(QuestionForm).call(this, props));
     _this.state = _this.props.question;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -1690,7 +1687,13 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.submitAction(this.state).then(this.props.history.push('/'));
+      this.props.submitAction(this.state).then(this.props.closeModal());
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      this.props.closeModal();
     }
   }, {
     key: "render",
@@ -1716,9 +1719,9 @@ function (_React$Component) {
         className: "question-submit-button",
         type: "submit",
         value: "Add Question"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "question-form-cancel",
-        to: "/"
+        onClick: this.handleClick
       }, "Cancel"))));
     }
   }]);

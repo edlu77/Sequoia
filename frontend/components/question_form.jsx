@@ -7,6 +7,7 @@ class QuestionForm extends React.Component {
     super(props);
     this.state = this.props.question
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   };
 
   update(field) {
@@ -17,8 +18,13 @@ class QuestionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.submitAction(this.state).then(this.props.history.push('/'))
+    this.props.submitAction(this.state).then(this.props.closeModal());
   };
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.closeModal();
+  }
 
   render () {
 
@@ -38,7 +44,7 @@ class QuestionForm extends React.Component {
 
           <div className="question-form-footer">
             <input className="question-submit-button" type="submit" value="Add Question" />
-            <Link className="question-form-cancel" to='/'>Cancel</Link>
+            <button className="question-form-cancel" onClick={this.handleClick}>Cancel</button>
           </div>
         </form>
       </div>

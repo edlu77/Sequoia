@@ -39,12 +39,9 @@ class FeedIndex extends Component {
     let result = [];
     let questions = [];
     for (let i = 0; i < array.length; i++) {
-      debugger
       if (questions.includes(array[i].question_id)) {
-        debugger
         continue
       } else {
-        debugger
         result.push(array[i]);
         questions.push(array[i].question_id)
       }
