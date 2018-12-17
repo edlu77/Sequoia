@@ -723,7 +723,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _feed_index_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./feed_index_container */ "./frontend/components/feed_index_container.js");
 /* harmony import */ var _question_show_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./question_show_container */ "./frontend/components/question_show_container.js");
 /* harmony import */ var _create_question_form_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./create_question_form_container */ "./frontend/components/create_question_form_container.js");
-/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modal */ "./frontend/components/modal.jsx");
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modal */ "./frontend/components/modal.jsx");
 
 
 
@@ -736,7 +736,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal__WEBPACK_IMPORTED_MODULE_10__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
     className: "header"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "content"
