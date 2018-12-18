@@ -15,17 +15,19 @@
 }
 
 .nav-main {
+  display: flex;
   margin: 0 auto;
   width: 68%;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 50px;
 }
 
 .header-list-left {
   display: flex;
-  float: left;
 }
 
 .header-logo {
-  display: block;
   font-size: 25px;
   font-weight: bolder;
   color: #b93029;
@@ -34,7 +36,6 @@
 }
 
 .home-button {
-  display: block;
   margin-left: 8px;
   min-width: 96px;
   box-sizing: border-box;
@@ -47,14 +48,16 @@
   border-radius: 3px;
 }
 
+.header-left-link:hover {
+  border-bottom: 1px solid red;
+}
+
 .header-list-right {
   display: flex;
-  float: right;
-  transform: translateY(50%);
+  max-height: 26px;
 }
 
 .ask-question-button {
-  display: table-cell;
   padding: 3px 7px 4px 7px;
   margin-left: 8px;
   min-width: 96px;
@@ -69,7 +72,6 @@
 }
 
 .logout-button {
-  display: block;
   padding: 3px 7px 4px 7px;
   margin-left: 8px;
   min-width: 96px;
@@ -83,9 +85,7 @@
 }
 
 .search-form {
-  position: fixed;
   font-size: 15px;
-  right: 230px;
   border: 1px solid #e2e2e2;
   border-radius: 4px;
   background: white;

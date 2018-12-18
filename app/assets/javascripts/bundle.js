@@ -1318,26 +1318,50 @@ function (_Component) {
     value: function render() {
       var _this = this;
 
-      var questions = this.props.questions.map(function (question) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: question.created_at,
-          question: question,
-          author: _this.getAuthorFromItem(question),
-          deleteQuestion: _this.props.deleteQuestion
-        });
+      // const questions = this.props.questions.map((question) => {
+      //   return (
+      //     <QuestionIndexItem
+      //       key={question.created_at}
+      //       question={question}
+      //       author={this.getAuthorFromItem(question)}
+      //       deleteQuestion={this.props.deleteQuestion}/>
+      //   );
+      // });
+      //
+      // let filteredAnswers = this.filterAnswers(this.props.answers) || []
+      //
+      // const answers = filteredAnswers.map((answer) => {
+      //   return (
+      //     <FeedAnswerIndexItem
+      //       key={answer.created_at}
+      //       answer={answer}
+      //       author={this.getAuthorFromItem(answer)}
+      //       question={this.getQuestionFromAnswer(answer)}
+      //       body={answer.body}
+      //       users={this.props.users} />
+      //   );
+      // });
+      //
+      // let combinedFeed = answers.concat(questions)
+      var combinedFeed = this.props.feedItems.map(function (item) {
+        if (_this.props.questions.includes(item)) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: item.created_at,
+            question: item,
+            author: _this.getAuthorFromItem(item),
+            deleteQuestion: _this.props.deleteQuestion
+          });
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            key: item.created_at,
+            answer: item,
+            author: _this.getAuthorFromItem(item),
+            question: _this.getQuestionFromAnswer(item),
+            body: item.body,
+            users: _this.props.users
+          });
+        }
       });
-      var filteredAnswers = this.filterAnswers(this.props.answers) || [];
-      var answers = filteredAnswers.map(function (answer) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          key: answer.created_at,
-          answer: answer,
-          author: _this.getAuthorFromItem(answer),
-          question: _this.getQuestionFromAnswer(answer),
-          body: answer.body,
-          users: _this.props.users
-        });
-      });
-      var combinedFeed = answers.concat(questions);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-index-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1388,10 +1412,12 @@ var mapStateToProps = function mapStateToProps(state) {
   // const currentUser = state.entities.users[currentUserId];
   var questions = Object.values(state.entities.questions).sort(sortByTime);
   var answers = Object.values(state.entities.answers).sort(sortByTime);
+  var feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
   var users = Object.values(state.entities.users);
   return {
     questions: questions,
     answers: answers,
+    feedItems: feedItems,
     users: users
   };
 };

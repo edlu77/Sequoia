@@ -18,10 +18,12 @@ const mapStateToProps = (state) => {
   // const currentUser = state.entities.users[currentUserId];
   const questions = Object.values(state.entities.questions).sort(sortByTime)
   const answers = Object.values(state.entities.answers).sort(sortByTime)
+  const feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
   const users = Object.values(state.entities.users)
   return ({
     questions: questions,
     answers: answers,
+    feedItems: feedItems,
     users: users,
   })
 };

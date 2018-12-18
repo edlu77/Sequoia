@@ -50,32 +50,54 @@ class FeedIndex extends Component {
   }
 
   render() {
-    const questions = this.props.questions.map((question) => {
-      return (
-        <QuestionIndexItem
-          key={question.created_at}
-          question={question}
-          author={this.getAuthorFromItem(question)}
-          deleteQuestion={this.props.deleteQuestion}/>
-      );
-    });
+    // const questions = this.props.questions.map((question) => {
+    //   return (
+    //     <QuestionIndexItem
+    //       key={question.created_at}
+    //       question={question}
+    //       author={this.getAuthorFromItem(question)}
+    //       deleteQuestion={this.props.deleteQuestion}/>
+    //   );
+    // });
+    //
+    // let filteredAnswers = this.filterAnswers(this.props.answers) || []
+    //
+    // const answers = filteredAnswers.map((answer) => {
+    //   return (
+    //     <FeedAnswerIndexItem
+    //       key={answer.created_at}
+    //       answer={answer}
+    //       author={this.getAuthorFromItem(answer)}
+    //       question={this.getQuestionFromAnswer(answer)}
+    //       body={answer.body}
+    //       users={this.props.users} />
+    //   );
+    // });
+    //
 
-    let filteredAnswers = this.filterAnswers(this.props.answers) || []
+    // let combinedFeed = answers.concat(questions)
 
-    const answers = filteredAnswers.map((answer) => {
-      return (
-        <FeedAnswerIndexItem
-          key={answer.created_at}
-          answer={answer}
-          author={this.getAuthorFromItem(answer)}
-          question={this.getQuestionFromAnswer(answer)}
-          body={answer.body}
-          users={this.props.users} />
-      );
-    });
-
-
-    let combinedFeed = answers.concat(questions)
+    const combinedFeed = this.props.feedItems.map((item) => {
+      if (this.props.questions.includes(item)) {
+        return (
+          <QuestionIndexItem
+            key={item.created_at}
+            question={item}
+            author={this.getAuthorFromItem(item)}
+            deleteQuestion={this.props.deleteQuestion}/>
+        );
+      } else {
+        return (
+          <FeedAnswerIndexItem
+            key={item.created_at}
+            answer={item}
+            author={this.getAuthorFromItem(item)}
+            question={this.getQuestionFromAnswer(item)}
+            body={item.body}
+            users={this.props.users} />
+        );
+      }
+    })
 
     return (
       <div className="feed-index-wrapper">
