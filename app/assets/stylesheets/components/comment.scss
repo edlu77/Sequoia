@@ -8,10 +8,6 @@
   min-height: 32px;
 }
 
-.comment-author {
-  font-weight: bold;
-}
-
 .comment-submit-form {
   display: flex;
 }
@@ -45,6 +41,10 @@
 .comment-index-item {
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.comment-author {
+  font-weight: bold;
 }
 
 .comment-body {

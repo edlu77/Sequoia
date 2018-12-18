@@ -44,10 +44,6 @@
   border-top: 1px solid #e2e2e2
 }
 
-.question-form-cancel {
-  float: right;
-}
-
 .question-submit-button {
   float: right;
   font-size: 15px;
@@ -59,4 +55,8 @@
   background: #3a66ad;
   color: white;
   box-shadow: 0 1px 1px 0 rgba(200,200,200,0.6);
+}
+
+.question-form-cancel {
+  float: right;
 }
