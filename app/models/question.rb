@@ -11,4 +11,9 @@ class Question < ApplicationRecord
   primary_key: :id,
   class_name: :Answer
 
+  belongs_to :topic,
+  foreign_key: :topic_id,
+  primary_key: :id,
+  class_name: :Topic
+
 end
