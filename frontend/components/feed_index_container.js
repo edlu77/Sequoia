@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import FeedIndex from './feed_index';
 import { fetchQuestions, deleteQuestion } from '../actions/question_actions';
 
+import { fetchTopics } from '../actions/topic_actions';
+
 var sortByTime = function(a, b) {
   if (a.created_at < b.created_at) {
     return 1;
@@ -20,10 +22,12 @@ const mapStateToProps = (state) => {
   const answers = Object.values(state.entities.answers).sort(sortByTime)
   const feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
   const users = Object.values(state.entities.users)
+  const topics = Object.values(state.entities.topics)
   return ({
     questions: questions,
     answers: answers,
     feedItems: feedItems,
+    topics: topics,
     users: users,
   })
 };
@@ -32,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     fetchQuestions: () => dispatch(fetchQuestions()),
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
+    fetchTopics: () => dispatch(fetchTopics()),
   })
 };
 

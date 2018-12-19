@@ -25,6 +25,7 @@ class CommentIndex extends React.Component {
     const commentIndexItems = ownComments.map((comment) => {
       return (
         <CommentIndexItem
+          key={comment.id}
           comment={comment}
           author={this.getAuthorFromItem(comment)} />
       )

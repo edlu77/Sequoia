@@ -7,6 +7,7 @@ class FeedIndex extends Component {
 
   componentDidMount() {
     this.props.fetchQuestions();
+    this.props.fetchTopics();
   }
 
   shuffle(array) {
@@ -77,6 +78,7 @@ class FeedIndex extends Component {
 
     // let combinedFeed = answers.concat(questions)
 
+
     const combinedFeed = this.props.feedItems.map((item) => {
       if (this.props.questions.includes(item)) {
         return (
@@ -99,8 +101,19 @@ class FeedIndex extends Component {
       }
     })
 
+    const topicsList = this.props.topics.map((topic) => {
+      return (
+        <li key={topic.id}>
+          {topic.name}
+        </li>
+      )
+    })
+
     return (
       <div className="feed-index-wrapper">
+        <div>
+          {topicsList}
+        </div>
         <div className="feed-index">
           <ul className="feed-list">
             {combinedFeed}

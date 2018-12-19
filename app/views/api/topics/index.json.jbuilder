@@ -1,4 +1,4 @@
-json.topics do
+
   @topics.each do |topic|
     json.set! topic.id do
       json.partial! '/api/topics/topic', topic: topic
@@ -7,4 +7,3 @@ json.topics do
       end
     end
   end
-end

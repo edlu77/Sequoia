@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     end
     resources :answers, only: [:create, :show, :update, :destroy]
     resources :comments, only: [:index, :create, :show, :update, :destroy]
+    resources :topics, only: [:index, :show]
   end
 end

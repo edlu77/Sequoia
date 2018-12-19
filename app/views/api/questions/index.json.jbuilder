@@ -5,9 +5,6 @@ json.questions do
       json.answerIds do
         json.array! question.answers, :id
       end
-      json.topicId do 
-        json.array! question.topic, :id
-      end
     end
   end
 end
