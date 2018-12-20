@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import QuestionIndexItem from './question_index_item';
 import FeedAnswerIndexItem from './feed_answer_index_item';
 
@@ -107,7 +108,11 @@ class FeedIndex extends Component {
     const topicsList = Object.values(this.props.topics).map((topic) => {
       return (
         <li key={topic.id}>
-          {topic.name}
+          <Link
+            className="index-topic-name"
+            onClick={this.props.clearAnswers()}
+            to={`/topics/${topic.id}`} >{topic.name}
+          </Link>
         </li>
       )
     })

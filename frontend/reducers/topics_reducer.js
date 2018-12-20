@@ -7,7 +7,7 @@ const topicsReducer = (oldState = {}, action) => {
     case RECEIVE_ALL_TOPICS:
       return action.topics;
     case RECEIVE_TOPIC:
-      return merge({}, oldState, {[action.topic.id]: action.topic});
+      return action.payload.topics;
     default:
       return oldState;
   };

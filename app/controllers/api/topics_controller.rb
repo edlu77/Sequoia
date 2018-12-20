@@ -7,8 +7,9 @@ class Api::TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @questions = @topic.questions
-    @answers = @topic.answers
+    @questions = @topic.questions || []
+    @answers = @topic.answers || []
+    @users = User.all
     render :show
   end
 

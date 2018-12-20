@@ -9,10 +9,10 @@ const receiveTopics = (topics) => {
   })
 };
 
-const receiveTopic = (topic) => {
+const receiveTopic = (payload) => {
   return ({
     type: RECEIVE_TOPIC,
-    topic: topic,
+    payload: payload,
   })
 };
 
@@ -24,6 +24,6 @@ export const fetchTopics = () => dispatch => {
 
 export const fetchTopic = (id) => dispatch => {
   return TopicApiUtil.fetchTopic(id).then(
-    (topic) => dispatch(receiveTopic(topic))
+    (payload) => dispatch(receiveTopic(payload))
   )
 };

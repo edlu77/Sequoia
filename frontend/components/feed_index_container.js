@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import FeedIndex from './feed_index';
-import { fetchQuestions, deleteQuestion } from '../actions/question_actions';
+import { fetchQuestions, deleteQuestion, clearQuestions } from '../actions/question_actions';
+import { clearAnswers } from '../actions/answer_actions';
 
 import { fetchTopics } from '../actions/topic_actions';
 
@@ -37,6 +38,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchQuestions: () => dispatch(fetchQuestions()),
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
     fetchTopics: () => dispatch(fetchTopics()),
+    clearAnswers: () => dispatch(clearAnswers()),
+    clearQuestions: () => dispatch(clearQuestions()),
   })
 };
 
