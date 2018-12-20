@@ -18,11 +18,11 @@ const mapStateToProps = (state) => {
   // this is for later when we want to filter out questions based on currentUser's subscribed topics
   // const currentUserId = state.session.id;
   // const currentUser = state.entities.users[currentUserId];
-  const questions = Object.values(state.entities.questions).sort(sortByTime)
-  const answers = Object.values(state.entities.answers).sort(sortByTime)
+  const questions = Object.values(state.entities.questions).sort(sortByTime);
+  const answers = Object.values(state.entities.answers).sort(sortByTime);
   const feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
-  const users = Object.values(state.entities.users)
-  const topics = Object.values(state.entities.topics)
+  const users = Object.values(state.entities.users);
+  const topics = state.entities.topics;
   return ({
     questions: questions,
     answers: answers,

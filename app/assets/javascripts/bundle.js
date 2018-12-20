@@ -1175,29 +1175,28 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions//question_actions */ "./frontend/actions/question_actions.js");
+/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-/* harmony import */ var _question_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./question_form */ "./frontend/components/question_form.jsx");
+/* harmony import */ var _actions_topic_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/topic_actions */ "./frontend/actions/topic_actions.js");
+/* harmony import */ var _question_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./question_form */ "./frontend/components/question_form.jsx");
+
 
 
 
 
 
 var mapStateToProps = function mapStateToProps(state) {
+  var topics = Object.values(state.entities.topics);
   return {
     question: {
       title: "",
-      topic: "",
+      topic_id: null,
       author_id: state.session.id
     },
+    topics: topics,
     formType: "create question"
   };
-}; // const mapDispatchToProps = (dispatch) => {
-//   return ({
-//     submitAction: (question) => dispatch(createQuestion(question)),
-//   })
-// };
-
+};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
@@ -1206,11 +1205,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     closeModal: function closeModal() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["closeModal"])());
+    },
+    fetchTopics: function fetchTopics() {
+      return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_3__["fetchTopics"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_question_form__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_question_form__WEBPACK_IMPORTED_MODULE_4__["default"]));
 
 /***/ }),
 
@@ -1394,11 +1396,17 @@ function (_Component) {
       // });
       //
       // let combinedFeed = answers.concat(questions)
+      var topics = this.props.topics;
       var combinedFeed = this.props.feedItems.map(function (item) {
+        var topic = topics[item.topic_id] || {
+          name: "Miscellaneous"
+        };
+
         if (_this.props.questions.includes(item)) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
             key: item.created_at,
             question: item,
+            topic: topic,
             author: _this.getAuthorFromItem(item),
             deleteQuestion: _this.props.deleteQuestion
           });
@@ -1413,14 +1421,16 @@ function (_Component) {
           });
         }
       });
-      var topicsList = this.props.topics.map(function (topic) {
+      var topicsList = Object.values(this.props.topics).map(function (topic) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: topic.id
         }, topic.name);
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-index-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, topicsList), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topics-list"
+      }, topicsList), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "feed-list"
@@ -1472,7 +1482,7 @@ var mapStateToProps = function mapStateToProps(state) {
   var answers = Object.values(state.entities.answers).sort(sortByTime);
   var feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
   var users = Object.values(state.entities.users);
-  var topics = Object.values(state.entities.topics);
+  var topics = state.entities.topics;
   return {
     questions: questions,
     answers: answers,
@@ -1760,13 +1770,37 @@ function (_React$Component) {
     _classCallCheck(this, QuestionForm);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(QuestionForm).call(this, props));
-    _this.state = _this.props.question;
+    _this.state = {
+      title: _this.props.question.title,
+      author_id: _this.props.question.author_id,
+      topic: "",
+      topic_id: null
+    };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(QuestionForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchTopics();
+    }
+  }, {
+    key: "getIdFromName",
+    value: function getIdFromName(topicName) {
+      for (var i = 0; i < this.props.topics.length; i++) {
+        if (topicName === this.props.topics[i].name) {
+          return this.props.topics[i].id;
+        }
+
+        ;
+      }
+
+      ;
+      return null;
+    }
+  }, {
     key: "update",
     value: function update(field) {
       var _this2 = this;
@@ -1779,7 +1813,11 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.submitAction(this.state).then(this.props.closeModal());
+      this.props.submitAction({
+        title: this.state.title,
+        author_id: this.state.author_id,
+        topic_id: this.getIdFromName(this.state.topic)
+      }).then(this.props.closeModal());
     }
   }, {
     key: "handleClick",
@@ -1803,8 +1841,14 @@ function (_React$Component) {
         className: "question-title-input",
         type: "text",
         value: this.state.title,
-        onChange: this.update('title'),
+        onChange: this.update("title"),
         placeholder: "Start your question with \"What\", \"How\", \"Why\", etc."
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "question-topic-input",
+        type: "text",
+        value: this.state.topic,
+        onChange: this.update("topic"),
+        placeholder: "Enter question topic (optional)"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-form-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -1821,13 +1865,7 @@ function (_React$Component) {
   return QuestionForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-; // <input
-//   className="question-topic-input"
-//   type="text"
-//   value={this.state.topic}
-//   onChange={this.update('topic')}
-//   placeholder="Enter question topic (optional)"/>
-
+;
 /* harmony default export */ __webpack_exports__["default"] = (QuestionForm);
 
 /***/ }),
@@ -1848,12 +1886,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var QuestionIndexItem = function QuestionIndexItem(props) {
+  var name = props.topic.name;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: props.question.id,
     className: "question-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "question-topic-list"
-  }, "Question added"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Question added - ".concat(name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "question-index-title",
     to: "/questions/".concat(props.question.id)
   }, props.question.title));

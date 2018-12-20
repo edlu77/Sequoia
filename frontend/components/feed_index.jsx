@@ -78,13 +78,16 @@ class FeedIndex extends Component {
 
     // let combinedFeed = answers.concat(questions)
 
+    const topics = this.props.topics;
 
     const combinedFeed = this.props.feedItems.map((item) => {
+      const topic = topics[item.topic_id] || {name: "Miscellaneous"}
       if (this.props.questions.includes(item)) {
         return (
           <QuestionIndexItem
             key={item.created_at}
             question={item}
+            topic={topic}
             author={this.getAuthorFromItem(item)}
             deleteQuestion={this.props.deleteQuestion}/>
         );
@@ -101,7 +104,7 @@ class FeedIndex extends Component {
       }
     })
 
-    const topicsList = this.props.topics.map((topic) => {
+    const topicsList = Object.values(this.props.topics).map((topic) => {
       return (
         <li key={topic.id}>
           {topic.name}
@@ -111,7 +114,7 @@ class FeedIndex extends Component {
 
     return (
       <div className="feed-index-wrapper">
-        <div>
+        <div className="topics-list">
           {topicsList}
         </div>
         <div className="feed-index">
