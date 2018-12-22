@@ -6,23 +6,23 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Topic.destroy_all
+Topic.destroy_all
 User.destroy_all
 Question.destroy_all
 Answer.destroy_all
-# Comment.destroy_all
+Comment.destroy_all
 
 
-# topic1 = Topic.create!(name: "Programming")
-# topic2 = Topic.create!(name: "Exercise")
-# topic3 = Topic.create!(name: "Healthy Living")
-# topic4 = Topic.create!(name: "Gaming")
-# topic5 = Topic.create!(name: "Sports")
-# topic6 = Topic.create!(name: "Exercise")
-# topic7 = Topic.create!(name: "Higher Education")
-# topic8 = Topic.create!(name: "Science")
-# topic9 = Topic.create!(name: "Biology")
-# topic10 = Topic.create!(name: "Bridge")
+topic1 = Topic.create!(name: "Programming")
+topic2 = Topic.create!(name: "Exercise")
+topic3 = Topic.create!(name: "Healthy Living")
+topic4 = Topic.create!(name: "Gaming")
+topic5 = Topic.create!(name: "Sports")
+topic6 = Topic.create!(name: "Psychology")
+topic7 = Topic.create!(name: "Higher Education")
+topic8 = Topic.create!(name: "Science")
+topic9 = Topic.create!(name: "Biology")
+topic10 = Topic.create!(name: "Bridge")
 
 u1 = User.create!(username: "DemoUser", email: "demo@email.com", password: "starwars")
 u2 = User.create!(username: "Edward", email: "eddd.lu@gmail.com", password: "starwars")
@@ -32,12 +32,12 @@ u5 = User.create!(username: "Charizard", email: "charizard@pokemail.com", passwo
 u6 = User.create!(username: "Blastoise", email: "blastoise@pokemail.com", password: "starwars")
 u7 = User.create!(username: "Venusaur", email: "venusaur@pokemail.com", password: "starwars")
 
-q1 = Question.create!(title: "What is your name?", author_id: u2.id)
-q2 = Question.create!(title: "What is your quest?", author_id: u2.id)
-q3 = Question.create!(title: "What is your favorite color?", author_id: u3.id)
-q4 = Question.create!(title: "What is a question?", author_id: u4.id)
-q5 = Question.create!(title: "Who won the Superb Bowl?", author_id: u4.id)
-q6 = Question.create!(title: "How many Pokemon are there in the world?", author_id: u5.id)
-q7 = Question.create!(title: "How many chromosomes are in the human genome?", author_id: u6.id)
-q8 = Question.create!(title: "How many pushups can you do at once?", author_id: u7.id)
-q9 = Question.create!(title: "How big is the universe?", author_id: u7.id)
+q1 = Question.create!(title: "What is your name?", author_id: u2.id, topic_id: topic10.id)
+q2 = Question.create!(title: "What is your quest?", author_id: u2.id, topic_id: topic10.id)
+q3 = Question.create!(title: "What is your favorite color?", author_id: u3.id, topic_id: topic10.id)
+q4 = Question.create!(title: "What is a question?", author_id: u4.id, topic_id: topic7.id)
+q5 = Question.create!(title: "Who won the Superb Bowl?", author_id: u4.id, topic_id: topic5.id)
+q6 = Question.create!(title: "How many Pokemon are there in the world?", author_id: u5.id, topic_id: topic4.id)
+q7 = Question.create!(title: "How many chromosomes are in the human genome?", author_id: u6.id, topic_id: topic9.id)
+q8 = Question.create!(title: "How many pushups can you do at once?", author_id: u7.id, topic_id: topic2.id)
+q9 = Question.create!(title: "How big is the universe?", author_id: u7.id, topic_id: topic8.id)

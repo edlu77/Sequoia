@@ -15,5 +15,5 @@ class Answer < ApplicationRecord
   foreign_key: :parent_id,
   primary_key: :id,
   class_name: :Comment
-
+  
 end

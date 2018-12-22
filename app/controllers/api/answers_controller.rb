@@ -17,6 +17,8 @@ class Api::AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     @answer.author_id = current_user.id
     @answer.question_id = params[:answer][:questionId]
+    @answer.topic_id = @answer.question.topic_id
+    
 
     if @answer.save
       @answers = Answer.where(question_id: @answer.question_id)

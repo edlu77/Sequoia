@@ -2572,6 +2572,15 @@ function (_React$Component) {
             topic: topic,
             author: _this.getAuthorFromItem(item)
           });
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: item.created_at,
+            answer: item,
+            author: _this.getAuthorFromItem(item),
+            question: _this.getQuestionFromAnswer(item),
+            body: item.body,
+            users: _this.props.users
+          });
         }
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2588,16 +2597,7 @@ function (_React$Component) {
 // </div>
 
 
-/* harmony default export */ __webpack_exports__["default"] = (TopicShow); // } else {
-//   return (
-//     <FeedAnswerIndexItem
-//       key={item.created_at}
-//       answer={item}
-//       author={this.getAuthorFromItem(item)}
-//       question={this.getQuestionFromAnswer(item)}
-//       body={item.body}
-//       users={this.props.users} />
-//   );
+/* harmony default export */ __webpack_exports__["default"] = (TopicShow);
 
 /***/ }),
 
@@ -2619,6 +2619,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var sortByTime = function sortByTime(a, b) {
+  if (a.created_at < b.created_at) {
+    return 1;
+  } else if (a.created_at > b.created_at) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var topicId = ownProps.match.params.topicId;
   var topic = state.entities.topics[topicId];
@@ -2626,8 +2636,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questions = Object.values(state.entities.questions).filter(function (question) {
     return question.topic_id == topicId;
   });
-  var answers = Object.values(state.entities.answers);
-  var feedItems = questions.concat(answers);
+  var answers = Object.values(state.entities.answers).filter(function (answer) {
+    return answer.topic_id == topicId;
+  });
+  var feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
+  ;
   return {
     questions: questions,
     answers: answers,

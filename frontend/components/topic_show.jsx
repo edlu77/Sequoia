@@ -37,6 +37,16 @@ class TopicShow extends React.Component {
             topic={topic}
             author={this.getAuthorFromItem(item)}/>
         );
+      } else {
+        return (
+          <FeedAnswerIndexItem
+            key={item.created_at}
+            answer={item}
+            author={this.getAuthorFromItem(item)}
+            question={this.getQuestionFromAnswer(item)}
+            body={item.body}
+            users={this.props.users} />
+        );
       }
     })
 
@@ -56,14 +66,3 @@ class TopicShow extends React.Component {
 // </div>
 
 export default TopicShow;
-
-// } else {
-//   return (
-//     <FeedAnswerIndexItem
-//       key={item.created_at}
-//       answer={item}
-//       author={this.getAuthorFromItem(item)}
-//       question={this.getQuestionFromAnswer(item)}
-//       body={item.body}
-//       users={this.props.users} />
-//   );
