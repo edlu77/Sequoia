@@ -1,12 +1,16 @@
 import TopicShow from './topic_show';
 import { connect } from 'react-redux';
-import { fetchTopic } from '../actions/topic_actions';
+import { fetchTopics } from '../actions/topic_actions';
+import { fetchQuestions } from '../actions/question_actions';
+
 
 const mapStateToProps = (state, ownProps) => {
   const topicId = ownProps.match.params.topicId;
-  const topic = state.entities.topics;
+  const topic = state.entities.topics[topicId];
   const users = Object.values(state.entities.users);
-  const questions = Object.values(state.entities.questions);
+  const questions = Object.values(state.entities.questions).filter(
+    (question) => question.topic_id == topicId
+  );
   const answers = Object.values(state.entities.answers);
   const feedItems = questions.concat(answers);
 
@@ -22,7 +26,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    fetchTopic: (id) => dispatch(fetchTopic(id)),
+    fetchTopics: () => dispatch(fetchTopics()),
+    fetchQuestions: () => dispatch(fetchQuestions()),
+
   })
 }
 

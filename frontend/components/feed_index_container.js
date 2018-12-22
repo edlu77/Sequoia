@@ -38,8 +38,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchQuestions: () => dispatch(fetchQuestions()),
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
     fetchTopics: () => dispatch(fetchTopics()),
-    clearAnswers: () => dispatch(clearAnswers()),
-    clearQuestions: () => dispatch(clearQuestions()),
+
   })
 };
 

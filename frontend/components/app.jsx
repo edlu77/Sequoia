@@ -9,6 +9,7 @@ import QuestionShowContainer from './question_show_container';
 import CreateQuestionFormContainer from './create_question_form_container';
 import Modal from './modal';
 import TopicShowContainer from './topic_show_container';
+import TopicsListContainer from './topics_list_container';
 
 const App = () => {
   return (
@@ -19,6 +20,9 @@ const App = () => {
       </header>
       <div className="content">
         <div className="content-main">
+          <div className="topics-list-container">
+            <TopicsListContainer />
+          </div>
           <Switch>
             <ProtectedRoute exact path="/" component={FeedIndexContainer}/>
             <AuthRoute path="/login" component={LoginFormContainer} />

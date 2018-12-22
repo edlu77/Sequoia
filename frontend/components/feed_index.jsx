@@ -105,23 +105,8 @@ class FeedIndex extends Component {
       }
     })
 
-    const topicsList = Object.values(this.props.topics).map((topic) => {
-      return (
-        <li key={topic.id}>
-          <Link
-            className="index-topic-name"
-            onClick={this.props.clearAnswers()}
-            to={`/topics/${topic.id}`} >{topic.name}
-          </Link>
-        </li>
-      )
-    })
-
     return (
       <div className="feed-index-wrapper">
-        <div className="topics-list">
-          {topicsList}
-        </div>
         <div className="feed-index">
           <ul className="feed-list">
             {combinedFeed}

@@ -6,7 +6,8 @@ import FeedAnswerIndexItem from './feed_answer_index_item';
 class TopicShow extends React.Component {
 
   componentDidMount() {
-    this.props.fetchTopic(this.props.topicId)
+    this.props.fetchTopics()
+    this.props.fetchQuestions()
   };
 
   getQuestionFromAnswer(answer) {
@@ -36,16 +37,6 @@ class TopicShow extends React.Component {
             topic={topic}
             author={this.getAuthorFromItem(item)}/>
         );
-      } else {
-        return (
-          <FeedAnswerIndexItem
-            key={item.created_at}
-            answer={item}
-            author={this.getAuthorFromItem(item)}
-            question={this.getQuestionFromAnswer(item)}
-            body={item.body}
-            users={this.props.users} />
-        );
       }
     })
 
@@ -65,3 +56,14 @@ class TopicShow extends React.Component {
 // </div>
 
 export default TopicShow;
+
+// } else {
+//   return (
+//     <FeedAnswerIndexItem
+//       key={item.created_at}
+//       answer={item}
+//       author={this.getAuthorFromItem(item)}
+//       question={this.getQuestionFromAnswer(item)}
+//       body={item.body}
+//       users={this.props.users} />
+//   );
