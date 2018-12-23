@@ -806,8 +806,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _create_question_form_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./create_question_form_container */ "./frontend/components/create_question_form_container.js");
 /* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modal */ "./frontend/components/modal.jsx");
 /* harmony import */ var _topic_show_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./topic_show_container */ "./frontend/components/topic_show_container.js");
-/* harmony import */ var _topics_list_container__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./topics_list_container */ "./frontend/components/topics_list_container.js");
-
 
 
 
@@ -821,15 +819,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "site-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
     className: "header"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "content-main"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "topics-list-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_11__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
     exact: true,
     path: "/",
     component: _feed_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -845,7 +841,7 @@ var App = function App() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
     path: "/topics/:topicId",
     component: _topic_show_container__WEBPACK_IMPORTED_MODULE_10__["default"]
-  })))));
+  }))));
 }; // <ProtectedRoute path="/questions" component={CreateQuestionFormContainer} />
 
 
@@ -1318,6 +1314,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _question_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./question_index_item */ "./frontend/components/question_index_item.jsx");
 /* harmony import */ var _feed_answer_index_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./feed_answer_index_item */ "./frontend/components/feed_answer_index_item.jsx");
+/* harmony import */ var _topics_list_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./topics_list_container */ "./frontend/components/topics_list_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1335,6 +1332,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1465,12 +1463,16 @@ function (_Component) {
         }
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content-feed"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-index-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topics-list-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "feed-list"
-      }, combinedFeed)));
+      }, combinedFeed))));
     }
   }]);
 
@@ -2002,6 +2004,8 @@ function (_React$Component) {
       };
       var answers = this.props.answers || [];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content-question"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show"
@@ -2017,7 +2021,7 @@ function (_React$Component) {
         questionId: this.props.questionId,
         question: question,
         users: this.props.users
-      })));
+      }))));
     }
   }]);
 
@@ -2493,6 +2497,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _question_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./question_index_item */ "./frontend/components/question_index_item.jsx");
 /* harmony import */ var _feed_answer_index_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./feed_answer_index_item */ "./frontend/components/feed_answer_index_item.jsx");
+/* harmony import */ var _topics_list_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./topics_list_container */ "./frontend/components/topics_list_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2510,6 +2515,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2584,10 +2590,14 @@ function (_React$Component) {
         }
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content-feed"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topic-show-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topics-list-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topic-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, combinedFeed)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, combinedFeed))));
     }
   }]);
 
@@ -2720,13 +2730,16 @@ function (_React$Component) {
     value: function render() {
       var allTopics = Object.values(this.props.topics).map(function (topic) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: topic.id
+          key: topic.id,
+          className: "topics-list-link"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           className: "index-topic-name",
           to: "/topics/".concat(topic.id)
         }, topic.name));
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, allTopics);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "topics-list"
+      }, allTopics);
     }
   }]);
 

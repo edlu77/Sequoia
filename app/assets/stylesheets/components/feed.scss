@@ -1,19 +1,15 @@
 .feed-index-wrapper, .topic-show-wrapper {
-  width: 1002px;
+  display: flex;
+  width: 68%;
   margin: 0 auto;
   padding-top: 83px;
   padding-left: 32px;
   padding-right: 32px;
   padding-bottom: 32px;
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  background: #fafafa;
 }
 
 .feed-index, .topic-show {
   width: 602px;
-  margin: 0 auto;
 }
 
 .question-index-item, .feed-answer-index-item {

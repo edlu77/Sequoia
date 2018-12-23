@@ -1,15 +1,22 @@
 html {
-  background: #fafafa;
+  overflow-y: scroll;
 }
 
 body {
   margin: 0 auto;
   font-family: serif;
   font-size: 13px;
-  background: white;
+  background: #fafafa;
 }
 
-.content-main {
-  align-items: center;
-  background: #fafafa;
+.content-question, .content-feed {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.content-question {
+  background: white;
 }

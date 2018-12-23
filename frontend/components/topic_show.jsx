@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import QuestionIndexItem from './question_index_item';
 import FeedAnswerIndexItem from './feed_answer_index_item';
+import TopicsListContainer from './topics_list_container';
 
 class TopicShow extends React.Component {
 
@@ -51,11 +52,16 @@ class TopicShow extends React.Component {
     })
 
     return (
-      <div className="topic-show-wrapper">
-        <div className="topic-show">
-          <ul>
-            {combinedFeed}
-          </ul>
+      <div className="content-feed">
+        <div className="topic-show-wrapper">
+          <div className="topics-list-container">
+            <TopicsListContainer />
+          </div>
+          <div className="topic-show">
+            <ul>
+              {combinedFeed}
+            </ul>
+          </div>
         </div>
       </div>
     )

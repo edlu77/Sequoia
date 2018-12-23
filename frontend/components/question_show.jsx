@@ -16,6 +16,7 @@ class QuestionShow extends React.Component {
     const question = this.props.question || { title: ""}
     const answers = this.props.answers || []
     return (
+      <div className="content-question">
       <div className="question-show-wrapper">
         <div className="question-show">
           <div className="question-show-topic">
@@ -35,6 +36,7 @@ class QuestionShow extends React.Component {
             users={this.props.users} />
         </div>
       </div>
+    </div>
     )
   };
 }

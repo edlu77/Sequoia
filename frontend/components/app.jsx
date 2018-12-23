@@ -9,28 +9,23 @@ import QuestionShowContainer from './question_show_container';
 import CreateQuestionFormContainer from './create_question_form_container';
 import Modal from './modal';
 import TopicShowContainer from './topic_show_container';
-import TopicsListContainer from './topics_list_container';
+
 
 const App = () => {
   return (
-    <div>
+    <div className="site-content">
       <Modal />
       <header className="header">
         <NavbarContainer />
       </header>
-      <div className="content">
-        <div className="content-main">
-          <div className="topics-list-container">
-            <TopicsListContainer />
-          </div>
-          <Switch>
-            <ProtectedRoute exact path="/" component={FeedIndexContainer}/>
-            <AuthRoute path="/login" component={LoginFormContainer} />
-            <AuthRoute path="/signup" component={SignupFormContainer} />
-            <ProtectedRoute path="/questions/:questionId" component={QuestionShowContainer} />
-            <ProtectedRoute path="/topics/:topicId" component={TopicShowContainer} />
-          </Switch>
-        </div>
+      <div className="content-main">
+        <Switch>
+          <ProtectedRoute exact path="/" component={FeedIndexContainer}/>
+          <AuthRoute path="/login" component={LoginFormContainer} />
+          <AuthRoute path="/signup" component={SignupFormContainer} />
+          <ProtectedRoute path="/questions/:questionId" component={QuestionShowContainer} />
+          <ProtectedRoute path="/topics/:topicId" component={TopicShowContainer} />
+        </Switch>
       </div>
     </div>
   );

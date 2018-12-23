@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import QuestionIndexItem from './question_index_item';
 import FeedAnswerIndexItem from './feed_answer_index_item';
+import TopicsListContainer from './topics_list_container';
 
 
 class FeedIndex extends Component {
@@ -106,13 +107,18 @@ class FeedIndex extends Component {
     })
 
     return (
+      <div className="content-feed">
       <div className="feed-index-wrapper">
+        <div className="topics-list-container">
+          <TopicsListContainer />
+        </div>
         <div className="feed-index">
           <ul className="feed-list">
             {combinedFeed}
           </ul>
         </div>
       </div>
+    </div>
     );
   }
 };

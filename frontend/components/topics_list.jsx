@@ -11,7 +11,7 @@ class TopicsList extends React.Component {
   render() {
     const allTopics = Object.values(this.props.topics).map((topic) => {
       return (
-        <li key={topic.id}>
+        <li key={topic.id} className="topics-list-link">
           <Link
             className="index-topic-name"
             to={`/topics/${topic.id}`} >{topic.name}
@@ -21,7 +21,7 @@ class TopicsList extends React.Component {
     });
 
     return (
-      <ul>
+      <ul className="topics-list">
         {allTopics}
       </ul>
     )

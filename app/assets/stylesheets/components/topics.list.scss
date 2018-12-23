@@ -1,9 +1,14 @@
 .topics-list-container {
-  position: fixed;
-  margin-top: 83px;
-  left: 16%;
-  width: 150px;
-  height: 400px;
-  background: yellow;
-  z-index: 5;
+  width: 142px;
+}
+
+.topics-list-link {
+  margin-bottom: 8px;
+  padding: 4px;
+  margin-left: -4px;
+  border-radius: 3px;
+}
+
+.index-topic-name {
+  font-size: 13px;
 }
