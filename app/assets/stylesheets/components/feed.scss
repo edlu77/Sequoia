@@ -1,6 +1,6 @@
 .feed-index-wrapper, .topic-show-wrapper {
   display: flex;
-  width: 68%;
+  width: 74%;
   margin: 0 auto;
   padding-top: 83px;
   padding-left: 32px;
@@ -10,6 +10,8 @@
 
 .feed-index, .topic-show {
   width: 602px;
+  padding-left: 12px;
+  margin-left: 30px;
 }
 
 .question-index-item, .feed-answer-index-item {

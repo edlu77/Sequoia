@@ -22,6 +22,12 @@ class TopicsList extends React.Component {
 
     return (
       <ul className="topics-list">
+        <li className="topics-list-link">
+          <Link
+            className="index-topic-name"
+            to="/" >Feed
+          </Link>
+        </li>
         {allTopics}
       </ul>
     )
