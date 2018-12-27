@@ -17,7 +17,7 @@ class Search extends React.Component {
     } else {
       this.props.fetchQuestions()
       const filteredQuestions = this.props.questions.filter(
-        (question) => question.title.includes(e.target.value)
+        (question) => question.title.toLowerCase().includes(e.target.value.toLowerCase())
       )
       this.setState({
         query: e.target.value,

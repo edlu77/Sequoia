@@ -2184,7 +2184,7 @@ function (_React$Component) {
       } else {
         this.props.fetchQuestions();
         var filteredQuestions = this.props.questions.filter(function (question) {
-          return question.title.includes(e.target.value);
+          return question.title.toLowerCase().includes(e.target.value.toLowerCase());
         });
         this.setState({
           query: e.target.value,
