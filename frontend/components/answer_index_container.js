@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchAnswers } from '../actions/answer_actions';
+import { fetchAnswers, updateAnswer } from '../actions/answer_actions';
 import { fetchQuestion } from '../actions/question_actions';
 import AnswerIndex from './answer_index';
 
@@ -20,6 +20,7 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     fetchAnswers: (id) => dispatch(fetchAnswers(id)),
     fetchQuestion: (id) => dispatch(fetchQuestion(id)),
+    updateAnswer: (answer) => dispatch(updateAnswer(answer)),
   });
 };
 

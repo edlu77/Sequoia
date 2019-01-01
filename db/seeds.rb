@@ -12,7 +12,7 @@ Question.destroy_all
 Answer.destroy_all
 Comment.destroy_all
 
-
+topic0 = Topic.create!(id: 0, name: "Miscellaneous")
 topic1 = Topic.create!(name: "Programming")
 topic2 = Topic.create!(name: "Exercise")
 topic3 = Topic.create!(name: "Healthy Living")

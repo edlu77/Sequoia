@@ -679,7 +679,8 @@ function (_React$Component) {
           answer: answer,
           question: _this.props.question,
           users: _this.props.users,
-          author: _this.getAuthorFromItem(answer)
+          author: _this.getAuthorFromItem(answer),
+          updateAnswer: _this.props.updateAnswer
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -735,6 +736,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchQuestion: function fetchQuestion(id) {
       return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["fetchQuestion"])(id));
+    },
+    updateAnswer: function updateAnswer(answer) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_1__["updateAnswer"])(answer));
     }
   };
 };
@@ -761,6 +765,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AnswerIndexItem = function AnswerIndexItem(props) {
+  var upvote = function upvote(e) {
+    props.answer.upvotes++;
+    props.updateAnswer(props.answer);
+  };
+
   var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "answer-index-item"
@@ -775,7 +784,9 @@ var AnswerIndexItem = function AnswerIndexItem(props) {
     dangerouslySetInnerHTML: {
       __html: props.answer.body
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: upvote
+  }, "Upvote ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
   }));
@@ -1271,6 +1282,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
+  var upvote = function upvote(e) {
+    props.answer.upvotes++;
+    props.updateAnswer(props.answer);
+  };
+
   var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
@@ -1290,7 +1306,9 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     dangerouslySetInnerHTML: {
       __html: props.answer.body
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: upvote
+  }, "Upvote ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
   }));
@@ -1458,7 +1476,8 @@ function (_Component) {
             author: _this.getAuthorFromItem(item),
             question: _this.getQuestionFromAnswer(item),
             body: item.body,
-            users: _this.props.users
+            users: _this.props.users,
+            updateAnswer: _this.props.updateAnswer
           });
         }
       });

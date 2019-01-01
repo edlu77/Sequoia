@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import CommentIndexContainer from './comment_index_container';
 
 const FeedAnswerIndexItem = (props) => {
+  const upvote = (e) => {
+    props.answer.upvotes++
+    props.updateAnswer(props.answer)
+  }
+
   const date = new Date(props.answer.created_at)
 
 
@@ -24,6 +29,9 @@ const FeedAnswerIndexItem = (props) => {
       <div className="answer-body"
         dangerouslySetInnerHTML={{__html: props.answer.body}}>
       </div>
+      <button onClick={upvote}>
+        Upvote {props.answer.upvotes}
+      </button>
       <CommentIndexContainer
         answer={props.answer}
         users={props.users}/>

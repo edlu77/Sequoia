@@ -18,8 +18,7 @@ class Api::AnswersController < ApplicationController
     @answer.author_id = current_user.id
     @answer.question_id = params[:answer][:questionId]
     @answer.topic_id = @answer.question.topic_id
-    
-
+    @answer.upvotes = 0
     if @answer.save
       @answers = Answer.where(question_id: @answer.question_id)
       @users = []
@@ -30,6 +29,12 @@ class Api::AnswersController < ApplicationController
   end
 
   def update
+    @answer = Answer.find(params[:id])
+    if @answer.update(answer_params)
+      render :show
+    else
+      render json: @answer.errors.full_messages, status: 422
+    end
   end
 
   def destroy
@@ -38,7 +43,7 @@ class Api::AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, :upvotes)
   end
 
 end

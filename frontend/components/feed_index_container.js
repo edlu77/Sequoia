@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import FeedIndex from './feed_index';
 import { fetchQuestions, deleteQuestion, clearQuestions } from '../actions/question_actions';
-import { clearAnswers } from '../actions/answer_actions';
+import { clearAnswers, updateAnswer } from '../actions/answer_actions';
 
 import { fetchTopics } from '../actions/topic_actions';
 

@@ -17,6 +17,7 @@ class AnswerIndex extends React.Component {
   };
 
 
+
   render() {
 
     const answers = this.props.answers.map ((answer) => {
@@ -26,7 +27,8 @@ class AnswerIndex extends React.Component {
           answer={answer}
           question={this.props.question}
           users={this.props.users}
-          author={this.getAuthorFromItem(answer)} />
+          author={this.getAuthorFromItem(answer)}
+          updateAnswer = {this.props.updateAnswer} />
       );
     });
 

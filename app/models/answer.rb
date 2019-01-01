@@ -1,5 +1,5 @@
 class Answer < ApplicationRecord
-  validates :body, :author_id, :question_id, presence: true
+  validates :body, :author_id, :question_id, :upvotes, presence: true
 
   belongs_to :author,
   foreign_key: :author_id,
@@ -15,5 +15,5 @@ class Answer < ApplicationRecord
   foreign_key: :parent_id,
   primary_key: :id,
   class_name: :Comment
-  
+
 end
