@@ -46,7 +46,9 @@ class TopicShow extends React.Component {
             author={this.getAuthorFromItem(item)}
             question={this.getQuestionFromAnswer(item)}
             body={item.body}
-            users={this.props.users} />
+            users={this.props.users}
+            updateAnswer = {this.props.updateAnswer}
+            currentUserId = {this.props.currentUserId} />
         );
       }
     })

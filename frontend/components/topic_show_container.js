@@ -2,6 +2,7 @@ import TopicShow from './topic_show';
 import { connect } from 'react-redux';
 import { fetchTopics } from '../actions/topic_actions';
 import { fetchQuestions } from '../actions/question_actions';
+import { updateAnswer } from '../actions/answer_actions';
 
 var sortByTime = function(a, b) {
   if (a.created_at < b.created_at) {
@@ -23,7 +24,8 @@ const mapStateToProps = (state, ownProps) => {
   const answers = Object.values(state.entities.answers).filter(
     (answer) => answer.topic_id == topicId
   );
-  const feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);;
+  const feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
+  const currentUserId = state.session.id;
 
   return ({
     questions: questions,
@@ -32,6 +34,7 @@ const mapStateToProps = (state, ownProps) => {
     topicId: topicId,
     topic: topic,
     users: users,
+    currentUserId: currentUserId,
   })
 }
 
@@ -39,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     fetchTopics: () => dispatch(fetchTopics()),
     fetchQuestions: () => dispatch(fetchQuestions()),
+    updateAnswer: (answer) => dispatch(updateAnswer(answer)),
 
   })
 }

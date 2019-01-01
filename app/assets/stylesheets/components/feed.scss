@@ -62,3 +62,31 @@
 .question-index-title{
   font-weight: bold;
 }
+
+.answer-options {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  font-size: 14px;
+  font-weight: 400px;
+  margin-left: -12px;
+  margin-right: -5px;
+  margin-bottom: 4px;
+}
+
+.answer-upvote-button {
+  border-radius: 40px;
+  padding-top: 8px!important;
+  padding-bottom: 8px!important;
+  padding-left: 12px!important;
+  padding-right: 12px!important;
+}
+
+.answer-downvote-button:hover, .answer-upvote-button:hover {
+  background: #fafafa;
+}
+
+.answer-downvote-button {
+  padding: 5px;
+  border-radius: 40px;
+}

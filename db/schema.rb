@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_01_002434) do
+ActiveRecord::Schema.define(version: 2019_01_01_090902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2019_01_01_002434) do
     t.datetime "updated_at", null: false
     t.integer "topic_id"
     t.integer "upvotes"
+    t.text "voters", default: [], array: true
+    t.text "downvoters", default: [], array: true
     t.index ["author_id"], name: "index_answers_on_author_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end

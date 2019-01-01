@@ -17,26 +17,26 @@ class QuestionShow extends React.Component {
     const answers = this.props.answers || []
     return (
       <div className="content-question">
-      <div className="question-show-wrapper">
-        <div className="question-show">
-          <div className="question-show-topic">
-          </div>
-          <div className="question-show-title">
-            {question.title}
-          </div>
+        <div className="question-show-wrapper">
+          <div className="question-show">
+            <div className="question-show-topic">
+            </div>
+            <div className="question-show-title">
+              {question.title}
+            </div>
 
-          <CreateAnswerFormContainer
-            questionId={this.props.questionId}
-            answers={answers} />
+            <CreateAnswerFormContainer
+              questionId={this.props.questionId}
+              answers={answers} />
 
-          <AnswerIndexContainer
-            answers={answers}
-            questionId={this.props.questionId}
-            question={question}
-            users={this.props.users} />
+            <AnswerIndexContainer
+              answers={answers}
+              questionId={this.props.questionId}
+              question={question}
+              users={this.props.users} />
+          </div>
         </div>
       </div>
-    </div>
     )
   };
 }

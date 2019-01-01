@@ -680,7 +680,8 @@ function (_React$Component) {
           question: _this.props.question,
           users: _this.props.users,
           author: _this.getAuthorFromItem(answer),
-          updateAnswer: _this.props.updateAnswer
+          updateAnswer: _this.props.updateAnswer,
+          currentUserId: _this.props.currentUserId
         });
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -722,10 +723,12 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questionId = ownProps.questionId;
   var users = ownProps.users;
   var question = ownProps.question;
+  var currentUserId = state.session.id;
   return {
     answers: answers,
     question: question,
-    users: users
+    users: users,
+    currentUserId: currentUserId
   };
 };
 
@@ -766,7 +769,36 @@ __webpack_require__.r(__webpack_exports__);
 
 var AnswerIndexItem = function AnswerIndexItem(props) {
   var upvote = function upvote(e) {
-    props.answer.upvotes++;
+    if (props.answer.voters.includes(props.currentUserId.toString())) {
+      props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1);
+      props.answer.upvotes--;
+    } else {
+      if (props.answer.downvoters.includes(props.currentUserId.toString())) {
+        props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1);
+        props.answer.upvotes++;
+      }
+
+      props.answer.upvotes++;
+      props.answer.voters.push(props.currentUserId);
+    }
+
+    props.updateAnswer(props.answer);
+  };
+
+  var downvote = function downvote(e) {
+    if (props.answer.downvoters.includes(props.currentUserId.toString())) {
+      props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1);
+      props.answer.upvotes++;
+    } else {
+      if (props.answer.voters.includes(props.currentUserId.toString())) {
+        props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1);
+        props.answer.upvotes--;
+      }
+
+      props.answer.upvotes--;
+      props.answer.downvoters.push(props.currentUserId);
+    }
+
     props.updateAnswer(props.answer);
   };
 
@@ -784,9 +816,15 @@ var AnswerIndexItem = function AnswerIndexItem(props) {
     dangerouslySetInnerHTML: {
       __html: props.answer.body
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "answer-options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "answer-upvote-button",
     onClick: upvote
-  }, "Upvote ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Upvote \xB7 ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "answer-downvote-button",
+    onClick: downvote
+  }, "Downvote")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
   }));
@@ -1283,7 +1321,36 @@ __webpack_require__.r(__webpack_exports__);
 
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
   var upvote = function upvote(e) {
-    props.answer.upvotes++;
+    if (props.answer.voters.includes(props.currentUserId.toString())) {
+      props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1);
+      props.answer.upvotes--;
+    } else {
+      if (props.answer.downvoters.includes(props.currentUserId.toString())) {
+        props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1);
+        props.answer.upvotes++;
+      }
+
+      props.answer.upvotes++;
+      props.answer.voters.push(props.currentUserId);
+    }
+
+    props.updateAnswer(props.answer);
+  };
+
+  var downvote = function downvote(e) {
+    if (props.answer.downvoters.includes(props.currentUserId.toString())) {
+      props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1);
+      props.answer.upvotes++;
+    } else {
+      if (props.answer.voters.includes(props.currentUserId.toString())) {
+        props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1);
+        props.answer.upvotes--;
+      }
+
+      props.answer.upvotes--;
+      props.answer.downvoters.push(props.currentUserId);
+    }
+
     props.updateAnswer(props.answer);
   };
 
@@ -1306,9 +1373,15 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     dangerouslySetInnerHTML: {
       __html: props.answer.body
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "answer-options"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "answer-upvote-button",
     onClick: upvote
-  }, "Upvote ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Upvote \xB7 ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "answer-downvote-button",
+    onClick: downvote
+  }, "Downvote")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
   }));
@@ -1477,7 +1550,8 @@ function (_Component) {
             question: _this.getQuestionFromAnswer(item),
             body: item.body,
             users: _this.props.users,
-            updateAnswer: _this.props.updateAnswer
+            updateAnswer: _this.props.updateAnswer,
+            currentUserId: _this.props.currentUserId
           });
         }
       });
@@ -1542,12 +1616,14 @@ var mapStateToProps = function mapStateToProps(state) {
   var feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
   var users = Object.values(state.entities.users);
   var topics = state.entities.topics;
+  var currentUserId = state.session.id;
   return {
     questions: questions,
     answers: answers,
     feedItems: feedItems,
     topics: topics,
-    users: users
+    users: users,
+    currentUserId: currentUserId
   };
 };
 
@@ -1561,6 +1637,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchTopics: function fetchTopics() {
       return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__["fetchTopics"])());
+    },
+    updateAnswer: function updateAnswer(answer) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__["updateAnswer"])(answer));
     }
   };
 };
@@ -2604,7 +2683,9 @@ function (_React$Component) {
             author: _this.getAuthorFromItem(item),
             question: _this.getQuestionFromAnswer(item),
             body: item.body,
-            users: _this.props.users
+            users: _this.props.users,
+            updateAnswer: _this.props.updateAnswer,
+            currentUserId: _this.props.currentUserId
           });
         }
       });
@@ -2643,6 +2724,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_topic_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/topic_actions */ "./frontend/actions/topic_actions.js");
 /* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+
 
 
 
@@ -2669,14 +2752,15 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     return answer.topic_id == topicId;
   });
   var feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
-  ;
+  var currentUserId = state.session.id;
   return {
     questions: questions,
     answers: answers,
     feedItems: feedItems,
     topicId: topicId,
     topic: topic,
-    users: users
+    users: users,
+    currentUserId: currentUserId
   };
 };
 
@@ -2687,6 +2771,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchQuestions: function fetchQuestions() {
       return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_3__["fetchQuestions"])());
+    },
+    updateAnswer: function updateAnswer(answer) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__["updateAnswer"])(answer));
     }
   };
 };

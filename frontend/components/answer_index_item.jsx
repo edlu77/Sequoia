@@ -6,7 +6,32 @@ import CommentIndexContainer from './comment_index_container';
 const AnswerIndexItem = (props) => {
 
   const upvote = (e) => {
-    props.answer.upvotes++
+    if (props.answer.voters.includes(props.currentUserId.toString())) {
+      props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1)
+      props.answer.upvotes--
+    } else {
+      if (props.answer.downvoters.includes(props.currentUserId.toString())) {
+        props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1)
+        props.answer.upvotes++
+      }
+      props.answer.upvotes++
+      props.answer.voters.push(props.currentUserId)
+    }
+    props.updateAnswer(props.answer)
+  }
+
+  const downvote = (e) => {
+    if (props.answer.downvoters.includes(props.currentUserId.toString())) {
+      props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1)
+      props.answer.upvotes++
+    } else {
+      if (props.answer.voters.includes(props.currentUserId.toString())) {
+        props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1)
+        props.answer.upvotes--
+      }
+      props.answer.upvotes--
+      props.answer.downvoters.push(props.currentUserId)
+    }
     props.updateAnswer(props.answer)
   }
 
@@ -25,9 +50,14 @@ const AnswerIndexItem = (props) => {
       <div className="answer-body"
         dangerouslySetInnerHTML={{__html: props.answer.body}}>
       </div>
-      <button onClick={upvote}>
-        Upvote {props.answer.upvotes}
-      </button>
+      <div className="answer-options">
+        <button className="answer-upvote-button" onClick={upvote}>
+          Upvote · {props.answer.upvotes}
+        </button>
+        <button className="answer-downvote-button" onClick={downvote}>
+          Downvote
+        </button>
+      </div>
       <CommentIndexContainer
         answer={props.answer}
         users={props.users} />

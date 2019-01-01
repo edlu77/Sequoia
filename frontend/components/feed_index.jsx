@@ -102,7 +102,8 @@ class FeedIndex extends Component {
             question={this.getQuestionFromAnswer(item)}
             body={item.body}
             users={this.props.users}
-            updateAnswer = {this.props.updateAnswer} />
+            updateAnswer = {this.props.updateAnswer}
+            currentUserId = {this.props.currentUserId} />
         );
       }
     })

@@ -9,10 +9,12 @@ const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.questionId;
   const users = ownProps.users;
   const question = ownProps.question;
+  const currentUserId = state.session.id;
   return ({
     answers: answers,
     question: question,
     users: users,
+    currentUserId: currentUserId,
   });
 };
 

@@ -24,12 +24,14 @@ const mapStateToProps = (state) => {
   const feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
   const users = Object.values(state.entities.users);
   const topics = state.entities.topics;
+  const currentUserId = state.session.id;
   return ({
     questions: questions,
     answers: answers,
     feedItems: feedItems,
     topics: topics,
     users: users,
+    currentUserId: currentUserId,
   })
 };
 
@@ -38,6 +40,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchQuestions: () => dispatch(fetchQuestions()),
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
     fetchTopics: () => dispatch(fetchTopics()),
+    updateAnswer: (answer) => dispatch(updateAnswer(answer)),
 
   })
 };
