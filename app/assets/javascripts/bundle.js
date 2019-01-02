@@ -766,6 +766,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var MONTHS = {
+  1: "Jan",
+  2: "Feb",
+  3: "Mar",
+  4: "Apr",
+  5: "May",
+  6: "Jun",
+  7: "Jul",
+  8: "Aug",
+  9: "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec"
+};
 
 var AnswerIndexItem = function AnswerIndexItem(props) {
   var upvote = function upvote(e) {
@@ -811,7 +825,7 @@ var AnswerIndexItem = function AnswerIndexItem(props) {
     className: "answer-submit-time"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "feed-answer-created-time"
-  }, "Answered at ".concat(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-body",
     dangerouslySetInnerHTML: {
       __html: props.answer.body
@@ -891,8 +905,7 @@ var App = function App() {
     path: "/topics/:topicId",
     component: _topic_show_container__WEBPACK_IMPORTED_MODULE_10__["default"]
   }))));
-}; // <ProtectedRoute path="/questions" component={CreateQuestionFormContainer} />
-
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
 
@@ -1152,6 +1165,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
+var MONTHS = {
+  1: "Jan",
+  2: "Feb",
+  3: "Mar",
+  4: "Apr",
+  5: "May",
+  6: "Jun",
+  7: "Jul",
+  8: "Aug",
+  9: "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec"
+};
 
 var CommentIndexItem = function CommentIndexItem(props) {
   var date = new Date(props.comment.created_at);
@@ -1161,7 +1188,7 @@ var CommentIndexItem = function CommentIndexItem(props) {
     className: "comment-author"
   }, props.author.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "comment-created-time"
-  }, date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "comment-body"
   }, props.comment.body));
 };
@@ -1318,6 +1345,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var MONTHS = {
+  1: "Jan",
+  2: "Feb",
+  3: "Mar",
+  4: "Apr",
+  5: "May",
+  6: "Jun",
+  7: "Jul",
+  8: "Aug",
+  9: "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec"
+};
 
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
   var upvote = function upvote(e) {
@@ -1368,7 +1409,7 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     className: "feed-answer-author-name"
   }, props.author.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "feed-answer-created-time"
-  }, "Answered at ".concat(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-body",
     dangerouslySetInnerHTML: {
       __html: props.answer.body
@@ -2804,13 +2845,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -2820,13 +2861,27 @@ var TopicsList =
 function (_React$Component) {
   _inherits(TopicsList, _React$Component);
 
-  function TopicsList() {
+  function TopicsList(props) {
+    var _this;
+
     _classCallCheck(this, TopicsList);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(TopicsList).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TopicsList).call(this, props));
+    _this.state = {
+      clicked: "Feed"
+    };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(TopicsList, [{
+    key: "handleClick",
+    value: function handleClick(e) {
+      this.setState({
+        clicked: e.currentTarget.innerText
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchTopics();
@@ -2834,23 +2889,34 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var allTopics = Object.values(this.props.topics).map(function (topic) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: topic.id,
-          className: "topics-list-link"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          className: "index-topic-name",
-          to: "/topics/".concat(topic.id)
-        }, topic.name));
+        var topicHighlight = _this2.state.clicked === topic.name ? 'clicked' : 'unclicked';
+
+        if (topic.name === "Feed") {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: topic.id,
+            className: "topics-list-link ".concat(topicHighlight)
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            onClick: _this2.handleClick,
+            className: "index-topic-name",
+            to: "/"
+          }, topic.name));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: topic.id,
+            className: "topics-list-link ".concat(topicHighlight)
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            onClick: _this2.handleClick,
+            className: "index-topic-name",
+            to: "/topics/".concat(topic.id)
+          }, topic.name));
+        }
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "topics-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "topics-list-link"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "index-topic-name",
-        to: "/"
-      }, "Feed")), allTopics);
+      }, allTopics);
     }
   }]);
 
@@ -2880,7 +2946,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // debugger
+  // const currentTopicId = ownProps.match.params.topicId || 0
+  // const currentTopic = state.entities.topics[currentTopicId].name
   return {
     topics: state.entities.topics
   };

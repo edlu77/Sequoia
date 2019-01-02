@@ -2,6 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class TopicsList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {clicked: "Feed"};
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(e) {
+    this.setState({clicked: e.currentTarget.innerText});
+  }
 
 
   componentDidMount() {
@@ -10,24 +19,32 @@ class TopicsList extends React.Component {
 
   render() {
     const allTopics = Object.values(this.props.topics).map((topic) => {
-      return (
-        <li key={topic.id} className="topics-list-link">
-          <Link
-            className="index-topic-name"
-            to={`/topics/${topic.id}`} >{topic.name}
-          </Link>
-        </li>
-      )
+      const topicHighlight = (this.state.clicked === topic.name) ? 'clicked' : 'unclicked';
+      if (topic.name === "Feed") {
+        return (
+          <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
+            <Link
+              onClick={this.handleClick}
+              className="index-topic-name"
+              to="/">{topic.name}
+            </Link>
+          </li>
+        )
+      } else {
+        return (
+          <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
+            <Link
+              onClick={this.handleClick}
+              className="index-topic-name"
+              to={`/topics/${topic.id}`}>{topic.name}
+            </Link>
+          </li>
+        )
+      }
     });
 
     return (
       <ul className="topics-list">
-        <li className="topics-list-link">
-          <Link
-            className="index-topic-name"
-            to="/" >Feed
-          </Link>
-        </li>
         {allTopics}
       </ul>
     )

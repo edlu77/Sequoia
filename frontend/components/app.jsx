@@ -30,6 +30,5 @@ const App = () => {
     </div>
   );
 };
-// <ProtectedRoute path="/questions" component={CreateQuestionFormContainer} />
 
 export default App;
