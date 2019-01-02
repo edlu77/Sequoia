@@ -1,5 +1,6 @@
 html {
   overflow-y: scroll;
+  min-height: 100%;
 }
 
 body {
@@ -7,4 +8,10 @@ body {
   font-family: serif;
   font-size: 13px;
   background: #fafafa;
+  min-height: 100vh;
+}
+
+#root, .site-content, .content-main {
+  min-height: 100vh;
+  overflow:auto;
 }
