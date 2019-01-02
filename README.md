@@ -34,7 +34,7 @@ The search feature updates results on each key press and displays them in a list
 
 The Search component works by calling a handleSearch function after each key press. This function filters question titles according to the current search query. The component state is then updated with the current value of the search query.
 
-```  
+```javascript
 handleSearch(e) {
   if (e.target.value === "") {
     this.resetSearch(e);
