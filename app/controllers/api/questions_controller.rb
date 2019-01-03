@@ -12,7 +12,7 @@ class Api::QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.author_id = current_user.id
     @question.topic_id = params[:question][:topic_id] == "" ?
-      1 : params[:question][:topic_id]
+      0 : params[:question][:topic_id]
     if @question.save
       @questions = Question.all
       @answers = []

@@ -2065,13 +2065,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var QuestionIndexItem = function QuestionIndexItem(props) {
-  var name = props.topic.name;
+  var name = " - ".concat(props.topic.name);
+
+  if (props.topic.name === "Feed") {
+    name = "";
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: props.question.id,
     className: "question-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "question-topic-list"
-  }, "Question added - ".concat(name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Question added ", name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "question-index-title",
     to: "/questions/".concat(props.question.id)
   }, props.question.title));
@@ -2868,7 +2873,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TopicsList).call(this, props));
     _this.state = {
-      clicked: "Feed"
+      value: "Feed"
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -2878,7 +2883,7 @@ function (_React$Component) {
     key: "handleClick",
     value: function handleClick(e) {
       this.setState({
-        clicked: e.currentTarget.innerText
+        value: e.currentTarget.innerText
       });
     }
   }, {
@@ -2892,7 +2897,7 @@ function (_React$Component) {
       var _this2 = this;
 
       var allTopics = Object.values(this.props.topics).map(function (topic) {
-        var topicHighlight = _this2.state.clicked === topic.name ? 'clicked' : 'unclicked';
+        var topicHighlight = _this2.state.value === topic.name ? 'clicked' : 'unclicked';
 
         if (topic.name === "Feed") {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
