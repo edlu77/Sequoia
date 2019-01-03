@@ -92,3 +92,13 @@
 .answer-body {
   font-size: 16px;
 }
+
+.answer-body > ul {
+  list-style: disc;
+
+}
+
+.answer-body > ul > li {
+  margin-left: 2em;
+  padding-bottom: .7em;
+}
