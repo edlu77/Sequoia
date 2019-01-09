@@ -9,7 +9,7 @@ const Navbar = ( {currentUser, logout, openForm} ) => {
       <nav className="nav-main">
 
         <ul className="header-list-left group">
-          <li className="header-left-link">
+          <li className="header-left-logo">
             <Link className="header-logo" to="/">seQuoia</Link>
           </li>
           <li className="header-left-link">

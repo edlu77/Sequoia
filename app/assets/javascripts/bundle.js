@@ -1571,7 +1571,9 @@ function (_Component) {
       // let combinedFeed = answers.concat(questions)
       var topics = this.props.topics;
       var combinedFeed = this.props.feedItems.map(function (item) {
-        var topic = topics[item.topic_id];
+        var topic = topics[item.topic_id] || {
+          name: ""
+        };
 
         if (_this.props.questions.includes(item)) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -1829,7 +1831,7 @@ var Navbar = function Navbar(_ref) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       className: "header-list-left group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-      className: "header-left-link"
+      className: "header-left-logo"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       className: "header-logo",
       to: "/"
