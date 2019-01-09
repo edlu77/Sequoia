@@ -1571,9 +1571,7 @@ function (_Component) {
       // let combinedFeed = answers.concat(questions)
       var topics = this.props.topics;
       var combinedFeed = this.props.feedItems.map(function (item) {
-        var topic = topics[item.topic_id] || {
-          name: "Miscellaneous"
-        };
+        var topic = topics[item.topic_id];
 
         if (_this.props.questions.includes(item)) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -1602,7 +1600,10 @@ function (_Component) {
         className: "feed-index-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topics-list-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        selected: "0",
+        topics: this.props.topics
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "feed-list"
@@ -2680,8 +2681,8 @@ function (_React$Component) {
   _createClass(TopicShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchTopics();
       this.props.fetchQuestions();
+      this.props.fetchTopics();
     }
   }, {
     key: "getQuestionFromAnswer",
@@ -2735,13 +2736,17 @@ function (_React$Component) {
           });
         }
       });
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content-feed"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topic-show-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topics-list-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        selected: this.props.match.params.topicId,
+        topics: this.props.topics
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topic-show"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, combinedFeed))));
     }
@@ -2789,6 +2794,7 @@ var sortByTime = function sortByTime(a, b) {
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var topicId = ownProps.match.params.topicId;
+  var topics = state.entities.topics;
   var topic = state.entities.topics[topicId];
   var users = Object.values(state.entities.users);
   var questions = Object.values(state.entities.questions).filter(function (question) {
@@ -2805,6 +2811,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     feedItems: feedItems,
     topicId: topicId,
     topic: topic,
+    topics: topics,
     users: users,
     currentUserId: currentUserId
   };
@@ -2873,13 +2880,18 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TopicsList).call(this, props));
     _this.state = {
-      value: "Feed"
+      value: ""
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(TopicsList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchTopics();
+    }
+  }, {
     key: "handleClick",
     value: function handleClick(e) {
       this.setState({
@@ -2887,17 +2899,13 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchTopics();
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
+      debugger;
       var allTopics = Object.values(this.props.topics).map(function (topic) {
-        var topicHighlight = _this2.state.value === topic.name ? 'clicked' : 'unclicked';
+        var topicHighlight = _this2.props.selected.name === topic.name ? 'clicked' : 'unclicked';
 
         if (topic.name === "Feed") {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -2952,11 +2960,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  // debugger
-  // const currentTopicId = ownProps.match.params.topicId || 0
-  // const currentTopic = state.entities.topics[currentTopicId].name
+  var topics = state.entities.topics;
+  var selected = topics[ownProps.selected] || {
+    name: "none"
+  };
+  debugger;
   return {
-    topics: state.entities.topics
+    selected: selected,
+    topics: topics
   };
 };
 

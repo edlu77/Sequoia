@@ -16,6 +16,7 @@ var sortByTime = function(a, b) {
 
 const mapStateToProps = (state, ownProps) => {
   const topicId = ownProps.match.params.topicId;
+  const topics = state.entities.topics;
   const topic = state.entities.topics[topicId];
   const users = Object.values(state.entities.users);
   const questions = Object.values(state.entities.questions).filter(
@@ -33,6 +34,7 @@ const mapStateToProps = (state, ownProps) => {
     feedItems: feedItems,
     topicId: topicId,
     topic: topic,
+    topics: topics,
     users: users,
     currentUserId: currentUserId,
   })

@@ -83,7 +83,7 @@ class FeedIndex extends Component {
     const topics = this.props.topics;
 
     const combinedFeed = this.props.feedItems.map((item) => {
-      const topic = topics[item.topic_id] || {name: "Miscellaneous"}
+      const topic = topics[item.topic_id]
       if (this.props.questions.includes(item)) {
         return (
           <QuestionIndexItem
@@ -112,7 +112,9 @@ class FeedIndex extends Component {
       <div className="content-feed">
       <div className="feed-index-wrapper">
         <div className="topics-list-container">
-          <TopicsListContainer />
+          <TopicsListContainer
+            selected = "0"
+            topics = {this.props.topics} />
         </div>
         <div className="feed-index">
           <ul className="feed-list">

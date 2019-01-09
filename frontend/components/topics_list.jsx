@@ -4,21 +4,22 @@ import { Link } from 'react-router-dom';
 class TopicsList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: "Feed"};
+    this.state = {value: ""};
     this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick(e) {
-    this.setState({value: e.currentTarget.innerText});
   }
 
   componentDidMount() {
     this.props.fetchTopics();
   }
 
+  handleClick(e) {
+    this.setState({value: e.currentTarget.innerText});
+  }
+
   render() {
+    debugger
     const allTopics = Object.values(this.props.topics).map((topic) => {
-      const topicHighlight = (this.state.value === topic.name) ? 'clicked' : 'unclicked';
+      const topicHighlight = (this.props.selected.name === topic.name) ? 'clicked' : 'unclicked';
       if (topic.name === "Feed") {
         return (
           <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >

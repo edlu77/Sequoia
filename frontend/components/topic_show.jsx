@@ -7,8 +7,8 @@ import TopicsListContainer from './topics_list_container';
 class TopicShow extends React.Component {
 
   componentDidMount() {
-    this.props.fetchTopics()
     this.props.fetchQuestions()
+    this.props.fetchTopics()
   };
 
   getQuestionFromAnswer(answer) {
@@ -52,12 +52,15 @@ class TopicShow extends React.Component {
         );
       }
     })
+    debugger
 
     return (
       <div className="content-feed">
         <div className="topic-show-wrapper">
           <div className="topics-list-container">
-            <TopicsListContainer />
+            <TopicsListContainer
+              selected={this.props.match.params.topicId}
+              topics={this.props.topics} />
           </div>
           <div className="topic-show">
             <ul>
