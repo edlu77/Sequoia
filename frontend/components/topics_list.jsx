@@ -17,7 +17,6 @@ class TopicsList extends React.Component {
   }
 
   render() {
-    debugger
     const allTopics = Object.values(this.props.topics).map((topic) => {
       const topicHighlight = (this.props.selected.name === topic.name) ? 'clicked' : 'unclicked';
       if (topic.name === "Feed") {

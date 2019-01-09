@@ -7,7 +7,6 @@ import { fetchTopics } from '../actions/topic_actions';
 const mapStateToProps = (state, ownProps) => {
   const topics = state.entities.topics
   const selected = topics[ownProps.selected] || {name: "none"}
-  debugger
   return ({
     selected: selected,
     topics: topics,

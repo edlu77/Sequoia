@@ -2736,7 +2736,6 @@ function (_React$Component) {
           });
         }
       });
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "content-feed"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2903,7 +2902,6 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      debugger;
       var allTopics = Object.values(this.props.topics).map(function (topic) {
         var topicHighlight = _this2.props.selected.name === topic.name ? 'clicked' : 'unclicked';
 
@@ -2964,7 +2962,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var selected = topics[ownProps.selected] || {
     name: "none"
   };
-  debugger;
   return {
     selected: selected,
     topics: topics

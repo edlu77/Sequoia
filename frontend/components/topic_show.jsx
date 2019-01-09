@@ -52,7 +52,6 @@ class TopicShow extends React.Component {
         );
       }
     })
-    debugger
 
     return (
       <div className="content-feed">
