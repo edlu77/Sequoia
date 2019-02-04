@@ -6,7 +6,7 @@ import CreateAnswerFormContainer from './create_answer_form_container';
 class QuestionShow extends React.Component {
 
   componentDidMount() {
-
+    window.scrollTo(0, 0)
     this.props.fetchQuestion(this.props.match.params.questionId);
     this.props.fetchAnswers(this.props.match.params.questionId);
   };

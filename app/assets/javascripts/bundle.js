@@ -2152,6 +2152,7 @@ function (_React$Component) {
   _createClass(QuestionShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      window.scrollTo(0, 0);
       this.props.fetchQuestion(this.props.match.params.questionId);
       this.props.fetchAnswers(this.props.match.params.questionId);
     }
