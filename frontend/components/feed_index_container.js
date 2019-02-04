@@ -15,13 +15,26 @@ var sortByTime = function(a, b) {
   }
 };
 
+var sortByVotes = function(a, b) {
+  if (a.constructor.name === "Question") {
+    return 0
+  }
+  else if (a.upvotes < b.upvotes) {
+    return 1;
+  } else if (a.upvotes > b.upvotes) {
+    return -1;
+  } else {
+    return 0
+  }
+};
+
 const mapStateToProps = (state) => {
   // this is for later when we want to filter out questions based on currentUser's subscribed topics
   // const currentUserId = state.session.id;
   // const currentUser = state.entities.users[currentUserId];
-  const questions = Object.values(state.entities.questions).sort(sortByTime);
-  const answers = Object.values(state.entities.answers).sort(sortByTime);
-  const feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
+  const questions = Object.values(state.entities.questions).sort(sortByTime).slice(0, 10);
+  const answers = Object.values(state.entities.answers).sort(sortByVotes).slice(0, 10);
+  const feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
   const users = Object.values(state.entities.users);
   const topics = state.entities.topics;
   const currentUserId = state.session.id;

@@ -1651,13 +1651,25 @@ var sortByTime = function sortByTime(a, b) {
   }
 };
 
+var sortByVotes = function sortByVotes(a, b) {
+  if (a.constructor.name === "Question") {
+    return 0;
+  } else if (a.upvotes < b.upvotes) {
+    return 1;
+  } else if (a.upvotes > b.upvotes) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   // this is for later when we want to filter out questions based on currentUser's subscribed topics
   // const currentUserId = state.session.id;
   // const currentUser = state.entities.users[currentUserId];
-  var questions = Object.values(state.entities.questions).sort(sortByTime);
-  var answers = Object.values(state.entities.answers).sort(sortByTime);
-  var feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
+  var questions = Object.values(state.entities.questions).sort(sortByTime).slice(0, 10);
+  var answers = Object.values(state.entities.answers).sort(sortByVotes).slice(0, 10);
+  var feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
   var users = Object.values(state.entities.users);
   var topics = state.entities.topics;
   var currentUserId = state.session.id;
@@ -2797,6 +2809,18 @@ var sortByTime = function sortByTime(a, b) {
   }
 };
 
+var sortByVotes = function sortByVotes(a, b) {
+  if (a.constructor.name === "Question") {
+    return 0;
+  } else if (a.upvotes < b.upvotes) {
+    return 1;
+  } else if (a.upvotes > b.upvotes) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var topicId = ownProps.match.params.topicId;
   var topics = state.entities.topics;
@@ -2804,11 +2828,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var users = Object.values(state.entities.users);
   var questions = Object.values(state.entities.questions).filter(function (question) {
     return question.topic_id == topicId;
-  });
+  }).slice(0, 10);
   var answers = Object.values(state.entities.answers).filter(function (answer) {
     return answer.topic_id == topicId;
-  });
-  var feedItems = questions.concat(answers).sort(sortByTime).slice(0, 10);
+  }).sort(sortByVotes).slice(0, 10);
+  var feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
   var currentUserId = state.session.id;
   return {
     questions: questions,
