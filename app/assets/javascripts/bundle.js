@@ -2353,7 +2353,9 @@ function (_React$Component) {
       var _this2 = this;
 
       return Object.values(questions).map(function (question) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "search-result"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           onClick: _this2.resetSearch,
           to: "/questions/".concat(question.id)
         }, question.title));
@@ -2365,8 +2367,9 @@ function (_React$Component) {
       var matches = this.getMatches(this.state.questions);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "search-input",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "search-input"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "Search seQuoia",
         onKeyUp: this.handleSearch

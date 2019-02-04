@@ -99,6 +99,28 @@
   border-radius: 4px;
   background: white;
   width: 250px;
-  padding: 3px 8px;
   color: black;
+}
+
+.search-input {
+  padding: 3px 8px;
+}
+
+.search-match-list {
+  border: 1px solid #e2e2e2;
+  background: white;
+  margin-top: 10px;
+  position: absolute;
+}
+
+.search-result {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 8px 12px;
+  padding-right: 30px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.search-result:hover {
+  background: #e6e6e6;
 }

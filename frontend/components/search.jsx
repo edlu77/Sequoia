@@ -33,7 +33,7 @@ class Search extends React.Component {
   getMatches(questions) {
     return Object.values(questions).map((question) => {
       return (
-        <li>
+        <li className="search-result">
           <Link
             onClick={this.resetSearch}
             to={`/questions/${question.id}`}>{question.title}
@@ -48,9 +48,8 @@ class Search extends React.Component {
     const matches = this.getMatches(this.state.questions)
     return (
       <div className="search-form">
-        <form>
+        <form className="search-input">
           <input
-            className="search-input"
             type="text"
             placeholder="Search seQuoia"
             onKeyUp={this.handleSearch} />
