@@ -46,6 +46,7 @@ class Search extends React.Component {
   render() {
 
     const matches = this.getMatches(this.state.questions)
+    const searchOpen = (this.state.questions.length > 0) ? 'open' : 'closed';
     return (
       <div className="search-form">
         <form className="search-input">
@@ -54,7 +55,7 @@ class Search extends React.Component {
             placeholder="Search seQuoia"
             onKeyUp={this.handleSearch} />
         </form>
-        <ul className="search-match-list">
+        <ul className={`search-match-list-${searchOpen}`}>
           {matches}
         </ul>
       </div>

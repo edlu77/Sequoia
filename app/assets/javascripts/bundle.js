@@ -2365,6 +2365,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var matches = this.getMatches(this.state.questions);
+      var searchOpen = this.state.questions.length > 0 ? 'open' : 'closed';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -2374,7 +2375,7 @@ function (_React$Component) {
         placeholder: "Search seQuoia",
         onKeyUp: this.handleSearch
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "search-match-list"
+        className: "search-match-list-".concat(searchOpen)
       }, matches));
     }
   }]);
