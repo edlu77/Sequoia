@@ -27,6 +27,7 @@ class TopicShow extends React.Component {
     }
   };
 
+
   render() {
     const combinedFeed = this.props.feedItems.map((item) => {
       const topic = this.props.topic || {name: "Miscellaneous"}

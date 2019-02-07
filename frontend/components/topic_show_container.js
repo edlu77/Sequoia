@@ -27,15 +27,29 @@ var sortByVotes = function(a, b) {
   }
 };
 
+// var uniqueAnswers = function(answers) {
+//   let questions = {};
+//   let result = [];
+//   for (var i=0; i<answers.length; i++) {
+//     if(questions[i]) {
+//       return
+//     } else {
+//       questions[i] = answers[i].question_id
+//       result.push(answers[i])
+//     }
+//   }
+//   return result
+// };
+
 const mapStateToProps = (state, ownProps) => {
   const topicId = ownProps.match.params.topicId;
   const topics = state.entities.topics;
   const topic = state.entities.topics[topicId];
   const users = Object.values(state.entities.users);
   const questions = Object.values(state.entities.questions).filter(
-    (question) => question.topic_id == topicId).slice(0, 10);
+    (question) => question.topic_id == topicId).slice(0, 10)
   const answers = Object.values(state.entities.answers).filter(
-    (answer) => answer.topic_id == topicId).sort(sortByVotes).slice(0, 10);
+    (answer) => answer.topic_id == topicId).sort(sortByVotes)
   const feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
   const currentUserId = state.session.id;
 

@@ -2820,7 +2820,20 @@ var sortByVotes = function sortByVotes(a, b) {
   } else {
     return 0;
   }
-};
+}; // var uniqueAnswers = function(answers) {
+//   let questions = {};
+//   let result = [];
+//   for (var i=0; i<answers.length; i++) {
+//     if(questions[i]) {
+//       return
+//     } else {
+//       questions[i] = answers[i].question_id
+//       result.push(answers[i])
+//     }
+//   }
+//   return result
+// };
+
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var topicId = ownProps.match.params.topicId;
@@ -2832,7 +2845,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   }).slice(0, 10);
   var answers = Object.values(state.entities.answers).filter(function (answer) {
     return answer.topic_id == topicId;
-  }).sort(sortByVotes).slice(0, 10);
+  }).sort(sortByVotes);
   var feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
   var currentUserId = state.session.id;
   return {
