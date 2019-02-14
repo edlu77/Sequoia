@@ -554,18 +554,33 @@ function (_React$Component) {
     _this.state = {
       currentUser: _this.props.currentUser,
       body: _this.props.answer.body,
-      questionId: _this.props.questionId
+      questionId: _this.props.questionId,
+      images: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(AnswerForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      // e.preventDefault();
+      // this.props.createAnswer(this.state)
+      // this.setState({body: ""})
       e.preventDefault();
-      this.props.createAnswer(this.state);
+      var formData = new FormData();
+      formData.append('answer[body]', this.state.body);
+      formData.append('answer[questionId]', this.state.questionId);
+
+      if (this.state.images) {
+        for (var i = 0; i < this.state.images.length; i++) {
+          formData.append('answer[images][]', this.state.images[i]);
+        }
+      }
+
+      this.props.createAnswer(formData);
       this.setState({
         body: ""
       });
@@ -578,13 +593,23 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      this.setState({
+        images: e.currentTarget.files
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form-userinfo"
-      }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        onChange: this.handleFile
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
         className: "answer-submit-form-input",
         theme: "snow",
         onChange: this.handleChange,
@@ -3576,14 +3601,21 @@ var fetchAnswer = function fetchAnswer(id) {
     method: "GET",
     url: "/api/answers/".concat(id)
   });
-};
-var createAnswer = function createAnswer(answer) {
+}; // export const createAnswer = answer => {
+//   return $.ajax({
+//     method: "POST",
+//     url: '/api/answers',
+//     data: { answer },
+//   })
+// };
+
+var createAnswer = function createAnswer(formData) {
   return $.ajax({
     method: "POST",
     url: '/api/answers',
-    data: {
-      answer: answer
-    }
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 var updateAnswer = function updateAnswer(answer) {

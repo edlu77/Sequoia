@@ -16,4 +16,6 @@ class Answer < ApplicationRecord
   primary_key: :id,
   class_name: :Comment
 
+  has_many_attached :images
+
 end
