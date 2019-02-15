@@ -555,7 +555,10 @@ function (_React$Component) {
       currentUser: _this.props.currentUser,
       body: _this.props.answer.body,
       questionId: _this.props.questionId,
-      images: null
+      images: null,
+      imageUrls: null,
+      imageFile: null,
+      imageUrl: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -595,13 +598,35 @@ function (_React$Component) {
   }, {
     key: "handleFile",
     value: function handleFile(e) {
-      this.setState({
-        images: e.currentTarget.files
-      });
+      var _this2 = this;
+
+      var reader = new FileReader();
+      var file = e.currentTarget.files[0];
+
+      reader.onloadend = function () {
+        return _this2.setState({
+          imageUrl: reader.result,
+          imageFile: file
+        });
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+        var newBody = this.state.body + "<img src=\"".concat(this.state.imageUrl, "\"></img>");
+        this.setState({
+          body: newBody
+        });
+      } else {
+        this.setState({
+          imageUrl: "",
+          imageFile: null
+        });
+      }
     }
   }, {
     key: "render",
     value: function render() {
+      console.log(this.state);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

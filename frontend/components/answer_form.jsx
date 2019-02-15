@@ -7,7 +7,8 @@ let quillModules = {
 				['bold', 'italic'],
 				[{'list': 'ordered'}, {'list': 'bullet'}],
 				['link']
-			]
+			],
+
 		};
 
 class AnswerForm extends React.Component {
@@ -17,7 +18,10 @@ class AnswerForm extends React.Component {
 			currentUser: this.props.currentUser,
       body: this.props.answer.body,
       questionId: this.props.questionId,
-			images: null
+			images: null,
+			imageUrls: null,
+			imageFile: null,
+			imageUrl: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -48,10 +52,22 @@ class AnswerForm extends React.Component {
   }
 
 	handleFile(e) {
-		this.setState({images: e.currentTarget.files})
+		const reader = new FileReader();
+		const file = e.currentTarget.files[0];
+		reader.onloadend = () =>
+			this.setState({ imageUrl: reader.result, imageFile: file });
+
+		if (file) {
+			reader.readAsDataURL(file);
+			const newBody = this.state.body + `<img src=\"${this.state.imageUrl}\"></img>`
+			this.setState({ body: newBody })
+		} else {
+			this.setState({ imageUrl: "", imageFile: null })
+		}
 	}
 
   render() {
+		console.log(this.state)
     return (
       <div className="answer-submit-form">
 
