@@ -604,18 +604,20 @@ function (_React$Component) {
       var file = e.currentTarget.files[0];
 
       reader.onloadend = function () {
-        return _this2.setState({
+        _this2.setState({
           imageUrl: reader.result,
           imageFile: file
+        });
+
+        var newBody = _this2.state.body + "<img src=\"".concat(_this2.state.imageUrl, "\"></img>");
+
+        _this2.setState({
+          body: newBody
         });
       };
 
       if (file) {
         reader.readAsDataURL(file);
-        var newBody = this.state.body + "<img src=\"".concat(this.state.imageUrl, "\"></img>");
-        this.setState({
-          body: newBody
-        });
       } else {
         this.setState({
           imageUrl: "",

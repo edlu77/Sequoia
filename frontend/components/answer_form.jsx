@@ -54,13 +54,14 @@ class AnswerForm extends React.Component {
 	handleFile(e) {
 		const reader = new FileReader();
 		const file = e.currentTarget.files[0];
-		reader.onloadend = () =>
+		reader.onloadend = () => {
 			this.setState({ imageUrl: reader.result, imageFile: file });
-
+			const newBody = this.state.body + `<img src=\"${this.state.imageUrl}\"></img>`;
+			this.setState({ body: newBody });
+		}
+		
 		if (file) {
 			reader.readAsDataURL(file);
-			const newBody = this.state.body + `<img src=\"${this.state.imageUrl}\"></img>`
-			this.setState({ body: newBody })
 		} else {
 			this.setState({ imageUrl: "", imageFile: null })
 		}
