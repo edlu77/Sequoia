@@ -4,26 +4,23 @@ import { fetchTopics } from '../actions/topic_actions';
 import { fetchQuestions } from '../actions/question_actions';
 import { updateAnswer } from '../actions/answer_actions';
 
+var sortByVotes = function(a, b) {
+  if (a.upvotes < b.upvotes) {
+    return 1;
+  } else if (a.upvotes > b.upvotes) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
+
 var sortByTime = function(a, b) {
   if (a.created_at < b.created_at) {
     return 1;
   } else if (a.created_at > b.created_at) {
     return -1;
   } else {
-    return 0
-  }
-};
-
-var sortByVotes = function(a, b) {
-  if (a.constructor.name === "Question") {
-    return 0
-  }
-  else if (a.upvotes < b.upvotes) {
     return 1;
-  } else if (a.upvotes > b.upvotes) {
-    return -1;
-  } else {
-    return 0
   }
 };
 
@@ -47,9 +44,12 @@ const mapStateToProps = (state, ownProps) => {
   const topic = state.entities.topics[topicId];
   const users = Object.values(state.entities.users);
   const questions = Object.values(state.entities.questions).filter(
-    (question) => question.topic_id == topicId).slice(0, 10)
-  const answers = Object.values(state.entities.answers).filter(
-    (answer) => answer.topic_id == topicId).sort(sortByVotes)
+    (question) => question.topic_id == topicId).sort(sortByTime).slice(0, 10)
+  const bestAnswers = Object.values(state.entities.answers).filter(
+    (answer) => answer.topic_id == topicId).sort(sortByVotes).slice(0, 5);
+  const recentAnswers = Object.values(state.entities.answers).filter(
+    (answer) => answer.topic_id == topicId).sort(sortByTime).slice(0, 5);
+  const answers = bestAnswers.concat(recentAnswers);
   const feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
   const currentUserId = state.session.id;
 

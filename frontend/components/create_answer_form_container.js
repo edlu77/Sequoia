@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
   const currentUser = state.entities.users[currentUserId];
 
   return ({
-    answer: {body: ""},
+    answer: {body: "<p><br></p>"},
     answers: answers,
     questionId: questionId,
     currentUser: currentUser,

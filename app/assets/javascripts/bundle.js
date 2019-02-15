@@ -554,11 +554,7 @@ function (_React$Component) {
     _this.state = {
       currentUser: _this.props.currentUser,
       body: _this.props.answer.body,
-      questionId: _this.props.questionId,
-      images: null,
-      imageUrls: null,
-      imageFile: null,
-      imageUrl: ""
+      questionId: _this.props.questionId
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -569,23 +565,18 @@ function (_React$Component) {
   _createClass(AnswerForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      // e.preventDefault();
-      // this.props.createAnswer(this.state)
-      // this.setState({body: ""})
       e.preventDefault();
+
+      if (this.state.body === "<p><br></p>") {
+        return;
+      }
+
       var formData = new FormData();
       formData.append('answer[body]', this.state.body);
       formData.append('answer[questionId]', this.state.questionId);
-
-      if (this.state.images) {
-        for (var i = 0; i < this.state.images.length; i++) {
-          formData.append('answer[images][]', this.state.images[i]);
-        }
-      }
-
       this.props.createAnswer(formData);
       this.setState({
-        body: ""
+        body: "<p><br></p>"
       });
     }
   }, {
@@ -604,12 +595,7 @@ function (_React$Component) {
       var file = e.currentTarget.files[0];
 
       reader.onloadend = function () {
-        _this2.setState({
-          imageUrl: reader.result,
-          imageFile: file
-        });
-
-        var newBody = _this2.state.body + "<img src=\"".concat(_this2.state.imageUrl, "\"></img>");
+        var newBody = _this2.state.body + "<img src=\"".concat(reader.result, "\"></img>");
 
         _this2.setState({
           body: newBody
@@ -618,11 +604,6 @@ function (_React$Component) {
 
       if (file) {
         reader.readAsDataURL(file);
-      } else {
-        this.setState({
-          imageUrl: "",
-          imageFile: null
-        });
       }
     }
   }, {
@@ -1272,7 +1253,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var currentUser = state.entities.users[currentUserId];
   return {
     answer: {
-      body: ""
+      body: "<p><br></p>"
     },
     answers: answers,
     questionId: questionId,
@@ -1541,18 +1522,6 @@ function (_Component) {
       this.props.fetchTopics();
     }
   }, {
-    key: "shuffle",
-    value: function shuffle(array) {
-      for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-      }
-
-      return array;
-    }
-  }, {
     key: "getQuestionFromAnswer",
     value: function getQuestionFromAnswer(answer) {
       for (var i = 0; i < this.props.questions.length; i++) {
@@ -1693,20 +1662,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var sortByTime = function sortByTime(a, b) {
-  if (a.created_at < b.created_at) {
-    return 1;
-  } else if (a.created_at > b.created_at) {
-    return -1;
-  } else {
-    return 0;
-  }
-};
-
 var sortByVotes = function sortByVotes(a, b) {
-  if (a.constructor.name === "Question") {
-    return 0;
-  } else if (a.upvotes < b.upvotes) {
+  if (a.upvotes < b.upvotes) {
     return 1;
   } else if (a.upvotes > b.upvotes) {
     return -1;
@@ -1715,13 +1672,29 @@ var sortByVotes = function sortByVotes(a, b) {
   }
 };
 
+var sortByTime = function sortByTime(a, b) {
+  if (a.created_at < b.created_at) {
+    return 1;
+  } else if (a.created_at > b.created_at) {
+    return -1;
+  } else {
+    return 1;
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   // this is for later when we want to filter out questions based on currentUser's subscribed topics
   // const currentUserId = state.session.id;
   // const currentUser = state.entities.users[currentUserId];
-  var questions = Object.values(state.entities.questions).sort(sortByTime).slice(0, 10);
-  var answers = Object.values(state.entities.answers).sort(sortByVotes).slice(0, 10);
-  var feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
+  var questions = Object.values(state.entities.questions).sort(sortByTime).slice(0, 10); //take 10 most recent questions
+
+  var bestAnswers = Object.values(state.entities.answers).sort(sortByVotes).slice(0, 5); //take 5 most upvoted answers
+
+  var recentAnswers = Object.values(state.entities.answers).sort(sortByTime).slice(0, 5); //take 5 more recent answers
+
+  var answers = bestAnswers.concat(recentAnswers);
+  var feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
+
   var users = Object.values(state.entities.users);
   var topics = state.entities.topics;
   var currentUserId = state.session.id;
@@ -2852,25 +2825,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var sortByTime = function sortByTime(a, b) {
-  if (a.created_at < b.created_at) {
+var sortByVotes = function sortByVotes(a, b) {
+  if (a.upvotes < b.upvotes) {
     return 1;
-  } else if (a.created_at > b.created_at) {
+  } else if (a.upvotes > b.upvotes) {
     return -1;
   } else {
     return 0;
   }
 };
 
-var sortByVotes = function sortByVotes(a, b) {
-  if (a.constructor.name === "Question") {
-    return 0;
-  } else if (a.upvotes < b.upvotes) {
+var sortByTime = function sortByTime(a, b) {
+  if (a.created_at < b.created_at) {
     return 1;
-  } else if (a.upvotes > b.upvotes) {
+  } else if (a.created_at > b.created_at) {
     return -1;
   } else {
-    return 0;
+    return 1;
   }
 }; // var uniqueAnswers = function(answers) {
 //   let questions = {};
@@ -2894,10 +2865,14 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var users = Object.values(state.entities.users);
   var questions = Object.values(state.entities.questions).filter(function (question) {
     return question.topic_id == topicId;
-  }).slice(0, 10);
-  var answers = Object.values(state.entities.answers).filter(function (answer) {
+  }).sort(sortByTime).slice(0, 10);
+  var bestAnswers = Object.values(state.entities.answers).filter(function (answer) {
     return answer.topic_id == topicId;
-  }).sort(sortByVotes);
+  }).sort(sortByVotes).slice(0, 5);
+  var recentAnswers = Object.values(state.entities.answers).filter(function (answer) {
+    return answer.topic_id == topicId;
+  }).sort(sortByTime).slice(0, 5);
+  var answers = bestAnswers.concat(recentAnswers);
   var feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
   var currentUserId = state.session.id;
   return {

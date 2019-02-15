@@ -18,10 +18,6 @@ class AnswerForm extends React.Component {
 			currentUser: this.props.currentUser,
       body: this.props.answer.body,
       questionId: this.props.questionId,
-			images: null,
-			imageUrls: null,
-			imageFile: null,
-			imageUrl: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -29,23 +25,16 @@ class AnswerForm extends React.Component {
   };
 
   handleSubmit(e) {
-    // e.preventDefault();
-    // this.props.createAnswer(this.state)
-		// this.setState({body: ""})
-
 		e.preventDefault();
+		if (this.state.body === "<p><br></p>") {
+			return
+		}
 		const formData = new FormData();
 		formData.append('answer[body]', this.state.body);
 		formData.append('answer[questionId]', this.state.questionId);
-		if (this.state.images) {
-			for (let i = 0; i < this.state.images.length; i++) {
-				formData.append('answer[images][]', this.state.images[i]);
-			}
-		}
 		this.props.createAnswer(formData)
-		this.setState({body: ""})
+		this.setState({body: "<p><br></p>"})
   }
-
 
   handleChange(value) {
     this.setState({ body: value })
@@ -55,15 +44,11 @@ class AnswerForm extends React.Component {
 		const reader = new FileReader();
 		const file = e.currentTarget.files[0];
 		reader.onloadend = () => {
-			this.setState({ imageUrl: reader.result, imageFile: file });
-			const newBody = this.state.body + `<img src=\"${this.state.imageUrl}\"></img>`;
+			const newBody = this.state.body + `<img src=\"${reader.result}\"></img>`;
 			this.setState({ body: newBody });
 		}
-		
 		if (file) {
 			reader.readAsDataURL(file);
-		} else {
-			this.setState({ imageUrl: "", imageFile: null })
 		}
 	}
 

@@ -45,7 +45,7 @@ class Api::AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:body, :upvotes, images: [])
+    params.require(:answer).permit(:body, :upvotes)
   end
 
 end
