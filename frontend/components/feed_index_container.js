@@ -25,15 +25,29 @@ var sortByTime = function(a, b) {
   }
 };
 
+var uniqueAnswers = function(answers) {
+  let allAnswers = Object.values(answers)
+  let questions = {};
+  let result = [];
+  for (var i=0; i<allAnswers.length; i++) {
+    if(questions[allAnswers[i].question_id] === true) {
+      questions[allAnswers[i].question_id] = true
+    } else {
+      questions[allAnswers[i].question_id] = true
+      result.push(allAnswers[i])
+    }
+  }
+  return result
+};
 
 const mapStateToProps = (state) => {
   // this is for later when we want to filter out questions based on currentUser's subscribed topics
   // const currentUserId = state.session.id;
   // const currentUser = state.entities.users[currentUserId];
   const questions = Object.values(state.entities.questions).sort(sortByTime).slice(0, 10); //take 10 most recent questions
-  const bestAnswers = Object.values(state.entities.answers).sort(sortByVotes).slice(0, 5); //take 5 most upvoted answers
-  const recentAnswers = Object.values(state.entities.answers).sort(sortByTime).slice(0, 5); //take 5 more recent answers
-  const answers = bestAnswers.concat(recentAnswers);
+  const bestAnswers = Object.values(state.entities.answers).sort(sortByVotes);
+  const recentAnswers = Object.values(state.entities.answers).sort(sortByTime);
+  const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0,10);
   const feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
   const users = Object.values(state.entities.users);
   const topics = state.entities.topics;

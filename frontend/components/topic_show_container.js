@@ -24,19 +24,20 @@ var sortByTime = function(a, b) {
   }
 };
 
-// var uniqueAnswers = function(answers) {
-//   let questions = {};
-//   let result = [];
-//   for (var i=0; i<answers.length; i++) {
-//     if(questions[i]) {
-//       return
-//     } else {
-//       questions[i] = answers[i].question_id
-//       result.push(answers[i])
-//     }
-//   }
-//   return result
-// };
+var uniqueAnswers = function(answers) {
+  let allAnswers = Object.values(answers)
+  let questions = {};
+  let result = [];
+  for (var i=0; i<allAnswers.length; i++) {
+    if(questions[allAnswers[i].question_id] === true) {
+      questions[allAnswers[i].question_id] = true
+    } else {
+      questions[allAnswers[i].question_id] = true
+      result.push(allAnswers[i])
+    }
+  }
+  return result
+};
 
 const mapStateToProps = (state, ownProps) => {
   const topicId = ownProps.match.params.topicId;
@@ -46,11 +47,11 @@ const mapStateToProps = (state, ownProps) => {
   const questions = Object.values(state.entities.questions).filter(
     (question) => question.topic_id == topicId).sort(sortByTime).slice(0, 10)
   const bestAnswers = Object.values(state.entities.answers).filter(
-    (answer) => answer.topic_id == topicId).sort(sortByVotes).slice(0, 5);
+    (answer) => answer.topic_id == topicId).sort(sortByVotes);
   const recentAnswers = Object.values(state.entities.answers).filter(
-    (answer) => answer.topic_id == topicId).sort(sortByTime).slice(0, 5);
-  const answers = bestAnswers.concat(recentAnswers);
-  const feedItems = questions.concat(answers).sort(sortByTime).sort(sortByVotes);
+    (answer) => answer.topic_id == topicId).sort(sortByTime);
+  const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
+  const feedItems = questions.concat(answers).sort(sortByTime);
   const currentUserId = state.session.id;
 
   return ({

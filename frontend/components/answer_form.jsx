@@ -3,13 +3,12 @@ import { Link, Redirect } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 
 let quillModules = {
-			toolbar: [
-				['bold', 'italic'],
-				[{'list': 'ordered'}, {'list': 'bullet'}],
-				['link']
-			],
-
-		};
+	toolbar: [
+		['bold', 'italic'],
+		[{'list': 'ordered'}, {'list': 'bullet'}],
+		['link']
+	],
+};
 
 class AnswerForm extends React.Component {
   constructor(props) {
