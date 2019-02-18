@@ -1706,7 +1706,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
   var bestAnswers = Object.values(state.entities.answers).sort(sortByVotes);
   var recentAnswers = Object.values(state.entities.answers).sort(sortByTime);
-  var answers = uniqueAnswers(recentAnswers.concat(bestAnswers)).slice(0, 10);
+  var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   var feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
 
   var users = Object.values(state.entities.users);
@@ -2890,7 +2890,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var recentAnswers = Object.values(state.entities.answers).filter(function (answer) {
     return answer.topic_id == topicId;
   }).sort(sortByTime);
-  var answers = uniqueAnswers(recentAnswers.concat(bestAnswers)).slice(0, 10);
+  var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   var feedItems = questions.concat(answers).sort(sortByTime);
   var currentUserId = state.session.id;
   return {

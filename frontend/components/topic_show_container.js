@@ -50,7 +50,7 @@ const mapStateToProps = (state, ownProps) => {
     (answer) => answer.topic_id == topicId).sort(sortByVotes);
   const recentAnswers = Object.values(state.entities.answers).filter(
     (answer) => answer.topic_id == topicId).sort(sortByTime);
-  const answers = uniqueAnswers(recentAnswers.concat(bestAnswers)).slice(0, 10);
+  const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   const feedItems = questions.concat(answers).sort(sortByTime);
   const currentUserId = state.session.id;
 
