@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
   const questions = Object.values(state.entities.questions).sort(sortByTime).slice(0, 10); //take 10 most recent questions
   const bestAnswers = Object.values(state.entities.answers).sort(sortByVotes);
   const recentAnswers = Object.values(state.entities.answers).sort(sortByTime);
-  const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0,10);
+  const answers = uniqueAnswers(recentAnswers.concat(bestAnswers)).slice(0,10);
   const feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
   const users = Object.values(state.entities.users);
   const topics = state.entities.topics;
