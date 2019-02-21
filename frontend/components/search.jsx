@@ -45,7 +45,7 @@ class Search extends React.Component {
 
   render() {
 
-    const matches = this.getMatches(this.state.questions)
+    const matches = this.getMatches(this.state.questions).slice(0, 5)
     const searchOpen = (this.state.questions.length > 0) ? 'open' : 'closed';
     return (
       <div className="search-form">

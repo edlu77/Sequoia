@@ -11,15 +11,20 @@
 }
 
 .question-form-header {
+  display: flex;
   background: #fafafa;
-  border-bottom: 1px solid #e2e2e2
+  border-bottom: 1px solid #e2e2e2;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .add-question-tab-button {
-  font-weight: 500;
-  color: #666;
+  color: #b92b27;
+  font-weight: bold;
+  // color: #666;
   text-align: center;
-  float: left;
+  padding: 16px 32px;
+  margin: 0;
 }
 
 .question-form-content {
@@ -36,27 +41,29 @@
   line-height: 1.3;
 }
 
+.question-topic-input {
+  padding: 12px 0px 12px 24px;
+  border-top: 1px solid #e2e2e2;
+}
+
 .question-form-footer {
+  display: flex;
   width: 600px;
   background: #fafafa;
   color: #949494;
   padding: 10px;
-  border-top: 1px solid #e2e2e2
+  border-top: 1px solid #e2e2e2;
+  flex-direction: row-reverse;
 }
 
 .question-submit-button {
-  float: right;
   font-size: 15px;
   line-height: 1.4;
   border-radius: 3px;
   font-weight: 500;
   padding: 3px 7px 4px 7px;
-  margin-left: 5px;
+  margin-left: 16px;
   background: #3a66ad;
   color: white;
   box-shadow: 0 1px 1px 0 rgba(200,200,200,0.6);
-}
-
-.question-form-cancel {
-  float: right;
 }
