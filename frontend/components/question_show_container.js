@@ -14,11 +14,21 @@ var sortByTime = function(a, b) {
   }
 };
 
+var sortByVotes = function(a, b) {
+  if (a.upvotes < b.upvotes) {
+    return 1;
+  } else if (a.upvotes > b.upvotes) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
+
 const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.match.params.questionId;
   const question = state.entities.questions[questionId];
   const answers = Object.values(state.entities.answers).filter(
-    answer => answer.question_id == questionId).sort(sortByTime);
+    answer => answer.question_id == questionId).sort(sortByVotes);
   const users = Object.values(state.entities.users);
   return ({
     questionId: questionId,

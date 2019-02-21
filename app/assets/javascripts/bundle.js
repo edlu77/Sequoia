@@ -2262,12 +2262,22 @@ var sortByTime = function sortByTime(a, b) {
   }
 };
 
+var sortByVotes = function sortByVotes(a, b) {
+  if (a.upvotes < b.upvotes) {
+    return 1;
+  } else if (a.upvotes > b.upvotes) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questionId = ownProps.match.params.questionId;
   var question = state.entities.questions[questionId];
   var answers = Object.values(state.entities.answers).filter(function (answer) {
     return answer.question_id == questionId;
-  }).sort(sortByTime);
+  }).sort(sortByVotes);
   var users = Object.values(state.entities.users);
   return {
     questionId: questionId,
