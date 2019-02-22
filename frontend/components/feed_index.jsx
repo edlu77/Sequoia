@@ -13,9 +13,9 @@ class FeedIndex extends Component {
   }
 
   getQuestionFromAnswer(answer) {
-    for (let i = 0; i < this.props.questions.length; i++) {
-      if (answer.question_id === this.props.questions[i].id) {
-        return this.props.questions[i]
+    for (let i = 0; i < this.props.allQuestions.length; i++) {
+      if (answer.question_id === this.props.allQuestions[i].id) {
+        return this.props.allQuestions[i]
       };
     }
   };
@@ -43,35 +43,7 @@ class FeedIndex extends Component {
   }
 
   render() {
-    // const questions = this.props.questions.map((question) => {
-    //   return (
-    //     <QuestionIndexItem
-    //       key={question.created_at}
-    //       question={question}
-    //       author={this.getAuthorFromItem(question)}
-    //       deleteQuestion={this.props.deleteQuestion}/>
-    //   );
-    // });
-    //
-    // let filteredAnswers = this.filterAnswers(this.props.answers) || []
-    //
-    // const answers = filteredAnswers.map((answer) => {
-    //   return (
-    //     <FeedAnswerIndexItem
-    //       key={answer.created_at}
-    //       answer={answer}
-    //       author={this.getAuthorFromItem(answer)}
-    //       question={this.getQuestionFromAnswer(answer)}
-    //       body={answer.body}
-    //       users={this.props.users} />
-    //   );
-    // });
-    //
-
-    // let combinedFeed = answers.concat(questions)
-
     const topics = this.props.topics;
-
     const combinedFeed = this.props.feedItems.map((item) => {
       const topic = topics[item.topic_id] || {name: ""}
       if (this.props.questions.includes(item)) {
@@ -97,7 +69,6 @@ class FeedIndex extends Component {
         );
       }
     })
-
     return (
       <div className="content-feed">
       <div className="feed-index-wrapper">

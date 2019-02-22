@@ -49,13 +49,11 @@ const FeedAnswerIndexItem = (props) => {
   }
 
   const date = new Date(props.answer.created_at)
-
-
   return (
     <li className="feed-answer-index-item">
       <div className="answer-topic-list">Answer</div>
       <div className="answer-question-title">
-        <Link className="feed-answer-title" to={`/questions/${props.question.id}`}>
+        <Link className="feed-answer-title" to={`/questions/${props.answer.question_id}`}>
           {props.question.title}
         </Link>
       </div>

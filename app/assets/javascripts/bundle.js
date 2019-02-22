@@ -1436,7 +1436,7 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     className: "answer-question-title"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "feed-answer-title",
-    to: "/questions/".concat(props.question.id)
+    to: "/questions/".concat(props.answer.question_id)
   }, props.question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "feed-answer-author-name"
   }, props.author.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1523,9 +1523,9 @@ function (_Component) {
   }, {
     key: "getQuestionFromAnswer",
     value: function getQuestionFromAnswer(answer) {
-      for (var i = 0; i < this.props.questions.length; i++) {
-        if (answer.question_id === this.props.questions[i].id) {
-          return this.props.questions[i];
+      for (var i = 0; i < this.props.allQuestions.length; i++) {
+        if (answer.question_id === this.props.allQuestions[i].id) {
+          return this.props.allQuestions[i];
         }
 
         ;
@@ -1564,31 +1564,6 @@ function (_Component) {
     value: function render() {
       var _this = this;
 
-      // const questions = this.props.questions.map((question) => {
-      //   return (
-      //     <QuestionIndexItem
-      //       key={question.created_at}
-      //       question={question}
-      //       author={this.getAuthorFromItem(question)}
-      //       deleteQuestion={this.props.deleteQuestion}/>
-      //   );
-      // });
-      //
-      // let filteredAnswers = this.filterAnswers(this.props.answers) || []
-      //
-      // const answers = filteredAnswers.map((answer) => {
-      //   return (
-      //     <FeedAnswerIndexItem
-      //       key={answer.created_at}
-      //       answer={answer}
-      //       author={this.getAuthorFromItem(answer)}
-      //       question={this.getQuestionFromAnswer(answer)}
-      //       body={answer.body}
-      //       users={this.props.users} />
-      //   );
-      // });
-      //
-      // let combinedFeed = answers.concat(questions)
       var topics = this.props.topics;
       var combinedFeed = this.props.feedItems.map(function (item) {
         var topic = topics[item.topic_id] || {
@@ -1702,7 +1677,8 @@ var mapStateToProps = function mapStateToProps(state) {
   // this is for later when we want to filter out questions based on currentUser's subscribed topics
   // const currentUserId = state.session.id;
   // const currentUser = state.entities.users[currentUserId];
-  var questions = Object.values(state.entities.questions).sort(sortByTime).slice(0, 10); //take 10 most recent questions
+  var allQuestions = Object.values(state.entities.questions);
+  var questions = allQuestions.sort(sortByTime).slice(0, 10); //take 10 most recent questions
 
   var bestAnswers = Object.values(state.entities.answers).sort(sortByVotes);
   var recentAnswers = Object.values(state.entities.answers).sort(sortByTime);
@@ -1713,6 +1689,7 @@ var mapStateToProps = function mapStateToProps(state) {
   var topics = state.entities.topics;
   var currentUserId = state.session.id;
   return {
+    allQuestions: allQuestions,
     questions: questions,
     answers: answers,
     feedItems: feedItems,
@@ -2061,6 +2038,11 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var topics = this.props.topics.map(function (topic) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: topic.name
+        }, topic.name);
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2076,13 +2058,10 @@ function (_React$Component) {
         value: this.state.title,
         onChange: this.update("title"),
         placeholder: "Start your question with \"What\", \"How\", \"Why\", etc."
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "question-topic-input",
-        type: "text",
-        value: this.state.topic,
-        onChange: this.update("topic"),
-        placeholder: "Enter question topic (optional)"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onChange: this.update("topic")
+      }, topics), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-form-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "question-submit-button",
