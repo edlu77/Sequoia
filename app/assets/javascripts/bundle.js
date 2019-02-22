@@ -2039,9 +2039,15 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var topics = this.props.topics.map(function (topic) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          value: topic.name
-        }, topic.name);
+        if (topic.name === "Feed") {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: topic.name
+          }, "None");
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: topic.name
+          }, topic.name);
+        }
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-form"
@@ -2058,10 +2064,14 @@ function (_React$Component) {
         value: this.state.title,
         onChange: this.update("title"),
         placeholder: "Start your question with \"What\", \"How\", \"Why\", etc."
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        className: "question-topic-input",
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "question-topic-input"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "question-topic-input-label"
+      }, "Select topic:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "question-topic-menu",
         onChange: this.update("topic")
-      }, topics), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, topics)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-form-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "question-submit-button",

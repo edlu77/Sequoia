@@ -52,9 +52,15 @@ class QuestionForm extends React.Component {
   render () {
 
     const topics = this.props.topics.map((topic) => {
-      return (
-        <option value={topic.name}>{topic.name}</option>
-      )
+      if (topic.name === "Feed") {
+        return (
+          <option value={topic.name}>None</option>
+        )
+      } else {
+        return (
+          <option value={topic.name}>{topic.name}</option>
+        )
+      }
     })
 
     return (
@@ -71,9 +77,12 @@ class QuestionForm extends React.Component {
             onChange={this.update("title")}
             placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."/>
 
-          <select className="question-topic-input" onChange={this.update("topic")}>
-            {topics}
-          </select>
+          <div className="question-topic-input">
+            <span className="question-topic-input-label">Select topic:</span>
+            <select className="question-topic-menu" onChange={this.update("topic")}>
+              {topics}
+            </select>
+          </div>
 
           <div className="question-form-footer">
             <input className="question-submit-button" type="submit" value="Add Question" />
