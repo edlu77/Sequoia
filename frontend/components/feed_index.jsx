@@ -66,7 +66,10 @@ class FeedIndex extends Component {
             users={this.props.users}
             updateAnswer = {this.props.updateAnswer}
             deleteAnswer = {this.props.deleteAnswer}
-            currentUserId = {this.props.currentUserId} />
+            currentUserId = {this.props.currentUserId}
+            currentUser = {this.props.currentUser}
+            showAnswerEdit = {false}
+            answers = {this.props.answers} />
         );
       }
     })

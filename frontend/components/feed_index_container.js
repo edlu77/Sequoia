@@ -53,6 +53,8 @@ const mapStateToProps = (state) => {
   const users = Object.values(state.entities.users);
   const topics = state.entities.topics;
   const currentUserId = state.session.id;
+  const currentUser = state.entities.users[currentUserId];
+
   return ({
     allQuestions: allQuestions,
     questions: questions,
@@ -61,6 +63,7 @@ const mapStateToProps = (state) => {
     topics: topics,
     users: users,
     currentUserId: currentUserId,
+    currentUser: currentUser,
   })
 };
 

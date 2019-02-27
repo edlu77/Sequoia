@@ -35,7 +35,9 @@ export const updateAnswer = answer => {
   return $.ajax({
     method: "PATCH",
     url: `/api/answers/${answer.id}`,
-    data: { answer },
+    data: formData,
+    contentType: false,
+    processData: false,
   })
 };
 

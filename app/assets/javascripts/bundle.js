@@ -1260,13 +1260,10 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     createAnswer: function createAnswer(answer) {
       return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["createAnswer"])(answer));
-    },
-    fetchAnswers: function fetchAnswers(questionId) {
-      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAnswers"])(questionId));
     }
   };
 };
@@ -1374,6 +1371,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _comment_index_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./comment_index_container */ "./frontend/components/comment_index_container.js");
+/* harmony import */ var _update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./update_answer_form_container */ "./frontend/components/update_answer_form_container.js");
+
 
 
 
@@ -1431,6 +1430,11 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     props.deleteAnswer(props.answer.id);
   };
 
+  var openEditor = function openEditor(e) {
+    props.showAnswerEdit = true;
+  };
+
+  var showAnswerEdit = props.showAnswerEdit ? 'open' : 'closed';
   var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
@@ -1446,16 +1450,27 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
   }, props.author.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "feed-answer-created-time"
   }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-body",
+    className: "answer-body ".concat(showAnswerEdit),
     dangerouslySetInnerHTML: {
       __html: props.answer.body
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "answer-edit ".concat(showAnswerEdit)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    answer: props.body,
+    answers: props.answers,
+    questionId: props.question.id,
+    currentUser: props.currentUser,
+    updateAnswer: props.updateAnswer
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-options"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "answer-upvote-button",
     onClick: upvote
   }, "Upvote \xB7 ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "answer-update-button",
+    onClick: openEditor
+  }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "answer-delete-button",
     onClick: deleteAnswer
   }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1595,7 +1610,10 @@ function (_Component) {
             users: _this.props.users,
             updateAnswer: _this.props.updateAnswer,
             deleteAnswer: _this.props.deleteAnswer,
-            currentUserId: _this.props.currentUserId
+            currentUserId: _this.props.currentUserId,
+            currentUser: _this.props.currentUser,
+            showAnswerEdit: false,
+            answers: _this.props.answers
           });
         }
       });
@@ -1696,6 +1714,7 @@ var mapStateToProps = function mapStateToProps(state) {
   var users = Object.values(state.entities.users);
   var topics = state.entities.topics;
   var currentUserId = state.session.id;
+  var currentUser = state.entities.users[currentUserId];
   return {
     allQuestions: allQuestions,
     questions: questions,
@@ -1703,7 +1722,8 @@ var mapStateToProps = function mapStateToProps(state) {
     feedItems: feedItems,
     topics: topics,
     users: users,
-    currentUserId: currentUserId
+    currentUserId: currentUserId,
+    currentUser: currentUser
   };
 };
 
@@ -2801,7 +2821,10 @@ function (_React$Component) {
             users: _this.props.users,
             updateAnswer: _this.props.updateAnswer,
             deleteAnswer: _this.props.deleteAnswer,
-            currentUserId: _this.props.currentUserId
+            currentUserId: _this.props.currentUserId,
+            currentUser: _this.props.currentUser,
+            showAnswerEdit: false,
+            answers: _this.props.answers
           });
         }
       });
@@ -2904,6 +2927,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   var feedItems = questions.concat(answers).sort(sortByTime);
   var currentUserId = state.session.id;
+  var currentUser = state.entities.users[currentUserId];
   return {
     questions: questions,
     answers: answers,
@@ -2912,7 +2936,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     topic: topic,
     topics: topics,
     users: users,
-    currentUserId: currentUserId
+    currentUserId: currentUserId,
+    currentUser: currentUser
   };
 };
 
@@ -3080,6 +3105,189 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_topics_list__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/update_answer_form.jsx":
+/*!****************************************************!*\
+  !*** ./frontend/components/update_answer_form.jsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var react_quill__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-quill */ "./node_modules/react-quill/lib/index.js");
+/* harmony import */ var react_quill__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_quill__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+var quillModules = {
+  toolbar: [['bold', 'italic'], [{
+    'list': 'ordered'
+  }, {
+    'list': 'bullet'
+  }], ['link']]
+};
+
+var UpdateAnswerForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(UpdateAnswerForm, _React$Component);
+
+  function UpdateAnswerForm(props) {
+    var _this;
+
+    _classCallCheck(this, UpdateAnswerForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UpdateAnswerForm).call(this, props));
+    _this.state = {
+      currentUser: _this.props.currentUser,
+      body: _this.props.answer.body,
+      questionId: _this.props.questionId
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(UpdateAnswerForm, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+
+      if (this.state.body === "<p><br></p>") {
+        return;
+      }
+
+      var formData = new FormData();
+      formData.append('answer[body]', this.state.body);
+      formData.append('answer[questionId]', this.state.questionId);
+      this.props.updateAnswer(formData);
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(value) {
+      this.setState({
+        body: value
+      });
+    }
+  }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      var _this2 = this;
+
+      var reader = new FileReader();
+      var file = e.currentTarget.files[0];
+
+      reader.onloadend = function () {
+        var newBody = _this2.state.body + "<img src=\"".concat(reader.result, "\"></img>");
+
+        _this2.setState({
+          body: newBody
+        });
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-submit-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-submit-form-userinfo"
+      }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        onChange: this.handleFile
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        className: "answer-submit-form-input",
+        theme: "snow",
+        onChange: this.handleChange,
+        value: this.state.body,
+        formats: this.formats,
+        modules: quillModules,
+        placeholder: "Write your answer"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "answer-submit-button",
+        onClick: this.handleSubmit
+      }, "Submit"));
+    }
+  }]);
+
+  return UpdateAnswerForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (UpdateAnswerForm);
+
+/***/ }),
+
+/***/ "./frontend/components/update_answer_form_container.js":
+/*!*************************************************************!*\
+  !*** ./frontend/components/update_answer_form_container.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _update_answer_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./update_answer_form */ "./frontend/components/update_answer_form.jsx");
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var questionId = ownProps.questionId;
+  var answers = ownProps.answers;
+  var answer = {
+    body: ownProps.answer
+  };
+  var currentUserId = state.session.id;
+  var currentUser = state.entities.users[currentUserId];
+  return {
+    answer: answer,
+    answers: answers,
+    questionId: questionId,
+    currentUser: currentUser
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    updateAnswer: function updateAnswer(answer) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["updateAnswer"])(answer));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_update_answer_form__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -3656,9 +3864,9 @@ var updateAnswer = function updateAnswer(answer) {
   return $.ajax({
     method: "PATCH",
     url: "/api/answers/".concat(answer.id),
-    data: {
-      answer: answer
-    }
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 var deleteAnswer = function deleteAnswer(id) {

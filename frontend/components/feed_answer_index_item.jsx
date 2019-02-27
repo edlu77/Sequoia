@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CommentIndexContainer from './comment_index_container';
+import UpdateAnswerFormContainer from './update_answer_form_container';
 
 const MONTHS = {
   1: "Jan",
@@ -52,6 +53,12 @@ const FeedAnswerIndexItem = (props) => {
     props.deleteAnswer(props.answer.id)
   }
 
+  const openEditor = (e) => {
+    props.showAnswerEdit = true;
+  }
+
+  const showAnswerEdit = (props.showAnswerEdit) ? 'open' : 'closed';
+
   const date = new Date(props.answer.created_at)
   return (
     <li className="feed-answer-index-item">
@@ -68,12 +75,23 @@ const FeedAnswerIndexItem = (props) => {
         </div>
       </div>
 
-      <div className="answer-body"
+      <div className={`answer-body ${showAnswerEdit}`}
         dangerouslySetInnerHTML={{__html: props.answer.body}}>
+      </div>
+      <div className={`answer-edit ${showAnswerEdit}`}>
+        <UpdateAnswerFormContainer
+          answer = {props.body}
+          answers = {props.answers}
+          questionId = {props.question.id}
+          currentUser = {props.currentUser}
+          updateAnswer = {props.updateAnswer}/>
       </div>
       <div className="answer-options">
         <button className="answer-upvote-button" onClick={upvote}>
           Upvote · {props.answer.upvotes}
+        </button>
+        <button className="answer-update-button" onClick={openEditor}>
+          Update
         </button>
         <button className="answer-delete-button" onClick={deleteAnswer}>
           Delete

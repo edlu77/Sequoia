@@ -53,6 +53,7 @@ const mapStateToProps = (state, ownProps) => {
   const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   const feedItems = questions.concat(answers).sort(sortByTime);
   const currentUserId = state.session.id;
+  const currentUser = state.entities.users[currentUserId];
 
   return ({
     questions: questions,
@@ -63,6 +64,7 @@ const mapStateToProps = (state, ownProps) => {
     topics: topics,
     users: users,
     currentUserId: currentUserId,
+    currentUser: currentUser,
   })
 }
 

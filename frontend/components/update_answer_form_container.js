@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
-import AnswerForm from './answer_form';
-import { createAnswer} from '../actions/answer_actions';
+import UpdateAnswerForm from './update_answer_form';
+import { updateAnswer} from '../actions/answer_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.questionId;
   const answers = ownProps.answers;
+  const answer = {body: ownProps.answer};
 
   const currentUserId = state.session.id;
   const currentUser = state.entities.users[currentUserId];
 
   return ({
-    answer: {body: "<p><br></p>"},
+    answer: answer,
     answers: answers,
     questionId: questionId,
     currentUser: currentUser,
@@ -19,8 +20,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return ({
-    createAnswer: (answer) => dispatch(createAnswer(answer)),
+    updateAnswer: (answer) => dispatch(updateAnswer(answer)),
   })
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AnswerForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateAnswerForm);
