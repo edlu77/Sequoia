@@ -49,6 +49,7 @@ class TopicShow extends React.Component {
             body={item.body}
             users={this.props.users}
             updateAnswer = {this.props.updateAnswer}
+            deleteAnswer = {this.props.deleteAnswer}
             currentUserId = {this.props.currentUserId} />
         );
       }

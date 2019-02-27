@@ -1427,6 +1427,10 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     props.updateAnswer(props.answer);
   };
 
+  var deleteAnswer = function deleteAnswer(e) {
+    props.deleteAnswer(props.answer.id);
+  };
+
   var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
@@ -1452,6 +1456,9 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     className: "answer-upvote-button",
     onClick: upvote
   }, "Upvote \xB7 ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "answer-delete-button",
+    onClick: deleteAnswer
+  }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "answer-downvote-button",
     onClick: downvote
   }, "Downvote")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -1587,6 +1594,7 @@ function (_Component) {
             body: item.body,
             users: _this.props.users,
             updateAnswer: _this.props.updateAnswer,
+            deleteAnswer: _this.props.deleteAnswer,
             currentUserId: _this.props.currentUserId
           });
         }
@@ -1712,6 +1720,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateAnswer: function updateAnswer(answer) {
       return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__["updateAnswer"])(answer));
+    },
+    deleteAnswer: function deleteAnswer(answerId) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__["deleteAnswer"])(answerId));
     }
   };
 };
@@ -2789,6 +2800,7 @@ function (_React$Component) {
             body: item.body,
             users: _this.props.users,
             updateAnswer: _this.props.updateAnswer,
+            deleteAnswer: _this.props.deleteAnswer,
             currentUserId: _this.props.currentUserId
           });
         }
@@ -2914,6 +2926,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateAnswer: function updateAnswer(answer) {
       return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__["updateAnswer"])(answer));
+    },
+    deleteAnswer: function deleteAnswer(answerId) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__["deleteAnswer"])(answerId));
     }
   };
 };

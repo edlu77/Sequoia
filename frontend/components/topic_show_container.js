@@ -2,7 +2,7 @@ import TopicShow from './topic_show';
 import { connect } from 'react-redux';
 import { fetchTopics } from '../actions/topic_actions';
 import { fetchQuestions } from '../actions/question_actions';
-import { updateAnswer } from '../actions/answer_actions';
+import { updateAnswer, deleteAnswer } from '../actions/answer_actions';
 
 var sortByVotes = function(a, b) {
   if (a.upvotes < b.upvotes) {
@@ -71,6 +71,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchTopics: () => dispatch(fetchTopics()),
     fetchQuestions: () => dispatch(fetchQuestions()),
     updateAnswer: (answer) => dispatch(updateAnswer(answer)),
+    deleteAnswer: (answerId) => dispatch(deleteAnswer(answerId)),
 
   })
 }

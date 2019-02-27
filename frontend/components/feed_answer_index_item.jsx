@@ -48,6 +48,10 @@ const FeedAnswerIndexItem = (props) => {
     props.updateAnswer(props.answer)
   }
 
+  const deleteAnswer = (e) => {
+    props.deleteAnswer(props.answer.id)
+  }
+
   const date = new Date(props.answer.created_at)
   return (
     <li className="feed-answer-index-item">
@@ -70,6 +74,9 @@ const FeedAnswerIndexItem = (props) => {
       <div className="answer-options">
         <button className="answer-upvote-button" onClick={upvote}>
           Upvote · {props.answer.upvotes}
+        </button>
+        <button className="answer-delete-button" onClick={deleteAnswer}>
+          Delete
         </button>
         <button className="answer-downvote-button" onClick={downvote}>
           Downvote
