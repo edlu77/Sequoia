@@ -17,6 +17,7 @@ class UpdateAnswerForm extends React.Component {
 			currentUser: this.props.currentUser,
       body: this.props.answer.body,
       questionId: this.props.questionId,
+      answerId: this.props.answerId
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,10 +29,7 @@ class UpdateAnswerForm extends React.Component {
 		if (this.state.body === "<p><br></p>") {
 			return
 		}
-		const formData = new FormData();
-		formData.append('answer[body]', this.state.body);
-		formData.append('answer[questionId]', this.state.questionId);
-		this.props.updateAnswer(formData)
+		this.props.updateAnswer(this.state)
   }
 
   handleChange(value) {

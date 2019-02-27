@@ -122,7 +122,8 @@ var receiveAnswers = function receiveAnswers(payload) {
 var receiveAnswer = function receiveAnswer(answer) {
   return {
     type: RECEIVE_ANSWER,
-    answer: answer
+    answer: answer,
+    answerId: answer.id
   };
 };
 
@@ -1458,6 +1459,7 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     className: "answer-edit ".concat(showAnswerEdit)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
     answer: props.body,
+    answerId: props.answer.id,
     answers: props.answers,
     questionId: props.question.id,
     currentUser: props.currentUser,
@@ -3165,7 +3167,8 @@ function (_React$Component) {
     _this.state = {
       currentUser: _this.props.currentUser,
       body: _this.props.answer.body,
-      questionId: _this.props.questionId
+      questionId: _this.props.questionId,
+      answerId: _this.props.answerId
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -3182,10 +3185,7 @@ function (_React$Component) {
         return;
       }
 
-      var formData = new FormData();
-      formData.append('answer[body]', this.state.body);
-      formData.append('answer[questionId]', this.state.questionId);
-      this.props.updateAnswer(formData);
+      this.props.updateAnswer(this.state);
     }
   }, {
     key: "handleChange",
@@ -3269,12 +3269,14 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var answer = {
     body: ownProps.answer
   };
+  var answerId = ownProps.answerId;
   var currentUserId = state.session.id;
   var currentUser = state.entities.users[currentUserId];
   return {
     answer: answer,
     answers: answers,
     questionId: questionId,
+    answerId: answerId,
     currentUser: currentUser
   };
 };
@@ -3863,10 +3865,10 @@ var createAnswer = function createAnswer(formData) {
 var updateAnswer = function updateAnswer(answer) {
   return $.ajax({
     method: "PATCH",
-    url: "/api/answers/".concat(answer.id),
-    data: formData,
-    contentType: false,
-    processData: false
+    url: "/api/answers/".concat(answer.answerId),
+    data: {
+      answer: answer
+    }
   });
 };
 var deleteAnswer = function deleteAnswer(id) {

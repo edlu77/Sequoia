@@ -81,6 +81,7 @@ const FeedAnswerIndexItem = (props) => {
       <div className={`answer-edit ${showAnswerEdit}`}>
         <UpdateAnswerFormContainer
           answer = {props.body}
+          answerId = {props.answer.id}
           answers = {props.answers}
           questionId = {props.question.id}
           currentUser = {props.currentUser}

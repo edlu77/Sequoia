@@ -6,6 +6,7 @@ const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.questionId;
   const answers = ownProps.answers;
   const answer = {body: ownProps.answer};
+  const answerId = ownProps.answerId;
 
   const currentUserId = state.session.id;
   const currentUser = state.entities.users[currentUserId];
@@ -14,6 +15,7 @@ const mapStateToProps = (state, ownProps) => {
     answer: answer,
     answers: answers,
     questionId: questionId,
+    answerId: answerId,
     currentUser: currentUser,
   })
 };
