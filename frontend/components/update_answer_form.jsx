@@ -19,7 +19,6 @@ class UpdateAnswerForm extends React.Component {
 			currentUser: this.props.currentUser,
       body: this.props.answer.body,
       questionId: this.props.questionId,
-      answerId: this.props.answerId,
 			editOpen: this.props.editOpen,
 			upvotes: this.props.upvotes,
 			voters: this.props.answer.voters,
@@ -31,6 +30,7 @@ class UpdateAnswerForm extends React.Component {
 		this.showEdit = this.showEdit.bind(this);
 		this.upvote = this.upvote.bind(this);
 		this.downvote = this.downvote.bind(this);
+		this.deleteAnswer = this.deleteAnswer.bind(this);
   };
 
   handleSubmit(e) {
@@ -41,7 +41,7 @@ class UpdateAnswerForm extends React.Component {
 		this.props.updateAnswer({
 			author_id: this.state.answer.author_id,
 			body: this.state.body,
-			id: this.state.answer.id,
+			id: this.state.id,
 			question_id: this.state.answer.questionId,
 			topic_id: this.state.answer.topic_id,
 			upvotes: this.state.upvotes,
@@ -106,10 +106,11 @@ class UpdateAnswerForm extends React.Component {
 	}
 
 	deleteAnswer (e) {
-		this.props.deleteAnswer(this.props.answer.id)
+		this.props.deleteAnswer(this.state.id)
 	}
 
   render() {
+		console.log(this.state)
     return (
 			<div>
 				<div className={`answer-body-${this.state.editOpen}`}

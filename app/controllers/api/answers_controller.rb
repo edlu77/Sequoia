@@ -40,6 +40,8 @@ class Api::AnswersController < ApplicationController
   end
 
   def destroy
+    @answer = Answer.find(params[:id])
+    @answer.destroy
   end
 
   private

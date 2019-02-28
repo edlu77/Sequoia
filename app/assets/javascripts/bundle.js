@@ -120,7 +120,6 @@ var receiveAnswers = function receiveAnswers(payload) {
 };
 
 var receiveAnswer = function receiveAnswer(answer) {
-  debugger;
   return {
     type: RECEIVE_ANSWER,
     answer: answer,
@@ -3141,7 +3140,6 @@ function (_React$Component) {
       currentUser: _this.props.currentUser,
       body: _this.props.answer.body,
       questionId: _this.props.questionId,
-      answerId: _this.props.answerId,
       editOpen: _this.props.editOpen,
       upvotes: _this.props.upvotes,
       voters: _this.props.answer.voters,
@@ -3153,6 +3151,7 @@ function (_React$Component) {
     _this.showEdit = _this.showEdit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.upvote = _this.upvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.downvote = _this.downvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.deleteAnswer = _this.deleteAnswer.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -3168,7 +3167,7 @@ function (_React$Component) {
       this.props.updateAnswer({
         author_id: this.state.answer.author_id,
         body: this.state.body,
-        id: this.state.answer.id,
+        id: this.state.id,
         question_id: this.state.answer.questionId,
         topic_id: this.state.answer.topic_id,
         upvotes: this.state.upvotes,
@@ -3271,11 +3270,12 @@ function (_React$Component) {
   }, {
     key: "deleteAnswer",
     value: function deleteAnswer(e) {
-      this.props.deleteAnswer(this.props.answer.id);
+      this.props.deleteAnswer(this.state.id);
     }
   }, {
     key: "render",
     value: function render() {
+      console.log(this.state);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-body-".concat(this.state.editOpen),
         dangerouslySetInnerHTML: {

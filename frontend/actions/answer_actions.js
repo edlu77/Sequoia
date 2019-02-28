@@ -12,7 +12,6 @@ const receiveAnswers = (payload) => {
 };
 
 const receiveAnswer = (answer) => {
-  debugger
   return ({
     type: RECEIVE_ANSWER,
     answer: answer,
