@@ -49,16 +49,6 @@ const FeedAnswerIndexItem = (props) => {
     props.updateAnswer(props.answer)
   }
 
-  const deleteAnswer = (e) => {
-    props.deleteAnswer(props.answer.id)
-  }
-
-  const openEditor = (e) => {
-    props.showAnswerEdit = true;
-  }
-
-  const showAnswerEdit = (props.showAnswerEdit) ? 'open' : 'closed';
-
   const date = new Date(props.answer.created_at)
   return (
     <li className="feed-answer-index-item">
@@ -75,32 +65,16 @@ const FeedAnswerIndexItem = (props) => {
         </div>
       </div>
 
-      <div className={`answer-body ${showAnswerEdit}`}
-        dangerouslySetInnerHTML={{__html: props.answer.body}}>
-      </div>
-      <div className={`answer-edit ${showAnswerEdit}`}>
+      <div className='answer-edit'>
         <UpdateAnswerFormContainer
-          answer = {props.body}
+          answer = {props.answer}
           answerId = {props.answer.id}
           answers = {props.answers}
           questionId = {props.question.id}
           currentUser = {props.currentUser}
-          updateAnswer = {props.updateAnswer}/>
+          upvotes = {props.answer.upvotes}/>
       </div>
-      <div className="answer-options">
-        <button className="answer-upvote-button" onClick={upvote}>
-          Upvote · {props.answer.upvotes}
-        </button>
-        <button className="answer-update-button" onClick={openEditor}>
-          Update
-        </button>
-        <button className="answer-delete-button" onClick={deleteAnswer}>
-          Delete
-        </button>
-        <button className="answer-downvote-button" onClick={downvote}>
-          Downvote
-        </button>
-      </div>
+
       <CommentIndexContainer
         answer={props.answer}
         users={props.users}/>

@@ -29,7 +29,7 @@ class Api::AnswersController < ApplicationController
   end
 
   def update
-    @answer = Answer.find(params[:id])
+    @answer = Answer.find(params[:answer][:id])
     @answer.voters = params[:answer][:voters] || []
     @answer.downvoters = params[:answer][:downvoters] || []
     if @answer.update(answer_params)

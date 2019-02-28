@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 import UpdateAnswerForm from './update_answer_form';
-import { updateAnswer} from '../actions/answer_actions';
+import { updateAnswer, deleteAnswer} from '../actions/answer_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.questionId;
   const answers = ownProps.answers;
-  const answer = {body: ownProps.answer};
+  const answer = ownProps.answer;
+  const body = {body: ownProps.answer};
   const answerId = ownProps.answerId;
 
   const currentUserId = state.session.id;
@@ -13,16 +14,22 @@ const mapStateToProps = (state, ownProps) => {
 
   return ({
     answer: answer,
+    id: answer.id,
+    body: body,
     answers: answers,
     questionId: questionId,
     answerId: answerId,
     currentUser: currentUser,
+    currentUserId: currentUserId,
+    editOpen: 'closed',
+    upvotes: ownProps.upvotes,
   })
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return ({
     updateAnswer: (answer) => dispatch(updateAnswer(answer)),
+    deleteAnswer: (answerId) => dispatch(deleteAnswer(answerId)),
   })
 };
 

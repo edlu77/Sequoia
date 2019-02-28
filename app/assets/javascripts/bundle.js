@@ -120,6 +120,7 @@ var receiveAnswers = function receiveAnswers(payload) {
 };
 
 var receiveAnswer = function receiveAnswer(answer) {
+  debugger;
   return {
     type: RECEIVE_ANSWER,
     answer: answer,
@@ -1427,15 +1428,6 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     props.updateAnswer(props.answer);
   };
 
-  var deleteAnswer = function deleteAnswer(e) {
-    props.deleteAnswer(props.answer.id);
-  };
-
-  var openEditor = function openEditor(e) {
-    props.showAnswerEdit = true;
-  };
-
-  var showAnswerEdit = props.showAnswerEdit ? 'open' : 'closed';
   var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
@@ -1451,34 +1443,15 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
   }, props.author.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "feed-answer-created-time"
   }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-body ".concat(showAnswerEdit),
-    dangerouslySetInnerHTML: {
-      __html: props.answer.body
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-edit ".concat(showAnswerEdit)
+    className: "answer-edit"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    answer: props.body,
+    answer: props.answer,
     answerId: props.answer.id,
     answers: props.answers,
     questionId: props.question.id,
     currentUser: props.currentUser,
-    updateAnswer: props.updateAnswer
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-options"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "answer-upvote-button",
-    onClick: upvote
-  }, "Upvote \xB7 ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "answer-update-button",
-    onClick: openEditor
-  }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "answer-delete-button",
-    onClick: deleteAnswer
-  }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "answer-downvote-button",
-    onClick: downvote
-  }, "Downvote")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    upvotes: props.answer.upvotes
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
   }));
@@ -1614,7 +1587,6 @@ function (_Component) {
             deleteAnswer: _this.props.deleteAnswer,
             currentUserId: _this.props.currentUserId,
             currentUser: _this.props.currentUser,
-            showAnswerEdit: false,
             answers: _this.props.answers
           });
         }
@@ -2825,7 +2797,6 @@ function (_React$Component) {
             deleteAnswer: _this.props.deleteAnswer,
             currentUserId: _this.props.currentUserId,
             currentUser: _this.props.currentUser,
-            showAnswerEdit: false,
             answers: _this.props.answers
           });
         }
@@ -3165,14 +3136,23 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UpdateAnswerForm).call(this, props));
     _this.state = {
+      answer: _this.props.answer,
+      id: _this.props.id,
       currentUser: _this.props.currentUser,
       body: _this.props.answer.body,
       questionId: _this.props.questionId,
-      answerId: _this.props.answerId
+      answerId: _this.props.answerId,
+      editOpen: _this.props.editOpen,
+      upvotes: _this.props.upvotes,
+      voters: _this.props.answer.voters,
+      downvoters: _this.props.answer.downvoters
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.showEdit = _this.showEdit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.upvote = _this.upvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.downvote = _this.downvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -3185,7 +3165,18 @@ function (_React$Component) {
         return;
       }
 
-      this.props.updateAnswer(this.state);
+      this.props.updateAnswer({
+        author_id: this.state.answer.author_id,
+        body: this.state.body,
+        id: this.state.answer.id,
+        question_id: this.state.answer.questionId,
+        topic_id: this.state.answer.topic_id,
+        upvotes: this.state.upvotes,
+        voters: this.state.voters
+      });
+      this.setState({
+        editOpen: 'closed'
+      });
     }
   }, {
     key: "handleChange",
@@ -3215,10 +3206,83 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "showEdit",
+    value: function showEdit(e) {
+      this.setState({
+        editOpen: 'open'
+      });
+    }
+  }, {
+    key: "upvote",
+    value: function upvote(e) {
+      var upvotes = this.state.upvotes;
+      var voters = this.state.voters;
+      var downvoters = this.state.downvoters;
+
+      if (this.props.answer.voters.includes(this.props.currentUserId.toString())) {
+        this.props.answer.voters.splice(this.props.answer.voters.indexOf(this.props.currentUserId.toString()), 1);
+        this.setState({
+          upvotes: upvotes - 1
+        });
+      } else {
+        if (downvoters.includes(this.props.currentUserId.toString())) {
+          downvoters.splice(downvoters.indexOf(this.props.currentUserId.toString()), 1);
+          this.setState({
+            upvotes: upvotes + 1,
+            downvoters: downvoters
+          });
+        }
+
+        voters.push(this.props.currentUserId);
+        this.setState({
+          upvotes: upvotes + 1,
+          voters: voters
+        });
+      }
+
+      this.handleSubmit(e);
+    }
+  }, {
+    key: "downvote",
+    value: function downvote(e) {
+      var upvotes = this.state.upvotes;
+
+      if (this.props.answer.downvoters.includes(this.props.currentUserId.toString())) {
+        this.props.answer.downvoters.splice(this.props.answer.downvoters.indexOf(this.props.currentUserId.toString()), 1);
+        this.setState({
+          upvotes: upvotes + 1
+        });
+      } else {
+        if (this.props.answer.voters.includes(this.props.currentUserId.toString())) {
+          this.props.answer.voters.splice(this.props.answer.voters.indexOf(this.props.currentUserId.toString()), 1);
+          this.setState({
+            upvotes: upvotes - 1
+          });
+        }
+
+        this.setState({
+          upvotes: upvotes - 1
+        });
+        this.props.answer.downvoters.push(this.props.currentUserId);
+      }
+
+      this.props.updateAnswer(this.props.answer);
+    }
+  }, {
+    key: "deleteAnswer",
+    value: function deleteAnswer(e) {
+      this.props.deleteAnswer(this.props.answer.id);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "answer-submit-form"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-body-".concat(this.state.editOpen),
+        dangerouslySetInnerHTML: {
+          __html: this.state.body
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-update-form-".concat(this.state.editOpen)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form-userinfo"
       }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -3235,7 +3299,21 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-submit-button",
         onClick: this.handleSubmit
-      }, "Submit"));
+      }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-options"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "answer-upvote-button",
+        onClick: this.upvote
+      }, "Upvote \xB7 ", this.props.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "answer-update-button",
+        onClick: this.showEdit
+      }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "answer-delete-button",
+        onClick: this.deleteAnswer
+      }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "answer-downvote-button",
+        onClick: this.downvote
+      }, "Downvote")));
     }
   }]);
 
@@ -3266,7 +3344,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questionId = ownProps.questionId;
   var answers = ownProps.answers;
-  var answer = {
+  var answer = ownProps.answer;
+  var body = {
     body: ownProps.answer
   };
   var answerId = ownProps.answerId;
@@ -3274,10 +3353,15 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var currentUser = state.entities.users[currentUserId];
   return {
     answer: answer,
+    id: answer.id,
+    body: body,
     answers: answers,
     questionId: questionId,
     answerId: answerId,
-    currentUser: currentUser
+    currentUser: currentUser,
+    currentUserId: currentUserId,
+    editOpen: 'closed',
+    upvotes: ownProps.upvotes
   };
 };
 
@@ -3285,6 +3369,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   return {
     updateAnswer: function updateAnswer(answer) {
       return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["updateAnswer"])(answer));
+    },
+    deleteAnswer: function deleteAnswer(answerId) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["deleteAnswer"])(answerId));
     }
   };
 };
