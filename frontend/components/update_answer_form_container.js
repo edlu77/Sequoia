@@ -11,18 +11,15 @@ const mapStateToProps = (state, ownProps) => {
 
   const currentUserId = state.session.id;
   const currentUser = state.entities.users[currentUserId];
-
   return ({
     answer: answer,
     id: answer.id,
     body: body,
-    answers: answers,
     questionId: questionId,
     answerId: answerId,
     currentUser: currentUser,
     currentUserId: currentUserId,
     editOpen: 'closed',
-    upvotes: ownProps.upvotes,
   })
 };
 

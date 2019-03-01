@@ -19,35 +19,6 @@ const MONTHS = {
 }
 
 const FeedAnswerIndexItem = (props) => {
-  const upvote = (e) => {
-    if (props.answer.voters.includes(props.currentUserId.toString())) {
-      props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1)
-      props.answer.upvotes--
-    } else {
-      if (props.answer.downvoters.includes(props.currentUserId.toString())) {
-        props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1)
-        props.answer.upvotes++
-      }
-      props.answer.upvotes++
-      props.answer.voters.push(props.currentUserId)
-    }
-    props.updateAnswer(props.answer)
-  }
-
-  const downvote = (e) => {
-    if (props.answer.downvoters.includes(props.currentUserId.toString())) {
-      props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1)
-      props.answer.upvotes++
-    } else {
-      if (props.answer.voters.includes(props.currentUserId.toString())) {
-        props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1)
-        props.answer.upvotes--
-      }
-      props.answer.upvotes--
-      props.answer.downvoters.push(props.currentUserId)
-    }
-    props.updateAnswer(props.answer)
-  }
 
   const date = new Date(props.answer.created_at)
   return (
@@ -69,10 +40,8 @@ const FeedAnswerIndexItem = (props) => {
         <UpdateAnswerFormContainer
           answer = {props.answer}
           answerId = {props.answer.id}
-          answers = {props.answers}
           questionId = {props.question.id}
-          currentUser = {props.currentUser}
-          upvotes = {props.answer.upvotes}/>
+          currentUser = {props.currentUser} />
       </div>
 
       <CommentIndexContainer

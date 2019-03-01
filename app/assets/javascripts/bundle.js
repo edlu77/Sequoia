@@ -652,6 +652,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _answer_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./answer_index_item */ "./frontend/components/answer_index_item.jsx");
+/* harmony import */ var _update_answer_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./update_answer_form_container */ "./frontend/components/update_answer_form_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -669,6 +670,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -702,20 +704,37 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "unStringify",
+    value: function unStringify(array) {
+      if (!array) {
+        return [];
+      } else {
+        var result = [];
+
+        for (var i = 0; i < array.length; i++) {
+          result.push(parseInt(array[i]));
+        }
+
+        return result;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this = this;
 
       var answers = this.props.answers.map(function (answer) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "answer-edit"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: answer.id,
           answer: answer,
           question: _this.props.question,
           users: _this.props.users,
           author: _this.getAuthorFromItem(answer),
           updateAnswer: _this.props.updateAnswer,
-          currentUserId: _this.props.currentUserId
-        });
+          currentUser: _this.props.currentUser
+        }));
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-index"
@@ -757,11 +776,13 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var users = ownProps.users;
   var question = ownProps.question;
   var currentUserId = state.session.id;
+  var currentUser = state.entities.users[currentUserId];
   return {
     answers: answers,
     question: question,
     users: users,
-    currentUserId: currentUserId
+    currentUserId: currentUserId,
+    currentUser: currentUser
   };
 };
 
@@ -796,6 +817,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _comment_index_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./comment_index_container */ "./frontend/components/comment_index_container.js");
+/* harmony import */ var _update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./update_answer_form_container */ "./frontend/components/update_answer_form_container.js");
+
 
 
 
@@ -815,40 +838,6 @@ var MONTHS = {
 };
 
 var AnswerIndexItem = function AnswerIndexItem(props) {
-  var upvote = function upvote(e) {
-    if (props.answer.voters.includes(props.currentUserId.toString())) {
-      props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1);
-      props.answer.upvotes--;
-    } else {
-      if (props.answer.downvoters.includes(props.currentUserId.toString())) {
-        props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1);
-        props.answer.upvotes++;
-      }
-
-      props.answer.upvotes++;
-      props.answer.voters.push(props.currentUserId);
-    }
-
-    props.updateAnswer(props.answer);
-  };
-
-  var downvote = function downvote(e) {
-    if (props.answer.downvoters.includes(props.currentUserId.toString())) {
-      props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1);
-      props.answer.upvotes++;
-    } else {
-      if (props.answer.voters.includes(props.currentUserId.toString())) {
-        props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1);
-        props.answer.upvotes--;
-      }
-
-      props.answer.upvotes--;
-      props.answer.downvoters.push(props.currentUserId);
-    }
-
-    props.updateAnswer(props.answer);
-  };
-
   var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "answer-index-item"
@@ -859,19 +848,14 @@ var AnswerIndexItem = function AnswerIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "feed-answer-created-time"
   }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-body",
-    dangerouslySetInnerHTML: {
-      __html: props.answer.body
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-options"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "answer-upvote-button",
-    onClick: upvote
-  }, "Upvote \xB7 ", props.answer.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "answer-downvote-button",
-    onClick: downvote
-  }, "Downvote")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "answer-edit"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    answer: props.answer,
+    answerId: props.answer.id,
+    questionId: props.question.id,
+    currentUser: props.currentUser,
+    upvotes: props.answer.upvotes
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
   }));
@@ -1393,40 +1377,6 @@ var MONTHS = {
 };
 
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
-  var upvote = function upvote(e) {
-    if (props.answer.voters.includes(props.currentUserId.toString())) {
-      props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1);
-      props.answer.upvotes--;
-    } else {
-      if (props.answer.downvoters.includes(props.currentUserId.toString())) {
-        props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1);
-        props.answer.upvotes++;
-      }
-
-      props.answer.upvotes++;
-      props.answer.voters.push(props.currentUserId);
-    }
-
-    props.updateAnswer(props.answer);
-  };
-
-  var downvote = function downvote(e) {
-    if (props.answer.downvoters.includes(props.currentUserId.toString())) {
-      props.answer.downvoters.splice(props.answer.downvoters.indexOf(props.currentUserId.toString()), 1);
-      props.answer.upvotes++;
-    } else {
-      if (props.answer.voters.includes(props.currentUserId.toString())) {
-        props.answer.voters.splice(props.answer.voters.indexOf(props.currentUserId.toString()), 1);
-        props.answer.upvotes--;
-      }
-
-      props.answer.upvotes--;
-      props.answer.downvoters.push(props.currentUserId);
-    }
-
-    props.updateAnswer(props.answer);
-  };
-
   var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
@@ -1446,10 +1396,8 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
     answer: props.answer,
     answerId: props.answer.id,
-    answers: props.answers,
     questionId: props.question.id,
-    currentUser: props.currentUser,
-    upvotes: props.answer.upvotes
+    currentUser: props.currentUser
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
@@ -2147,6 +2095,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _answer_index_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./answer_index_container */ "./frontend/components/answer_index_container.js");
 /* harmony import */ var _create_answer_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create_answer_form_container */ "./frontend/components/create_answer_form_container.js");
+/* harmony import */ var _update_answer_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./update_answer_form_container */ "./frontend/components/update_answer_form_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2164,6 +2113,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -3141,7 +3091,7 @@ function (_React$Component) {
       body: _this.props.answer.body,
       questionId: _this.props.questionId,
       editOpen: _this.props.editOpen,
-      upvotes: _this.props.upvotes,
+      upvotes: _this.props.answer.upvotes,
       voters: _this.props.answer.voters,
       downvoters: _this.props.answer.downvoters
     };
@@ -3165,13 +3115,10 @@ function (_React$Component) {
       }
 
       this.props.updateAnswer({
-        author_id: this.state.answer.author_id,
-        body: this.state.body,
-        id: this.state.id,
-        question_id: this.state.answer.questionId,
-        topic_id: this.state.answer.topic_id,
+        voters: this.state.voters,
+        downvoters: this.state.downvoters,
         upvotes: this.state.upvotes,
-        voters: this.state.voters
+        body: this.state.body
       });
       this.setState({
         editOpen: 'closed'
@@ -3218,54 +3165,60 @@ function (_React$Component) {
       var voters = this.state.voters;
       var downvoters = this.state.downvoters;
 
-      if (this.props.answer.voters.includes(this.props.currentUserId.toString())) {
-        this.props.answer.voters.splice(this.props.answer.voters.indexOf(this.props.currentUserId.toString()), 1);
-        this.setState({
-          upvotes: upvotes - 1
-        });
+      if (voters.includes(this.state.currentUser.id.toString())) {
+        voters.splice(voters.indexOf(this.state.currentUser.id.toString()), 1);
+        upvotes--;
       } else {
-        if (downvoters.includes(this.props.currentUserId.toString())) {
-          downvoters.splice(downvoters.indexOf(this.props.currentUserId.toString()), 1);
-          this.setState({
-            upvotes: upvotes + 1,
-            downvoters: downvoters
-          });
+        if (downvoters.includes(this.state.currentUser.id.toString())) {
+          downvoters.splice(downvoters.indexOf(this.state.currentUser.id.toString()), 1);
+          upvotes++;
         }
 
-        voters.push(this.props.currentUserId);
-        this.setState({
-          upvotes: upvotes + 1,
-          voters: voters
-        });
+        voters.push(this.state.currentUser.id.toString());
+        upvotes++;
       }
 
-      this.handleSubmit(e);
+      this.setState({
+        upvotes: upvotes
+      });
+      this.props.updateAnswer({
+        answerId: this.state.answer.id,
+        voters: voters,
+        downvoters: downvoters,
+        upvotes: upvotes,
+        body: this.state.body
+      });
     }
   }, {
     key: "downvote",
     value: function downvote(e) {
       var upvotes = this.state.upvotes;
+      var voters = this.state.voters;
+      var downvoters = this.state.downvoters;
 
-      if (this.props.answer.downvoters.includes(this.props.currentUserId.toString())) {
-        this.props.answer.downvoters.splice(this.props.answer.downvoters.indexOf(this.props.currentUserId.toString()), 1);
-        this.setState({
-          upvotes: upvotes + 1
-        });
+      if (downvoters.includes(this.state.currentUser.id.toString())) {
+        downvoters.splice(downvoters.indexOf(this.state.currentUser.id.toString()), 1);
+        upvotes++;
       } else {
-        if (this.props.answer.voters.includes(this.props.currentUserId.toString())) {
-          this.props.answer.voters.splice(this.props.answer.voters.indexOf(this.props.currentUserId.toString()), 1);
-          this.setState({
-            upvotes: upvotes - 1
-          });
+        if (voters.includes(this.state.currentUser.id.toString())) {
+          voters.splice(voters.indexOf(this.state.currentUser.id.toString()), 1);
+          upvotes--;
         }
 
-        this.setState({
-          upvotes: upvotes - 1
-        });
-        this.props.answer.downvoters.push(this.props.currentUserId);
+        upvotes--;
+        downvoters.push(this.state.currentUser.id.toString());
       }
 
-      this.props.updateAnswer(this.props.answer);
+      this.props.updateAnswer({
+        answerId: this.state.answer.id,
+        voters: voters,
+        downvoters: downvoters,
+        upvotes: upvotes,
+        body: this.state.body
+      });
+      this.setState({
+        upvotes: upvotes
+      });
     }
   }, {
     key: "deleteAnswer",
@@ -3275,7 +3228,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.state);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-body-".concat(this.state.editOpen),
         dangerouslySetInnerHTML: {
@@ -3304,7 +3256,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-upvote-button",
         onClick: this.upvote
-      }, "Upvote \xB7 ", this.props.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Upvote \xB7 ", this.state.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-update-button",
         onClick: this.showEdit
       }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -3355,13 +3307,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     answer: answer,
     id: answer.id,
     body: body,
-    answers: answers,
     questionId: questionId,
     answerId: answerId,
     currentUser: currentUser,
     currentUserId: currentUserId,
-    editOpen: 'closed',
-    upvotes: ownProps.upvotes
+    editOpen: 'closed'
   };
 };
 
@@ -3394,8 +3344,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_topic_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/topic_actions */ "./frontend/actions/topic_actions.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_3__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3419,7 +3367,9 @@ var answersReducer = function answersReducer() {
       return lodash_merge__WEBPACK_IMPORTED_MODULE_3___default()({}, oldState, action.payload.answers);
 
     case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ANSWER"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_3___default()({}, oldState, _defineProperty({}, action.answer.id, action.answer));
+      var newwState = lodash_merge__WEBPACK_IMPORTED_MODULE_3___default()({}, oldState);
+      newwState[action.answerId] = action.answer;
+      return newwState;
 
     case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_ANSWER"]:
       var newState = lodash_merge__WEBPACK_IMPORTED_MODULE_3___default()({}, oldState);

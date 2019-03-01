@@ -1,5 +1,6 @@
 import React from 'react';
 import AnswerIndexItem from './answer_index_item';
+import UpdateAnswerFormContainer from './update_answer_form_container';
 
 class AnswerIndex extends React.Component {
 
@@ -16,18 +17,33 @@ class AnswerIndex extends React.Component {
     }
   };
 
+  unStringify(array) {
+    if (!array) {
+      return []
+    } else {
+      let result = []
+      for (let i = 0; i < array.length; i++) {
+        result.push(parseInt(array[i]))
+      }
+
+      return result
+    }
+  }
+
   render() {
 
     const answers = this.props.answers.map ((answer) => {
       return (
-        <AnswerIndexItem
-          key={answer.id}
-          answer={answer}
-          question={this.props.question}
-          users={this.props.users}
-          author={this.getAuthorFromItem(answer)}
-          updateAnswer = {this.props.updateAnswer}
-          currentUserId = {this.props.currentUserId}/>
+        <div className='answer-edit'>
+          <AnswerIndexItem
+            key={answer.id}
+            answer={answer}
+            question={this.props.question}
+            users={this.props.users}
+            author={this.getAuthorFromItem(answer)}
+            updateAnswer = {this.props.updateAnswer}
+            currentUser = {this.props.currentUser} />
+        </div>
       );
     });
 

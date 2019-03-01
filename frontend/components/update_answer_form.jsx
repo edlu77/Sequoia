@@ -20,7 +20,7 @@ class UpdateAnswerForm extends React.Component {
       body: this.props.answer.body,
       questionId: this.props.questionId,
 			editOpen: this.props.editOpen,
-			upvotes: this.props.upvotes,
+			upvotes: this.props.answer.upvotes,
 			voters: this.props.answer.voters,
 			downvoters: this.props.answer.downvoters,
     };
@@ -39,13 +39,10 @@ class UpdateAnswerForm extends React.Component {
 			return
 		}
 		this.props.updateAnswer({
-			author_id: this.state.answer.author_id,
-			body: this.state.body,
-			id: this.state.id,
-			question_id: this.state.answer.questionId,
-			topic_id: this.state.answer.topic_id,
-			upvotes: this.state.upvotes,
 			voters: this.state.voters,
+			downvoters: this.state.downvoters,
+			upvotes: this.state.upvotes,
+			body: this.state.body,
 		})
 		this.setState({editOpen: 'closed'})
   }
@@ -74,35 +71,52 @@ class UpdateAnswerForm extends React.Component {
 		let upvotes = this.state.upvotes;
 		let voters = this.state.voters;
 		let downvoters = this.state.downvoters;
-		if (this.props.answer.voters.includes(this.props.currentUserId.toString())) {
-			this.props.answer.voters.splice(this.props.answer.voters.indexOf(this.props.currentUserId.toString()), 1)
-			this.setState({upvotes: upvotes-1})
+		if (voters.includes(this.state.currentUser.id.toString())) {
+			voters.splice(voters.indexOf(this.state.currentUser.id.toString()), 1)
+			upvotes--
 		} else {
-			if (downvoters.includes(this.props.currentUserId.toString())) {
-				downvoters.splice(downvoters.indexOf(this.props.currentUserId.toString()), 1)
-				this.setState({upvotes: upvotes+1, downvoters: downvoters})
-			}
-			voters.push(this.props.currentUserId)
-			this.setState({upvotes: upvotes+1, voters: voters});
-		}
+			if (downvoters.includes(this.state.currentUser.id.toString())) {
+				downvoters.splice(downvoters.indexOf(this.state.currentUser.id.toString()), 1)
 
-		this.handleSubmit(e)
+				upvotes++
+			}
+			voters.push(this.state.currentUser.id.toString())
+			upvotes++
+		}
+		this.setState({upvotes: upvotes})
+		this.props.updateAnswer({
+			answerId: this.state.answer.id,
+			voters: voters,
+			downvoters: downvoters,
+			upvotes: upvotes,
+			body: this.state.body,
+		})
 	}
 
 	downvote (e) {
-		const upvotes = this.state.upvotes;
-		if (this.props.answer.downvoters.includes(this.props.currentUserId.toString())) {
-			this.props.answer.downvoters.splice(this.props.answer.downvoters.indexOf(this.props.currentUserId.toString()), 1)
-			this.setState({upvotes: upvotes+1})
+		let upvotes = this.state.upvotes;
+		let voters = this.state.voters;
+		let downvoters = this.state.downvoters;
+		if (downvoters.includes(this.state.currentUser.id.toString())) {
+			downvoters.splice(downvoters.indexOf(this.state.currentUser.id.toString()), 1)
+			upvotes++
 		} else {
-			if (this.props.answer.voters.includes(this.props.currentUserId.toString())) {
-				this.props.answer.voters.splice(this.props.answer.voters.indexOf(this.props.currentUserId.toString()), 1)
-				this.setState({upvotes: upvotes-1})
+			if (voters.includes(this.state.currentUser.id.toString())) {
+				voters.splice(voters.indexOf(this.state.currentUser.id.toString()), 1)
+				upvotes--
 			}
-			this.setState({upvotes: upvotes-1})
-			this.props.answer.downvoters.push(this.props.currentUserId)
+			upvotes--
+			downvoters.push(this.state.currentUser.id.toString())
 		}
-		this.props.updateAnswer(this.props.answer)
+
+		this.props.updateAnswer({
+			answerId: this.state.answer.id,
+			voters: voters,
+			downvoters: downvoters,
+			upvotes: upvotes,
+			body: this.state.body,
+		})
+		this.setState({upvotes: upvotes})
 	}
 
 	deleteAnswer (e) {
@@ -110,7 +124,6 @@ class UpdateAnswerForm extends React.Component {
 	}
 
   render() {
-		console.log(this.state)
     return (
 			<div>
 				<div className={`answer-body-${this.state.editOpen}`}
@@ -136,7 +149,7 @@ class UpdateAnswerForm extends React.Component {
 
 				<div className='answer-options'>
 					<button className="answer-upvote-button" onClick={this.upvote}>
-						Upvote · {this.props.upvotes}
+						Upvote · {this.state.upvotes}
 					</button>
 					<button className="answer-update-button" onClick={this.showEdit}>
 						Update

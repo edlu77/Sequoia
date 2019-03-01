@@ -29,7 +29,7 @@ class Api::AnswersController < ApplicationController
   end
 
   def update
-    @answer = Answer.find(params[:answer][:id])
+    @answer = Answer.find(params[:answer][:answerId])
     @answer.voters = params[:answer][:voters] || []
     @answer.downvoters = params[:answer][:downvoters] || []
     if @answer.update(answer_params)
@@ -47,7 +47,7 @@ class Api::AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:body, :upvotes)
+    params.require(:answer).permit(:body, :upvotes, :voters, :downvoters)
   end
 
 end

@@ -12,6 +12,7 @@ const receiveAnswers = (payload) => {
 };
 
 const receiveAnswer = (answer) => {
+
   return ({
     type: RECEIVE_ANSWER,
     answer: answer,
