@@ -77,7 +77,7 @@
   margin-bottom: 4px;
 }
 
-.answer-upvote-button-, .answer-upvote-button-upvoted {
+.answer-upvote-button-, .answer-upvote-button-upvoted, .answer-delete-button, .answer-update-button {
   border-radius: 40px;
   padding-top: 8px!important;
   padding-bottom: 8px!important;
@@ -85,31 +85,19 @@
   padding-right: 12px!important;
 }
 
-.answer-downvote-button:hover, .answer-upvote-button:hover {
+.answer-downvote-button-, .answer-downvote-button-downvoted {
+  border-radius: 40px;
+  padding: 5px;
+}
+
+.answer-downvote-button-:hover, .answer-upvote-button-:hover, .answer-upvote-button-upvoted:hover, .answer-downvote-button-downvoted:hover, .answer-delete-button:hover, .answer-update-button:hover {
   background: #fafafa;
 }
 
-.answer-downvote-button- {
-  padding: 5px;
-  border-radius: 40px;
-}
-
-.answer-downvote-button-downvoted {
+.answer-downvote-button-downvoted, .answer-upvote-button-upvoted {
   color: blue;
 }
 
-.answer-submit-form-closed {
+.answer-submit-form-closed, .answer-update-options-open, .answer-body-open {
   display: none;
-}
-
-.answer-update-options-open {
-  display: none;
-}
-
-.answer-body-open {
-  display: none;
-}
-
-.answer-upvote-button-upvoted {
-  color: blue;
 }
