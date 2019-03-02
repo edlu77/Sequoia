@@ -38,6 +38,8 @@ class UpdateAnswerForm extends React.Component {
 			upvotes: this.props.answer.upvotes,
 			voters: this.props.answer.voters,
 			downvoters: this.props.answer.downvoters,
+			upvoted: (this.props.answer.voters.includes(this.props.currentUser.id.toString())) ? 'upvoted' : '',
+			downvoted: (this.props.answer.downvoters.includes(this.props.currentUser.id.toString())) ? 'downvoted' : '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -98,7 +100,11 @@ class UpdateAnswerForm extends React.Component {
 			voters.push(this.state.currentUser.id.toString())
 			upvotes++
 		}
-		this.setState({upvotes: upvotes})
+		this.setState({
+			upvotes: upvotes,
+			upvoted: (voters.includes(this.state.currentUser.id.toString())) ? 'upvoted' : '',
+			downvoted: (downvoters.includes(this.state.currentUser.id.toString())) ? 'downvoted' : ''
+		})
 		this.props.updateAnswer({
 			answerId: this.state.answer.id,
 			voters: voters,
@@ -123,7 +129,11 @@ class UpdateAnswerForm extends React.Component {
 			upvotes--
 			downvoters.push(this.state.currentUser.id.toString())
 		}
-		this.setState({upvotes: upvotes})
+		this.setState({
+			upvotes: upvotes,
+			upvoted: (voters.includes(this.state.currentUser.id.toString())) ? 'upvoted' : '',
+			downvoted: (downvoters.includes(this.state.currentUser.id.toString())) ? 'downvoted' : ''
+		})
 		this.props.updateAnswer({
 			answerId: this.state.answer.id,
 			voters: voters,
@@ -170,16 +180,16 @@ class UpdateAnswerForm extends React.Component {
 	      </div>
 
 				<div className='answer-options'>
-					<button className="answer-upvote-button" onClick={this.upvote}>
+					<button className={`answer-upvote-button-${this.state.upvoted}`} onClick={this.upvote}>
 						Upvote · {this.state.upvotes}
 					</button>
 					<button className="answer-update-button" onClick={this.toggleEdit}>
-						Update
+						{(this.state.editOpen === 'open') ? 'Cancel Edit' : 'Edit Answer'}
 					</button>
 					<button className="answer-delete-button" onClick={this.deleteAnswer}>
 						Delete
 					</button>
-					<button className="answer-downvote-button" onClick={this.downvote}>
+					<button className={`answer-downvote-button-${this.state.downvoted}`} onClick={this.downvote}>
 						Downvote
 					</button>
 				</div>

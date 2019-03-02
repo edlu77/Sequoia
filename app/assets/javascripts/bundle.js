@@ -2954,7 +2954,9 @@ function (_React$Component) {
       author: _this.props.author,
       upvotes: _this.props.answer.upvotes,
       voters: _this.props.answer.voters,
-      downvoters: _this.props.answer.downvoters
+      downvoters: _this.props.answer.downvoters,
+      upvoted: _this.props.answer.voters.includes(_this.props.currentUser.id.toString()) ? 'upvoted' : '',
+      downvoted: _this.props.answer.downvoters.includes(_this.props.currentUser.id.toString()) ? 'downvoted' : ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -3041,7 +3043,9 @@ function (_React$Component) {
       }
 
       this.setState({
-        upvotes: upvotes
+        upvotes: upvotes,
+        upvoted: voters.includes(this.state.currentUser.id.toString()) ? 'upvoted' : '',
+        downvoted: downvoters.includes(this.state.currentUser.id.toString()) ? 'downvoted' : ''
       });
       this.props.updateAnswer({
         answerId: this.state.answer.id,
@@ -3072,7 +3076,9 @@ function (_React$Component) {
       }
 
       this.setState({
-        upvotes: upvotes
+        upvotes: upvotes,
+        upvoted: voters.includes(this.state.currentUser.id.toString()) ? 'upvoted' : '',
+        downvoted: downvoters.includes(this.state.currentUser.id.toString()) ? 'downvoted' : ''
       });
       this.props.updateAnswer({
         answerId: this.state.answer.id,
@@ -3121,16 +3127,16 @@ function (_React$Component) {
       }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-options"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "answer-upvote-button",
+        className: "answer-upvote-button-".concat(this.state.upvoted),
         onClick: this.upvote
       }, "Upvote \xB7 ", this.state.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-update-button",
         onClick: this.toggleEdit
-      }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.state.editOpen === 'open' ? 'Cancel Edit' : 'Edit Answer'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-delete-button",
         onClick: this.deleteAnswer
       }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "answer-downvote-button",
+        className: "answer-downvote-button-".concat(this.state.downvoted),
         onClick: this.downvote
       }, "Downvote")));
     }

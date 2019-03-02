@@ -77,7 +77,7 @@
   margin-bottom: 4px;
 }
 
-.answer-upvote-button {
+.answer-upvote-button-, .answer-upvote-button-upvoted {
   border-radius: 40px;
   padding-top: 8px!important;
   padding-bottom: 8px!important;
@@ -89,9 +89,13 @@
   background: #fafafa;
 }
 
-.answer-downvote-button {
+.answer-downvote-button- {
   padding: 5px;
   border-radius: 40px;
+}
+
+.answer-downvote-button-downvoted {
+  color: blue;
 }
 
 .answer-submit-form-closed {
@@ -104,4 +108,8 @@
 
 .answer-body-open {
   display: none;
+}
+
+.answer-upvote-button-upvoted {
+  color: blue;
 }
