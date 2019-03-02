@@ -38,13 +38,17 @@
   text-decoration: underline;
 }
 
-.feed-answer-author-name {
+.feed-answer-header {
   position: relative;
   margin-top: 10px;
   min-height: 40px;
   // margin-bottom: 5px;
   font-size: 15px;
   line-height: 1.4;
+}
+
+.feed-answer-header-open {
+  display: none;
 }
 
 .feed-answer-created-time {

@@ -10,6 +10,21 @@ let quillModules = {
 	],
 };
 
+const MONTHS = {
+  1: "Jan",
+  2: "Feb",
+  3: "Mar",
+  4: "Apr",
+  5: "May",
+  6: "Jun",
+  7: "Jul",
+  8: "Aug",
+  9: "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec",
+}
+
 class UpdateAnswerForm extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +34,7 @@ class UpdateAnswerForm extends React.Component {
 			currentUser: this.props.currentUser,
 			editOpen: this.props.editOpen,
       body: this.props.answer.body,
+			author: this.props.author,
 			upvotes: this.props.answer.upvotes,
 			voters: this.props.answer.voters,
 			downvoters: this.props.answer.downvoters,
@@ -122,8 +138,16 @@ class UpdateAnswerForm extends React.Component {
 	}
 
   render() {
+		const date = new Date(this.state.answer.created_at)
     return (
 			<div>
+				<div className={`feed-answer-header-${this.state.editOpen}`}>
+					{this.state.author.username}
+					<div className="feed-answer-created-time">
+						{`Answered ${MONTHS[(date.getMonth()+1)] + " " + date.getDate() + ", " + date.getFullYear()}`}
+					</div>
+				</div>
+
 				<div className={`answer-body-${this.state.editOpen}`}
 					dangerouslySetInnerHTML={{__html: this.state.body}}>
 				</div>

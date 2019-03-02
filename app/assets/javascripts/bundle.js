@@ -761,36 +761,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var MONTHS = {
-  1: "Jan",
-  2: "Feb",
-  3: "Mar",
-  4: "Apr",
-  5: "May",
-  6: "Jun",
-  7: "Jul",
-  8: "Aug",
-  9: "Sep",
-  10: "Oct",
-  11: "Nov",
-  12: "Dec"
-};
 
 var AnswerIndexItem = function AnswerIndexItem(props) {
-  var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "answer-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-author"
-  }, props.author.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-submit-time"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "feed-answer-created-time"
-  }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-edit"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
     answer: props.answer,
-    questionId: props.question.id
+    questionId: props.question.id,
+    author: props.author
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
@@ -1292,23 +1272,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var MONTHS = {
-  1: "Jan",
-  2: "Feb",
-  3: "Mar",
-  4: "Apr",
-  5: "May",
-  6: "Jun",
-  7: "Jul",
-  8: "Aug",
-  9: "Sep",
-  10: "Oct",
-  11: "Nov",
-  12: "Dec"
-};
 
 var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
-  var date = new Date(props.answer.created_at);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "feed-answer-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1319,14 +1284,11 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     className: "feed-answer-title",
     to: "/questions/".concat(props.answer.question_id)
   }, props.question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "feed-answer-author-name"
-  }, props.author.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "feed-answer-created-time"
-  }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "answer-edit"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
     answer: props.answer,
-    questionId: props.question.id
+    questionId: props.question.id,
+    author: props.author
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
@@ -2957,6 +2919,20 @@ var quillModules = {
     'list': 'bullet'
   }], ['link']]
 };
+var MONTHS = {
+  1: "Jan",
+  2: "Feb",
+  3: "Mar",
+  4: "Apr",
+  5: "May",
+  6: "Jun",
+  7: "Jul",
+  8: "Aug",
+  9: "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec"
+};
 
 var UpdateAnswerForm =
 /*#__PURE__*/
@@ -2975,6 +2951,7 @@ function (_React$Component) {
       currentUser: _this.props.currentUser,
       editOpen: _this.props.editOpen,
       body: _this.props.answer.body,
+      author: _this.props.author,
       upvotes: _this.props.answer.upvotes,
       voters: _this.props.answer.voters,
       downvoters: _this.props.answer.downvoters
@@ -3113,7 +3090,12 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var date = new Date(this.state.answer.created_at);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "feed-answer-header-".concat(this.state.editOpen)
+      }, this.state.author.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "feed-answer-created-time"
+      }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-body-".concat(this.state.editOpen),
         dangerouslySetInnerHTML: {
           __html: this.state.body
@@ -3183,10 +3165,12 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questionId = ownProps.questionId;
   var currentUserId = state.session.id;
   var currentUser = state.entities.users[currentUserId];
+  var author = ownProps.author;
   return {
     answer: answer,
     questionId: questionId,
     currentUser: currentUser,
+    author: author,
     editOpen: 'closed'
   };
 };

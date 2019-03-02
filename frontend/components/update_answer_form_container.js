@@ -7,10 +7,12 @@ const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.questionId;
   const currentUserId = state.session.id;
   const currentUser = state.entities.users[currentUserId];
+  const author = ownProps.author;
   return ({
     answer: answer,
     questionId: questionId,
     currentUser: currentUser,
+    author: author,
     editOpen: 'closed',
   })
 };
