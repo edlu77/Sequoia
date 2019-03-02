@@ -64,7 +64,7 @@ class UpdateAnswerForm extends React.Component {
 	}
 
 	showEdit(e) {
-		this.setState({editOpen:'open'});
+		this.setState({editOpen:(this.state.editOpen === 'closed') ? 'open' : 'closed'});
 	}
 
 	upvote (e) {
@@ -129,7 +129,7 @@ class UpdateAnswerForm extends React.Component {
 				<div className={`answer-body-${this.state.editOpen}`}
 					dangerouslySetInnerHTML={{__html: this.state.body}}>
 				</div>
-	      <div className={`answer-update-form-${this.state.editOpen}`}>
+	      <div className={`answer-submit-form-${this.state.editOpen}`}>
 
 					<div className="answer-submit-form-userinfo">
 						{this.state.currentUser.username}

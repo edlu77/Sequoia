@@ -3155,7 +3155,7 @@ function (_React$Component) {
     key: "showEdit",
     value: function showEdit(e) {
       this.setState({
-        editOpen: 'open'
+        editOpen: this.state.editOpen === 'closed' ? 'open' : 'closed'
       });
     }
   }, {
@@ -3234,7 +3234,7 @@ function (_React$Component) {
           __html: this.state.body
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "answer-update-form-".concat(this.state.editOpen)
+        className: "answer-submit-form-".concat(this.state.editOpen)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form-userinfo"
       }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
