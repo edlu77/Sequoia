@@ -36,10 +36,7 @@ const AnswerIndexItem = (props) => {
       <div className='answer-edit'>
         <UpdateAnswerFormContainer
           answer = {props.answer}
-          answerId = {props.answer.id}
-          questionId = {props.question.id}
-          currentUser = {props.currentUser}
-          upvotes = {props.answer.upvotes} />
+          questionId = {props.question.id} />
       </div>
 
       <CommentIndexContainer

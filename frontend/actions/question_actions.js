@@ -31,7 +31,6 @@ const removeQuestions = () => {
   })
 }
 
-
 export const fetchQuestions = () => dispatch => {
   return QuestionApiUtil.fetchQuestions().then(
     (payload) => dispatch(receiveQuestions(payload))
@@ -60,8 +59,4 @@ export const deleteQuestion = (questionId) => dispatch => {
   return QuestionApiUtil.deleteQuestion(questionId).then(
     () => dispatch(removeQuestion(questionId))
   )
-};
-
-export const clearQuestions = () => (dispatch) => {
-  return () => dispatch(removeQuestions());
 };

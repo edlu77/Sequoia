@@ -62,7 +62,3 @@ export const deleteAnswer = (answerId) => dispatch => {
     () => dispatch(removeAnswer(answerId))
   )
 };
-
-export const clearAnswers = () => (dispatch) => {
-  return () => dispatch(removeAnswers());
-};

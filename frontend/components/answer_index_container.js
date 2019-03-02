@@ -1,31 +1,19 @@
 import { connect } from 'react-redux';
-import { fetchAnswers, updateAnswer } from '../actions/answer_actions';
-import { fetchQuestion } from '../actions/question_actions';
+import { updateAnswer } from '../actions/answer_actions';
 import AnswerIndex from './answer_index';
 
 const mapStateToProps = (state, ownProps) => {
 
   const answers = ownProps.answers || [];
   const questionId = ownProps.questionId;
-  const users = ownProps.users;
   const question = ownProps.question;
-  const currentUserId = state.session.id;
-  const currentUser = state.entities.users[currentUserId];
+  const users = ownProps.users;
   return ({
     answers: answers,
     question: question,
     users: users,
-    currentUserId: currentUserId,
-    currentUser: currentUser,
   });
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return ({
-    fetchAnswers: (id) => dispatch(fetchAnswers(id)),
-    fetchQuestion: (id) => dispatch(fetchQuestion(id)),
-    updateAnswer: (answer) => dispatch(updateAnswer(answer)),
-  });
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AnswerIndex);
+export default connect(mapStateToProps)(AnswerIndex);

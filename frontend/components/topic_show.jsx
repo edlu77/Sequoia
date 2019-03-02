@@ -7,8 +7,8 @@ import TopicsListContainer from './topics_list_container';
 class TopicShow extends React.Component {
 
   componentDidMount() {
-    this.props.fetchQuestions()
-    this.props.fetchTopics()
+    this.props.fetchQuestions();
+    this.props.fetchTopics();
   };
 
   getQuestionFromAnswer(answer) {
@@ -27,10 +27,9 @@ class TopicShow extends React.Component {
     }
   };
 
-
   render() {
+    const topic = this.props.topic
     const combinedFeed = this.props.feedItems.map((item) => {
-      const topic = this.props.topic || {name: "Miscellaneous"}
       if (this.props.questions.includes(item)) {
         return (
           <QuestionIndexItem
@@ -44,19 +43,12 @@ class TopicShow extends React.Component {
           <FeedAnswerIndexItem
             key={item.created_at}
             answer={item}
-            author={this.getAuthorFromItem(item)}
             question={this.getQuestionFromAnswer(item)}
-            body={item.body}
-            users={this.props.users}
-            updateAnswer = {this.props.updateAnswer}
-            deleteAnswer = {this.props.deleteAnswer}
-            currentUserId = {this.props.currentUserId}
-            currentUser = {this.props.currentUser}
-            answers = {this.props.answers} />
+            author={this.getAuthorFromItem(item)}
+            users={this.props.users} />
         );
       }
     })
-
     return (
       <div className="content-feed">
         <div className="topic-show-wrapper">
@@ -66,7 +58,7 @@ class TopicShow extends React.Component {
               topics={this.props.topics} />
           </div>
           <div className="topic-show">
-            <ul>
+            <ul className="feed-list">
               {combinedFeed}
             </ul>
           </div>
@@ -74,9 +66,6 @@ class TopicShow extends React.Component {
       </div>
     )
   }
-}
-// <div className="topic-show-title">
-//   {this.props.topic.name}
-// </div>
+};
 
 export default TopicShow;

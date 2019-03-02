@@ -3,22 +3,14 @@ import UpdateAnswerForm from './update_answer_form';
 import { updateAnswer, deleteAnswer} from '../actions/answer_actions';
 
 const mapStateToProps = (state, ownProps) => {
-  const questionId = ownProps.questionId;
-  const answers = ownProps.answers;
   const answer = ownProps.answer;
-  const body = {body: ownProps.answer};
-  const answerId = ownProps.answerId;
-
+  const questionId = ownProps.questionId;
   const currentUserId = state.session.id;
   const currentUser = state.entities.users[currentUserId];
   return ({
     answer: answer,
-    id: answer.id,
-    body: body,
     questionId: questionId,
-    answerId: answerId,
     currentUser: currentUser,
-    currentUserId: currentUserId,
     editOpen: 'closed',
   })
 };

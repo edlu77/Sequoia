@@ -29,6 +29,7 @@ const FeedAnswerIndexItem = (props) => {
           {props.question.title}
         </Link>
       </div>
+      
       <div className="feed-answer-author-name">
         {props.author.username}
         <div className="feed-answer-created-time">
@@ -39,9 +40,7 @@ const FeedAnswerIndexItem = (props) => {
       <div className='answer-edit'>
         <UpdateAnswerFormContainer
           answer = {props.answer}
-          answerId = {props.answer.id}
-          questionId = {props.question.id}
-          currentUser = {props.currentUser} />
+          questionId = {props.question.id} />
       </div>
 
       <CommentIndexContainer

@@ -4,14 +4,10 @@ import { createAnswer} from '../actions/answer_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const questionId = ownProps.questionId;
-  const answers = ownProps.answers;
-
   const currentUserId = state.session.id;
   const currentUser = state.entities.users[currentUserId];
 
   return ({
-    answer: {body: "<p><br></p>"},
-    answers: answers,
     questionId: questionId,
     currentUser: currentUser,
   })

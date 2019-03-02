@@ -90,7 +90,7 @@
 /*!********************************************!*\
   !*** ./frontend/actions/answer_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_ALL_ANSWERS, RECEIVE_ANSWER, REMOVE_ANSWER, REMOVE_ANSWERS, fetchAnswers, fetchAnswer, createAnswer, updateAnswer, deleteAnswer, clearAnswers */
+/*! exports provided: RECEIVE_ALL_ANSWERS, RECEIVE_ANSWER, REMOVE_ANSWER, REMOVE_ANSWERS, fetchAnswers, fetchAnswer, createAnswer, updateAnswer, deleteAnswer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104,7 +104,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAnswer", function() { return createAnswer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateAnswer", function() { return updateAnswer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteAnswer", function() { return deleteAnswer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearAnswers", function() { return clearAnswers; });
 /* harmony import */ var _util_answers_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/answers_api_util */ "./frontend/util/answers_api_util.js");
 
 var RECEIVE_ALL_ANSWERS = 'RECEIVE_ALL_ANSWERS';
@@ -173,13 +172,6 @@ var deleteAnswer = function deleteAnswer(answerId) {
     return _util_answers_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteAnswer"](answerId).then(function () {
       return dispatch(removeAnswer(answerId));
     });
-  };
-};
-var clearAnswers = function clearAnswers() {
-  return function (dispatch) {
-    return function () {
-      return dispatch(removeAnswers());
-    };
   };
 };
 
@@ -273,7 +265,7 @@ var closeModal = function closeModal() {
 /*!**********************************************!*\
   !*** ./frontend/actions/question_actions.js ***!
   \**********************************************/
-/*! exports provided: RECEIVE_ALL_QUESTIONS, RECEIVE_QUESTION, REMOVE_QUESTION, REMOVE_QUESTIONS, fetchQuestions, fetchQuestion, createQuestion, updateQuestion, deleteQuestion, clearQuestions */
+/*! exports provided: RECEIVE_ALL_QUESTIONS, RECEIVE_QUESTION, REMOVE_QUESTION, REMOVE_QUESTIONS, fetchQuestions, fetchQuestion, createQuestion, updateQuestion, deleteQuestion */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -287,7 +279,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createQuestion", function() { return createQuestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateQuestion", function() { return updateQuestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteQuestion", function() { return deleteQuestion; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearQuestions", function() { return clearQuestions; });
 /* harmony import */ var _util_question_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/question_api_util */ "./frontend/util/question_api_util.js");
 
 var RECEIVE_ALL_QUESTIONS = 'RECEIVE_ALL_QUESTIONS';
@@ -355,13 +346,6 @@ var deleteQuestion = function deleteQuestion(questionId) {
     return _util_question_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteQuestion"](questionId).then(function () {
       return dispatch(removeQuestion(questionId));
     });
-  };
-};
-var clearQuestions = function clearQuestions() {
-  return function (dispatch) {
-    return function () {
-      return dispatch(removeQuestions());
-    };
   };
 };
 
@@ -553,9 +537,9 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AnswerForm).call(this, props));
     _this.state = {
+      questionId: _this.props.questionId,
       currentUser: _this.props.currentUser,
-      body: _this.props.answer.body,
-      questionId: _this.props.questionId
+      body: "<p><br></p>"
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -652,7 +636,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _answer_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./answer_index_item */ "./frontend/components/answer_index_item.jsx");
-/* harmony import */ var _update_answer_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./update_answer_form_container */ "./frontend/components/update_answer_form_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -674,7 +657,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var AnswerIndex =
 /*#__PURE__*/
 function (_React$Component) {
@@ -687,12 +669,6 @@ function (_React$Component) {
   }
 
   _createClass(AnswerIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchAnswers(this.props.questionId);
-      this.props.fetchQuestion(this.props.questionId);
-    }
-  }, {
     key: "getAuthorFromItem",
     value: function getAuthorFromItem(item) {
       for (var i = 0; i < this.props.users.length; i++) {
@@ -704,21 +680,6 @@ function (_React$Component) {
       }
     }
   }, {
-    key: "unStringify",
-    value: function unStringify(array) {
-      if (!array) {
-        return [];
-      } else {
-        var result = [];
-
-        for (var i = 0; i < array.length; i++) {
-          result.push(parseInt(array[i]));
-        }
-
-        return result;
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this = this;
@@ -727,13 +688,11 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "answer-edit"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: answer.id,
+          key: answer.created_at,
           answer: answer,
           question: _this.props.question,
           users: _this.props.users,
-          author: _this.getAuthorFromItem(answer),
-          updateAnswer: _this.props.updateAnswer,
-          currentUser: _this.props.currentUser
+          author: _this.getAuthorFromItem(answer)
         }));
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -763,9 +722,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
-/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
-/* harmony import */ var _answer_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./answer_index */ "./frontend/components/answer_index.jsx");
-
+/* harmony import */ var _answer_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./answer_index */ "./frontend/components/answer_index.jsx");
 
 
 
@@ -773,34 +730,16 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var answers = ownProps.answers || [];
   var questionId = ownProps.questionId;
-  var users = ownProps.users;
   var question = ownProps.question;
-  var currentUserId = state.session.id;
-  var currentUser = state.entities.users[currentUserId];
+  var users = ownProps.users;
   return {
     answers: answers,
     question: question,
-    users: users,
-    currentUserId: currentUserId,
-    currentUser: currentUser
+    users: users
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchAnswers: function fetchAnswers(id) {
-      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAnswers"])(id));
-    },
-    fetchQuestion: function fetchQuestion(id) {
-      return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["fetchQuestion"])(id));
-    },
-    updateAnswer: function updateAnswer(answer) {
-      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_1__["updateAnswer"])(answer));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_answer_index__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(_answer_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -851,10 +790,7 @@ var AnswerIndexItem = function AnswerIndexItem(props) {
     className: "answer-edit"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
     answer: props.answer,
-    answerId: props.answer.id,
-    questionId: props.question.id,
-    currentUser: props.currentUser,
-    upvotes: props.answer.upvotes
+    questionId: props.question.id
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
@@ -1232,14 +1168,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var questionId = ownProps.questionId;
-  var answers = ownProps.answers;
   var currentUserId = state.session.id;
   var currentUser = state.entities.users[currentUserId];
   return {
-    answer: {
-      body: "<p><br></p>"
-    },
-    answers: answers,
     questionId: questionId,
     currentUser: currentUser
   };
@@ -1395,9 +1326,7 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
     className: "answer-edit"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
     answer: props.answer,
-    answerId: props.answer.id,
-    questionId: props.question.id,
-    currentUser: props.currentUser
+    questionId: props.question.id
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
@@ -1449,8 +1378,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var FeedIndex =
 /*#__PURE__*/
-function (_Component) {
-  _inherits(FeedIndex, _Component);
+function (_React$Component) {
+  _inherits(FeedIndex, _React$Component);
 
   function FeedIndex() {
     _classCallCheck(this, FeedIndex);
@@ -1519,22 +1448,15 @@ function (_Component) {
             key: item.created_at,
             question: item,
             topic: topic,
-            author: _this.getAuthorFromItem(item),
             deleteQuestion: _this.props.deleteQuestion
           });
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: item.created_at,
             answer: item,
-            author: _this.getAuthorFromItem(item),
             question: _this.getQuestionFromAnswer(item),
-            body: item.body,
-            users: _this.props.users,
-            updateAnswer: _this.props.updateAnswer,
-            deleteAnswer: _this.props.deleteAnswer,
-            currentUserId: _this.props.currentUserId,
-            currentUser: _this.props.currentUser,
-            answers: _this.props.answers
+            author: _this.getAuthorFromItem(item),
+            users: _this.props.users
           });
         }
       });
@@ -1556,7 +1478,7 @@ function (_Component) {
   }]);
 
   return FeedIndex;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 ;
 /* harmony default export */ __webpack_exports__["default"] = (FeedIndex);
@@ -1575,9 +1497,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _feed_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./feed_index */ "./frontend/components/feed_index.jsx");
 /* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
-/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
-/* harmony import */ var _actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/topic_actions */ "./frontend/actions/topic_actions.js");
-
+/* harmony import */ var _actions_topic_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/topic_actions */ "./frontend/actions/topic_actions.js");
 
 
 
@@ -1632,19 +1552,14 @@ var mapStateToProps = function mapStateToProps(state) {
   var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   var feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
 
-  var users = Object.values(state.entities.users);
   var topics = state.entities.topics;
-  var currentUserId = state.session.id;
-  var currentUser = state.entities.users[currentUserId];
+  var users = Object.values(state.entities.users);
   return {
     allQuestions: allQuestions,
     questions: questions,
-    answers: answers,
     feedItems: feedItems,
     topics: topics,
-    users: users,
-    currentUserId: currentUserId,
-    currentUser: currentUser
+    users: users
   };
 };
 
@@ -1657,13 +1572,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["deleteQuestion"])(questionId));
     },
     fetchTopics: function fetchTopics() {
-      return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__["fetchTopics"])());
-    },
-    updateAnswer: function updateAnswer(answer) {
-      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__["updateAnswer"])(answer));
-    },
-    deleteAnswer: function deleteAnswer(answerId) {
-      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__["deleteAnswer"])(answerId));
+      return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_3__["fetchTopics"])());
     }
   };
 };
@@ -2095,7 +2004,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _answer_index_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./answer_index_container */ "./frontend/components/answer_index_container.js");
 /* harmony import */ var _create_answer_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create_answer_form_container */ "./frontend/components/create_answer_form_container.js");
-/* harmony import */ var _update_answer_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./update_answer_form_container */ "./frontend/components/update_answer_form_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2113,7 +2021,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -2156,8 +2063,7 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show-title"
       }, question.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        questionId: this.props.questionId,
-        answers: answers
+        questionId: this.props.questionId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         answers: answers,
         questionId: this.props.questionId,
@@ -2722,11 +2628,8 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
+      var topic = this.props.topic;
       var combinedFeed = this.props.feedItems.map(function (item) {
-        var topic = _this.props.topic || {
-          name: "Miscellaneous"
-        };
-
         if (_this.props.questions.includes(item)) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
             key: item.created_at,
@@ -2738,15 +2641,9 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: item.created_at,
             answer: item,
-            author: _this.getAuthorFromItem(item),
             question: _this.getQuestionFromAnswer(item),
-            body: item.body,
-            users: _this.props.users,
-            updateAnswer: _this.props.updateAnswer,
-            deleteAnswer: _this.props.deleteAnswer,
-            currentUserId: _this.props.currentUserId,
-            currentUser: _this.props.currentUser,
-            answers: _this.props.answers
+            author: _this.getAuthorFromItem(item),
+            users: _this.props.users
           });
         }
       });
@@ -2761,16 +2658,16 @@ function (_React$Component) {
         topics: this.props.topics
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topic-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, combinedFeed))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "feed-list"
+      }, combinedFeed))));
     }
   }]);
 
   return TopicShow;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component); // <div className="topic-show-title">
-//   {this.props.topic.name}
-// </div>
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-
+;
 /* harmony default export */ __webpack_exports__["default"] = (TopicShow);
 
 /***/ }),
@@ -2786,9 +2683,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _topic_show__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./topic_show */ "./frontend/components/topic_show.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_topic_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/topic_actions */ "./frontend/actions/topic_actions.js");
-/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
-/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+/* harmony import */ var _actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/topic_actions */ "./frontend/actions/topic_actions.js");
 
 
 
@@ -2836,7 +2733,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var topicId = ownProps.match.params.topicId;
   var topics = state.entities.topics;
   var topic = state.entities.topics[topicId];
-  var users = Object.values(state.entities.users);
   var questions = Object.values(state.entities.questions).filter(function (question) {
     return question.topic_id == topicId;
   }).sort(sortByTime).slice(0, 10);
@@ -2848,34 +2744,36 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   }).sort(sortByTime);
   var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   var feedItems = questions.concat(answers).sort(sortByTime);
-  var currentUserId = state.session.id;
-  var currentUser = state.entities.users[currentUserId];
+  var users = Object.values(state.entities.users);
   return {
     questions: questions,
-    answers: answers,
     feedItems: feedItems,
-    topicId: topicId,
     topic: topic,
     topics: topics,
-    users: users,
-    currentUserId: currentUserId,
-    currentUser: currentUser
+    users: users
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchTopics: function fetchTopics() {
-      return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_2__["fetchTopics"])());
-    },
     fetchQuestions: function fetchQuestions() {
-      return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_3__["fetchQuestions"])());
+      return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["fetchQuestions"])());
     },
-    updateAnswer: function updateAnswer(answer) {
-      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__["updateAnswer"])(answer));
-    },
-    deleteAnswer: function deleteAnswer(answerId) {
-      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_4__["deleteAnswer"])(answerId));
+    deleteQuestion: function (_deleteQuestion) {
+      function deleteQuestion(_x) {
+        return _deleteQuestion.apply(this, arguments);
+      }
+
+      deleteQuestion.toString = function () {
+        return _deleteQuestion.toString();
+      };
+
+      return deleteQuestion;
+    }(function (questionId) {
+      return dispatch(deleteQuestion(questionId));
+    }),
+    fetchTopics: function fetchTopics() {
+      return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__["fetchTopics"])());
     }
   };
 };
@@ -2936,11 +2834,6 @@ function (_React$Component) {
   }
 
   _createClass(TopicsList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchTopics();
-    }
-  }, {
     key: "handleClick",
     value: function handleClick(e) {
       this.setState({
@@ -3008,7 +2901,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var topics = state.entities.topics;
+  var topics = ownProps.topics;
   var selected = topics[ownProps.selected] || {
     name: "none"
   };
@@ -3018,15 +2911,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    fetchTopics: function fetchTopics() {
-      return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_3__["fetchTopics"])());
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_topics_list__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps)(_topics_list__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -3086,11 +2971,10 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(UpdateAnswerForm).call(this, props));
     _this.state = {
       answer: _this.props.answer,
-      id: _this.props.id,
-      currentUser: _this.props.currentUser,
-      body: _this.props.answer.body,
       questionId: _this.props.questionId,
+      currentUser: _this.props.currentUser,
       editOpen: _this.props.editOpen,
+      body: _this.props.answer.body,
       upvotes: _this.props.answer.upvotes,
       voters: _this.props.answer.voters,
       downvoters: _this.props.answer.downvoters
@@ -3098,7 +2982,7 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.showEdit = _this.showEdit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.toggleEdit = _this.toggleEdit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.upvote = _this.upvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.downvote = _this.downvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deleteAnswer = _this.deleteAnswer.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -3153,8 +3037,8 @@ function (_React$Component) {
       }
     }
   }, {
-    key: "showEdit",
-    value: function showEdit(e) {
+    key: "toggleEdit",
+    value: function toggleEdit(e) {
       this.setState({
         editOpen: this.state.editOpen === 'closed' ? 'open' : 'closed'
       });
@@ -3210,6 +3094,9 @@ function (_React$Component) {
         downvoters.push(this.state.currentUser.id.toString());
       }
 
+      this.setState({
+        upvotes: upvotes
+      });
       this.props.updateAnswer({
         answerId: this.state.answer.id,
         voters: voters,
@@ -3217,14 +3104,11 @@ function (_React$Component) {
         upvotes: upvotes,
         body: this.state.body
       });
-      this.setState({
-        upvotes: upvotes
-      });
     }
   }, {
     key: "deleteAnswer",
     value: function deleteAnswer(e) {
-      this.props.deleteAnswer(this.state.id);
+      this.props.deleteAnswer(this.state.answer.id);
     }
   }, {
     key: "render",
@@ -3259,7 +3143,7 @@ function (_React$Component) {
         onClick: this.upvote
       }, "Upvote \xB7 ", this.state.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-update-button",
-        onClick: this.showEdit
+        onClick: this.toggleEdit
       }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-delete-button",
         onClick: this.deleteAnswer
@@ -3295,23 +3179,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var questionId = ownProps.questionId;
-  var answers = ownProps.answers;
   var answer = ownProps.answer;
-  var body = {
-    body: ownProps.answer
-  };
-  var answerId = ownProps.answerId;
+  var questionId = ownProps.questionId;
   var currentUserId = state.session.id;
   var currentUser = state.entities.users[currentUserId];
   return {
     answer: answer,
-    id: answer.id,
-    body: body,
     questionId: questionId,
-    answerId: answerId,
     currentUser: currentUser,
-    currentUserId: currentUserId,
     editOpen: 'closed'
   };
 };

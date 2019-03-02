@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AnswerIndexContainer from './answer_index_container';
 import CreateAnswerFormContainer from './create_answer_form_container';
-import UpdateAnswerFormContainer from './update_answer_form_container';
 
 class QuestionShow extends React.Component {
 
@@ -27,8 +26,7 @@ class QuestionShow extends React.Component {
             </div>
 
             <CreateAnswerFormContainer
-              questionId={this.props.questionId}
-              answers={answers} />
+              questionId={this.props.questionId} />
 
             <AnswerIndexContainer
               answers={answers}

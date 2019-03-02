@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import QuestionIndexItem from './question_index_item';
 import FeedAnswerIndexItem from './feed_answer_index_item';
 import TopicsListContainer from './topics_list_container';
 
-
-class FeedIndex extends Component {
+class FeedIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchQuestions();
     this.props.fetchTopics();
-  }
+  };
 
   getQuestionFromAnswer(answer) {
     for (let i = 0; i < this.props.allQuestions.length; i++) {
@@ -52,7 +51,6 @@ class FeedIndex extends Component {
             key={item.created_at}
             question={item}
             topic={topic}
-            author={this.getAuthorFromItem(item)}
             deleteQuestion={this.props.deleteQuestion}/>
         );
       } else {
@@ -60,33 +58,27 @@ class FeedIndex extends Component {
           <FeedAnswerIndexItem
             key={item.created_at}
             answer={item}
-            author={this.getAuthorFromItem(item)}
             question={this.getQuestionFromAnswer(item)}
-            body={item.body}
-            users={this.props.users}
-            updateAnswer = {this.props.updateAnswer}
-            deleteAnswer = {this.props.deleteAnswer}
-            currentUserId = {this.props.currentUserId}
-            currentUser = {this.props.currentUser}
-            answers = {this.props.answers} />
+            author={this.getAuthorFromItem(item)}
+            users={this.props.users} />
         );
       }
     })
     return (
       <div className="content-feed">
-      <div className="feed-index-wrapper">
-        <div className="topics-list-container">
-          <TopicsListContainer
-            selected = "0"
-            topics = {this.props.topics} />
-        </div>
-        <div className="feed-index">
-          <ul className="feed-list">
-            {combinedFeed}
-          </ul>
+        <div className="feed-index-wrapper">
+          <div className="topics-list-container">
+            <TopicsListContainer
+              selected = "0"
+              topics = {this.props.topics} />
+          </div>
+          <div className="feed-index">
+            <ul className="feed-list">
+              {combinedFeed}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
     );
   }
 };

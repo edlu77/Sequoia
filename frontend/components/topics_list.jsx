@@ -8,10 +8,6 @@ class TopicsList extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount() {
-    this.props.fetchTopics();
-  }
-
   handleClick(e) {
     this.setState({value: e.currentTarget.innerText});
   }

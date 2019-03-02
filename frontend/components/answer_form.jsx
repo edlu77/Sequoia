@@ -14,9 +14,9 @@ class AnswerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+			questionId: this.props.questionId,
 			currentUser: this.props.currentUser,
-      body: this.props.answer.body,
-      questionId: this.props.questionId,
+      body: "<p><br></p>",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -54,12 +54,10 @@ class AnswerForm extends React.Component {
   render() {
     return (
       <div className="answer-submit-form">
-
 				<div className="answer-submit-form-userinfo">
 					{this.state.currentUser.username}
 				</div>
 				<input type="file" onChange={this.handleFile}></input>
-
         <ReactQuill
 					className="answer-submit-form-input"
           theme="snow"

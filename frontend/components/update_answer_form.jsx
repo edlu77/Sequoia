@@ -15,11 +15,10 @@ class UpdateAnswerForm extends React.Component {
     super(props);
     this.state = {
 			answer: this.props.answer,
-			id: this.props.id,
+			questionId: this.props.questionId,
 			currentUser: this.props.currentUser,
-      body: this.props.answer.body,
-      questionId: this.props.questionId,
 			editOpen: this.props.editOpen,
+      body: this.props.answer.body,
 			upvotes: this.props.answer.upvotes,
 			voters: this.props.answer.voters,
 			downvoters: this.props.answer.downvoters,
@@ -27,7 +26,7 @@ class UpdateAnswerForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
 		this.handleFile = this.handleFile.bind(this);
-		this.showEdit = this.showEdit.bind(this);
+		this.toggleEdit = this.toggleEdit.bind(this);
 		this.upvote = this.upvote.bind(this);
 		this.downvote = this.downvote.bind(this);
 		this.deleteAnswer = this.deleteAnswer.bind(this);
@@ -64,7 +63,7 @@ class UpdateAnswerForm extends React.Component {
 		}
 	}
 
-	showEdit(e) {
+	toggleEdit(e) {
 		this.setState({editOpen:(this.state.editOpen === 'closed') ? 'open' : 'closed'});
 	}
 
@@ -78,7 +77,6 @@ class UpdateAnswerForm extends React.Component {
 		} else {
 			if (downvoters.includes(this.state.currentUser.id.toString())) {
 				downvoters.splice(downvoters.indexOf(this.state.currentUser.id.toString()), 1)
-
 				upvotes++
 			}
 			voters.push(this.state.currentUser.id.toString())
@@ -109,7 +107,7 @@ class UpdateAnswerForm extends React.Component {
 			upvotes--
 			downvoters.push(this.state.currentUser.id.toString())
 		}
-
+		this.setState({upvotes: upvotes})
 		this.props.updateAnswer({
 			answerId: this.state.answer.id,
 			voters: voters,
@@ -117,11 +115,10 @@ class UpdateAnswerForm extends React.Component {
 			upvotes: upvotes,
 			body: this.state.body,
 		})
-		this.setState({upvotes: upvotes})
 	}
 
 	deleteAnswer (e) {
-		this.props.deleteAnswer(this.state.id)
+		this.props.deleteAnswer(this.state.answer.id)
 	}
 
   render() {
@@ -152,7 +149,7 @@ class UpdateAnswerForm extends React.Component {
 					<button className="answer-upvote-button" onClick={this.upvote}>
 						Upvote · {this.state.upvotes}
 					</button>
-					<button className="answer-update-button" onClick={this.showEdit}>
+					<button className="answer-update-button" onClick={this.toggleEdit}>
 						Update
 					</button>
 					<button className="answer-delete-button" onClick={this.deleteAnswer}>
