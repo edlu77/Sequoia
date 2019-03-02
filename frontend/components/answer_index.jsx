@@ -12,12 +12,10 @@ class AnswerIndex extends React.Component {
   };
 
   render() {
-
     const answers = this.props.answers.map ((answer) => {
       return (
-        <div className='answer-edit'>
+        <div className='answer-edit' key={`answer-${answer.id}`}>
           <AnswerIndexItem
-            key={answer.created_at}
             answer={answer}
             question={this.props.question}
             users={this.props.users}

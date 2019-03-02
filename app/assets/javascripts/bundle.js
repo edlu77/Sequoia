@@ -686,9 +686,9 @@ function (_React$Component) {
 
       var answers = this.props.answers.map(function (answer) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "answer-edit"
+          className: "answer-edit",
+          key: "answer-".concat(answer.id)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: answer.created_at,
           answer: answer,
           question: _this.props.question,
           users: _this.props.users,
