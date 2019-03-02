@@ -39,6 +39,7 @@ class UpdateAnswerForm extends React.Component {
 			return
 		}
 		this.props.updateAnswer({
+			answerId: this.state.answer.id,
 			voters: this.state.voters,
 			downvoters: this.state.downvoters,
 			upvotes: this.state.upvotes,
