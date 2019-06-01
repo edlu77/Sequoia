@@ -10,10 +10,11 @@
 
 .feed-index, .topic-show {
   width: 602px;
-  margin: 0 auto;
+  padding-left: 12px;
+  margin-left: 30px;
 }
 
-.question-index-item, .feed-answer-index-item, .topic-header {
+.question-index-item, .feed-answer-index-item {
  font-style: serif;
  font-size: 18px;
  padding: 16px;
@@ -22,6 +23,18 @@
  border-bottom: 1px solid #e2e2e2;
  background: white;
  border: 1px solid #efefef;
+}
+
+.topic-header {
+  height: 158px;
+  font-style: serif;
+  font-size: 18px;
+  padding-top: 16px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e2e2;
+  background: white;
+  border: 1px solid #efefef;
 }
 
 .answer-topic-list, .question-topic-list {
