@@ -28,7 +28,7 @@ class TopicShow extends React.Component {
   };
 
   render() {
-    const topic = this.props.topic
+    const topic = this.props.topic || ""
     const combinedFeed = this.props.feedItems.map((item) => {
       if (this.props.questions.includes(item)) {
         return (
@@ -52,16 +52,22 @@ class TopicShow extends React.Component {
     return (
       <div className="content-feed">
         <div className="topic-show-wrapper">
+
           <div className="topics-list-container">
             <TopicsListContainer
               selected={this.props.match.params.topicId}
               topics={this.props.topics} />
           </div>
+
           <div className="topic-show">
             <ul className="feed-list">
+              <li className="topic-header">
+                {topic.name}
+              </li>
               {combinedFeed}
             </ul>
           </div>
+
         </div>
       </div>
     )

@@ -2590,7 +2590,7 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var topic = this.props.topic;
+      var topic = this.props.topic || "";
       var combinedFeed = this.props.feedItems.map(function (item) {
         if (_this.props.questions.includes(item)) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -2622,7 +2622,9 @@ function (_React$Component) {
         className: "topic-show"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "feed-list"
-      }, combinedFeed))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "topic-header"
+      }, topic.name), combinedFeed))));
     }
   }]);
 
