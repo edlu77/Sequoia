@@ -10,10 +10,20 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(user_params[:user][:username])
+    @user.followed_topics = params[:user][:followed_topics] || []
+    if @user.update(user)
+      render :show
+    else
+      render json: @user.errors.full_messages, status: 422
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :followed_topics)
   end
 
 end

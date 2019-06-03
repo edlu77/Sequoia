@@ -9,6 +9,7 @@ class TopicShow extends React.Component {
   componentDidMount() {
     this.props.fetchQuestions();
     this.props.fetchTopics();
+    this.props.updateUsers();
   };
 
   getQuestionFromAnswer(answer) {
@@ -25,6 +26,10 @@ class TopicShow extends React.Component {
         return this.props.users[i]
       };
     }
+  };
+
+  follow(e) {
+    this.props.
   };
 
   render() {
@@ -62,7 +67,12 @@ class TopicShow extends React.Component {
           <div className="topic-show">
             <ul className="feed-list">
               <li className="topic-header">
-                {topic.name}
+                <div className="topic-header-contents">
+                  {topic.name}
+                  <button className="follow-button">
+                    Follow
+                  </button>
+                </div>
               </li>
               {combinedFeed}
             </ul>

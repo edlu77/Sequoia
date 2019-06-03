@@ -16,6 +16,13 @@ const receiveTopic = (payload) => {
   })
 };
 
+const followTopic = (user) => {
+  return ({
+    type: RECEIVE_CURRENT_USER,
+    currentUser: user,
+  })
+}
+
 export const fetchTopics = () => dispatch => {
   return TopicApiUtil.fetchTopics().then(
     (topics) => dispatch(receiveTopics(topics))
@@ -25,5 +32,11 @@ export const fetchTopics = () => dispatch => {
 export const fetchTopic = (id) => dispatch => {
   return TopicApiUtil.fetchTopic(id).then(
     (payload) => dispatch(receiveTopic(payload))
+  )
+};
+
+export const followTopic = (user) => dispatch => {
+  return TopicApiUtil.followTopic(user).then(
+    (user) => dispatch(followTopic(user))
   )
 };

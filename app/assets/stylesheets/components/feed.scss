@@ -26,9 +26,12 @@
 }
 
 .topic-header {
+  display: flex;
   height: 158px;
   font-style: serif;
-  font-size: 18px;
+  font-size: 23px;
+  font-weight: bold;
+  color: #333;
   padding-top: 16px;
   border-radius: 4px;
   margin-bottom: 8px;
@@ -41,6 +44,18 @@
   color: #949494;
   font-size: 13px;
   margin-bottom: 5px;
+}
+
+.topic-header-contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 66%;
+}
+
+.follow-button {
+  font-weight: normal;
+  font-size: 15px;
 }
 
 .answer-question-title{
