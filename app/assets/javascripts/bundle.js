@@ -2574,7 +2574,7 @@ function (_React$Component) {
     _classCallCheck(this, TopicShow);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TopicShow).call(this, props));
-    _this.follow = _this.follow.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.toggleFollow = _this.toggleFollow.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -2607,11 +2607,21 @@ function (_React$Component) {
       }
     }
   }, {
-    key: "follow",
-    value: function follow(e) {
+    key: "toggleFollow",
+    value: function toggleFollow(e) {
       var user = this.props.currentUser;
-      user.followed_topics.push(this.props.topic.id);
-      debugger;
+      var followedTopics = user.followed_topics || [];
+      var topicId = this.props.topic.id.toString();
+
+      if (followedTopics.includes(topicId)) {
+        followedTopics = followedTopics.filter(function (id) {
+          return id != topicId;
+        });
+      } else {
+        followedTopics.push(this.props.topic.id);
+      }
+
+      user.followed_topics = followedTopics;
       this.props.followTopic(user);
     }
   }, {
@@ -2620,6 +2630,9 @@ function (_React$Component) {
       var _this2 = this;
 
       var topic = this.props.topic || "";
+      var topicId = topic.id || 0;
+      var followedTopics = this.props.currentUser.followed_topics || [];
+      var selected = followedTopics.includes(topicId.toString()) ? "selected" : "unselected";
       var combinedFeed = this.props.feedItems.map(function (item) {
         if (_this2.props.questions.includes(item)) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -2656,8 +2669,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topic-header-contents"
       }, topic.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "follow-button",
-        onClick: this.follow
+        className: "follow-button-".concat(selected),
+        onClick: this.toggleFollow
       }, "Follow"))), combinedFeed))));
     }
   }]);
@@ -2728,7 +2741,7 @@ var uniqueAnswers = function uniqueAnswers(answers) {
 };
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var topicId = ownProps.match.params.topicId;
+  var topicId = ownProps.match.params.topicId || 0;
   var topics = state.entities.topics;
   var topic = state.entities.topics[topicId];
   var questions = Object.values(state.entities.questions).filter(function (question) {

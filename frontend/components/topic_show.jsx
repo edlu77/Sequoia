@@ -8,7 +8,7 @@ class TopicShow extends React.Component {
 
   constructor(props) {
     super(props);
-    this.follow = this.follow.bind(this);
+    this.toggleFollow = this.toggleFollow.bind(this);
   }
 
   componentDidMount() {
@@ -32,15 +32,24 @@ class TopicShow extends React.Component {
     }
   };
 
-  follow(e) {
+  toggleFollow(e) {
     let user = this.props.currentUser;
-    user.followed_topics.push(this.props.topic.id);
-    debugger
+    let followedTopics = user.followed_topics || [];
+    let topicId = this.props.topic.id.toString();
+    if (followedTopics.includes(topicId)) {
+      followedTopics = followedTopics.filter(id => id != topicId)
+    } else {
+      followedTopics.push(this.props.topic.id);
+    }
+    user.followed_topics = followedTopics;
     this.props.followTopic(user);
   };
 
   render() {
-    const topic = this.props.topic || ""
+    const topic = this.props.topic || "";
+    const topicId = topic.id || 0;
+    const followedTopics = this.props.currentUser.followed_topics || [];
+    const selected = followedTopics.includes(topicId.toString()) ? "selected" : "unselected";
     const combinedFeed = this.props.feedItems.map((item) => {
       if (this.props.questions.includes(item)) {
         return (
@@ -76,7 +85,7 @@ class TopicShow extends React.Component {
               <li className="topic-header">
                 <div className="topic-header-contents">
                   {topic.name}
-                  <button className="follow-button" onClick={this.follow}>
+                  <button className={`follow-button-${selected}`} onClick={this.toggleFollow}>
                     Follow
                   </button>
                 </div>

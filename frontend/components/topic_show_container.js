@@ -40,7 +40,7 @@ var uniqueAnswers = function(answers) {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const topicId = ownProps.match.params.topicId;
+  const topicId = ownProps.match.params.topicId || 0;
   const topics = state.entities.topics;
   const topic = state.entities.topics[topicId];
   const questions = Object.values(state.entities.questions).filter(

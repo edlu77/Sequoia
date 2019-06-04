@@ -11,9 +11,8 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    debugger
     @user = User.find(params[:user][:id])
-    @user.followed_topics = params[:user][:followed_topics]
+    @user.followed_topics = params[:user][:followed_topics];
     if @user.update(user_params)
       render :show
     else

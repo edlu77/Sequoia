@@ -53,11 +53,6 @@
   height: 66%;
 }
 
-.follow-button {
-  font-weight: normal;
-  font-size: 15px;
-}
-
 .answer-question-title{
   font-weight: bold;
 }
@@ -128,4 +123,13 @@
 
 .answer-submit-form-closed, .answer-update-options-open, .answer-body-open {
   display: none;
+}
+
+.follow-button-selected, .follow-button-unselected {
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.follow-button-selected {
+  color: blue;
 }
