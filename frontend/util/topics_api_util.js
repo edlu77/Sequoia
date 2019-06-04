@@ -11,3 +11,11 @@ export const fetchTopic = id => {
     url: `/api/topics/${id}`,
   })
 };
+
+export const followTopic = user => {
+  return $.ajax({
+    method: "PATCH",
+    url: "/api/user",
+    data: { user },
+  })
+};

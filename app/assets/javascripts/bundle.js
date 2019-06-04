@@ -437,19 +437,22 @@ var clearErrors = function clearErrors() {
 /*!*******************************************!*\
   !*** ./frontend/actions/topic_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_TOPICS, RECEIVE_TOPIC, fetchTopics, fetchTopic */
+/*! exports provided: RECEIVE_ALL_TOPICS, RECEIVE_TOPIC, RECEIVE_CURRENT_USER, fetchTopics, fetchTopic, followTopic */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_TOPICS", function() { return RECEIVE_ALL_TOPICS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TOPIC", function() { return RECEIVE_TOPIC; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_USER", function() { return RECEIVE_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTopics", function() { return fetchTopics; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTopic", function() { return fetchTopic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "followTopic", function() { return followTopic; });
 /* harmony import */ var _util_topics_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/topics_api_util */ "./frontend/util/topics_api_util.js");
 
 var RECEIVE_ALL_TOPICS = 'RECEIVE_ALL_TOPICS';
 var RECEIVE_TOPIC = 'RECEIVE_TOPIC';
+var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 
 var receiveTopics = function receiveTopics(topics) {
   return {
@@ -465,6 +468,13 @@ var receiveTopic = function receiveTopic(payload) {
   };
 };
 
+var updateUser = function updateUser(user) {
+  return {
+    type: RECEIVE_CURRENT_USER,
+    currentUser: user
+  };
+};
+
 var fetchTopics = function fetchTopics() {
   return function (dispatch) {
     return _util_topics_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchTopics"]().then(function (topics) {
@@ -476,6 +486,13 @@ var fetchTopic = function fetchTopic(id) {
   return function (dispatch) {
     return _util_topics_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchTopic"](id).then(function (payload) {
       return dispatch(receiveTopic(payload));
+    });
+  };
+};
+var followTopic = function followTopic(user) {
+  return function (dispatch) {
+    return _util_topics_api_util__WEBPACK_IMPORTED_MODULE_0__["followTopic"](user).then(function (user) {
+      return dispatch(updateUser(user));
     });
   };
 };
@@ -2532,13 +2549,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -2551,10 +2568,14 @@ var TopicShow =
 function (_React$Component) {
   _inherits(TopicShow, _React$Component);
 
-  function TopicShow() {
+  function TopicShow(props) {
+    var _this;
+
     _classCallCheck(this, TopicShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(TopicShow).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TopicShow).call(this, props));
+    _this.toggleFollow = _this.toggleFollow.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(TopicShow, [{
@@ -2586,26 +2607,47 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "toggleFollow",
+    value: function toggleFollow(e) {
+      var user = this.props.currentUser;
+      var followedTopics = user.followed_topics || [];
+      var topicId = this.props.topic.id.toString();
+
+      if (followedTopics.includes(topicId)) {
+        followedTopics = followedTopics.filter(function (id) {
+          return id != topicId;
+        });
+      } else {
+        followedTopics.push(this.props.topic.id);
+      }
+
+      user.followed_topics = followedTopics;
+      this.props.followTopic(user);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
-      var topic = this.props.topic;
+      var topic = this.props.topic || "";
+      var topicId = topic.id || 0;
+      var followedTopics = this.props.currentUser.followed_topics || [];
+      var selected = followedTopics.includes(topicId.toString()) ? "selected" : "unselected";
       var combinedFeed = this.props.feedItems.map(function (item) {
-        if (_this.props.questions.includes(item)) {
+        if (_this2.props.questions.includes(item)) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
             key: item.created_at,
             question: item,
             topic: topic,
-            author: _this.getAuthorFromItem(item)
+            author: _this2.getAuthorFromItem(item)
           });
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: item.created_at,
             answer: item,
-            question: _this.getQuestionFromAnswer(item),
-            author: _this.getAuthorFromItem(item),
-            users: _this.props.users
+            question: _this2.getQuestionFromAnswer(item),
+            author: _this2.getAuthorFromItem(item),
+            users: _this2.props.users
           });
         }
       });
@@ -2622,7 +2664,14 @@ function (_React$Component) {
         className: "topic-show"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "feed-list"
-      }, combinedFeed))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "topic-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topic-header-contents"
+      }, topic.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "follow-button-".concat(selected),
+        onClick: this.toggleFollow
+      }, "Follow"))), combinedFeed))));
     }
   }]);
 
@@ -2692,7 +2741,7 @@ var uniqueAnswers = function uniqueAnswers(answers) {
 };
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var topicId = ownProps.match.params.topicId;
+  var topicId = ownProps.match.params.topicId || 0;
   var topics = state.entities.topics;
   var topic = state.entities.topics[topicId];
   var questions = Object.values(state.entities.questions).filter(function (question) {
@@ -2707,12 +2756,15 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   var feedItems = questions.concat(answers).sort(sortByTime);
   var users = Object.values(state.entities.users);
+  var currentUserId = state.session.id;
+  var currentUser = state.entities.users[currentUserId];
   return {
     questions: questions,
     feedItems: feedItems,
     topic: topic,
     topics: topics,
-    users: users
+    users: users,
+    currentUser: currentUser
   };
 };
 
@@ -2736,6 +2788,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     }),
     fetchTopics: function fetchTopics() {
       return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__["fetchTopics"])());
+    },
+    followTopic: function followTopic(user) {
+      return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__["followTopic"])(user));
     }
   };
 };
@@ -3997,13 +4052,14 @@ var logout = function logout() {
 /*!******************************************!*\
   !*** ./frontend/util/topics_api_util.js ***!
   \******************************************/
-/*! exports provided: fetchTopics, fetchTopic */
+/*! exports provided: fetchTopics, fetchTopic, followTopic */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTopics", function() { return fetchTopics; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTopic", function() { return fetchTopic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "followTopic", function() { return followTopic; });
 var fetchTopics = function fetchTopics() {
   return $.ajax({
     method: "GET",
@@ -4014,6 +4070,15 @@ var fetchTopic = function fetchTopic(id) {
   return $.ajax({
     method: "GET",
     url: "/api/topics/".concat(id)
+  });
+};
+var followTopic = function followTopic(user) {
+  return $.ajax({
+    method: "PATCH",
+    url: "/api/user",
+    data: {
+      user: user
+    }
   });
 };
 

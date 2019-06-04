@@ -2,7 +2,7 @@ import TopicShow from './topic_show';
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../actions/question_actions';
 import { updateAnswer, deleteAnswer } from '../actions/answer_actions';
-import { fetchTopics } from '../actions/topic_actions';
+import { fetchTopics, followTopic } from '../actions/topic_actions';
 
 var sortByVotes = function(a, b) {
   if (a.upvotes < b.upvotes) {
@@ -40,7 +40,7 @@ var uniqueAnswers = function(answers) {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const topicId = ownProps.match.params.topicId;
+  const topicId = ownProps.match.params.topicId || 0;
   const topics = state.entities.topics;
   const topic = state.entities.topics[topicId];
   const questions = Object.values(state.entities.questions).filter(
@@ -52,6 +52,8 @@ const mapStateToProps = (state, ownProps) => {
   const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
   const feedItems = questions.concat(answers).sort(sortByTime);
   const users = Object.values(state.entities.users);
+  const currentUserId = state.session.id;
+  const currentUser = state.entities.users[currentUserId];
 
   return ({
     questions: questions,
@@ -59,6 +61,7 @@ const mapStateToProps = (state, ownProps) => {
     topic: topic,
     topics: topics,
     users: users,
+    currentUser: currentUser,
   })
 }
 
@@ -67,6 +70,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchQuestions: () => dispatch(fetchQuestions()),
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
     fetchTopics: () => dispatch(fetchTopics()),
+    followTopic: (user) => dispatch(followTopic(user)),
   })
 }
 

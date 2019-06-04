@@ -6,6 +6,11 @@ import TopicsListContainer from './topics_list_container';
 
 class TopicShow extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.toggleFollow = this.toggleFollow.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchQuestions();
     this.props.fetchTopics();
@@ -27,8 +32,24 @@ class TopicShow extends React.Component {
     }
   };
 
+  toggleFollow(e) {
+    let user = this.props.currentUser;
+    let followedTopics = user.followed_topics || [];
+    let topicId = this.props.topic.id.toString();
+    if (followedTopics.includes(topicId)) {
+      followedTopics = followedTopics.filter(id => id != topicId)
+    } else {
+      followedTopics.push(this.props.topic.id);
+    }
+    user.followed_topics = followedTopics;
+    this.props.followTopic(user);
+  };
+
   render() {
-    const topic = this.props.topic
+    const topic = this.props.topic || "";
+    const topicId = topic.id || 0;
+    const followedTopics = this.props.currentUser.followed_topics || [];
+    const selected = followedTopics.includes(topicId.toString()) ? "selected" : "unselected";
     const combinedFeed = this.props.feedItems.map((item) => {
       if (this.props.questions.includes(item)) {
         return (
@@ -52,16 +73,27 @@ class TopicShow extends React.Component {
     return (
       <div className="content-feed">
         <div className="topic-show-wrapper">
+
           <div className="topics-list-container">
             <TopicsListContainer
               selected={this.props.match.params.topicId}
               topics={this.props.topics} />
           </div>
+
           <div className="topic-show">
             <ul className="feed-list">
+              <li className="topic-header">
+                <div className="topic-header-contents">
+                  {topic.name}
+                  <button className={`follow-button-${selected}`} onClick={this.toggleFollow}>
+                    Follow
+                  </button>
+                </div>
+              </li>
               {combinedFeed}
             </ul>
           </div>
+
         </div>
       </div>
     )

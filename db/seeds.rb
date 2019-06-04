@@ -38,7 +38,7 @@ q1 = Question.create!(title: "What is your name?", author_id: u2.id, topic_id: t
 q2 = Question.create!(title: "What is your quest?", author_id: u2.id, topic_id: topic11.id)
 q3 = Question.create!(title: "What is your favorite color?", author_id: u3.id, topic_id: topic11.id)
 q4 = Question.create!(title: "What is a question?", author_id: u4.id, topic_id: topic8.id)
-q5 = Question.create!(title: "Who won the Superb Bowl?", author_id: u4.id, topic_id: topic6.id)
+q5 = Question.create!(title: "Who won the Super Bowl?", author_id: u4.id, topic_id: topic6.id)
 q6 = Question.create!(title: "How many Pokemon are there in the world?", author_id: u5.id, topic_id: topic5.id)
 q7 = Question.create!(title: "How many chromosomes are in the human genome?", author_id: u6.id, topic_id: topic10.id)
 q8 = Question.create!(title: "How many pushups can you do at once?", author_id: u7.id, topic_id: topic3.id)
@@ -64,3 +64,17 @@ author_id: u5.id,
 question_id: q13.id,
 topic_id: q13.topic_id,
 upvotes: 0)
+
+a3 = Answer.create!(
+body:
+ "<p>There are couple ways to manipulate someone.</p><p><br></p><p><strong>Gas lighting-&nbsp;</strong>They have lied to you, but you begin to realize the truth. They will feed you with lies and distort your sense of reality. Eventually you are about to go crazy because it’s going against your nature. For example; you’ve been told to do a certain task, but later they deny saying that and accuse you as liar. This is form of abuse.</p><p><br></p><p><strong>Guilt Trip-&nbsp;</strong>“I’ve done all these things for you.” There is a line between guilt and unnecessary guilt which becomes manipulation. Everybody make mistakes but using that to benefit is wrong.</p><p><br></p><p><strong>Empathy-&nbsp;</strong>When you intentionally ask for a large favor then you ask for a small undeniable favor. </p><p>For example,</p><p><br></p><p>manipulator : “Could you please help me out with rent?”</p><p>you: “no”</p><p>manipulator: “okay.. Then could you at least buy me some food?”</p><p><br></p><p>This tactic is used buy many sales people. They will try to sell you something big, then proceed to sell you something small. This behavior is intentionally to sell you small thing in the first place. So you reject them once, but you are not likely to reject them twice. This is human psychology and many fell for it. My former boss told me he went door to door selling cheap fence signs instead of selling fences when he was young.</p><p><br></p><p><strong>Sympathy-</strong>&nbsp;This is used in charity scams. You see late night tv commercials of malnourished kids asking for money. They use this to open up people’s wallet for donation. But only 1% of money goes to the charity and the rest goes to some asshole’s earning. Are you familiar with Donation box across your street? I’ve donated clothes by thinking that it will help someone, but it went to the people who made millions selling off your free clothes.</p><p><br></p><p><strong>Dependency-&nbsp;</strong>They will make you heavily rely on them. Once you are hooked, they will control you and know that you are nothing without them. For example; poor girls who get into sex trafficking are likely to be manipulated by pimps. In the beginning they will pretend to genuinely care for these girls. Later on they will force them into prostitution. This happens in relationship as well. When the bread winner has the control of money, the victim has no choice due to fear of abandonment. This could happen in narcissistic relationship.</p><p><br></p><p><strong>Threat-&nbsp;</strong>This is the worst thing. They will try to hurt you physically, financially, and psychologically if you don’t abide by their rule. You fear the consequences. But in reality, they have more to lose.</p><p><br></p><p><strong>Succubus-&nbsp;</strong>Using money, drug, sex or any tempting things to make people do something. For example; employers fake promising green card, kidnapping little kids with ice cream, luring drug addicts into crime, and using sex as a power to control their partner.</p><p><br></p><p>Be aware. You don’t have to understand them, but your instinct will tell. When your mind speaks, “oh wait a minute.. I don’t know. Something is not right. It’s too good to be true.” Don’t be afraid to say no. Even though when you feel absolutely uncomfortable, say “No.”</p><p><br></p><p>Speak up, take action, and stay strong.</p>",
+author_id: u2.id,
+question_id: q11.id,
+topic_id: q11.topic_id,
+upvotes: 0)
+
+c1 = Comment.create!(
+  body: "Nice answer!",
+  author_id: u6.id,
+  parent_id: a2.id,
+)

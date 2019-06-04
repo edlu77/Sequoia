@@ -10,7 +10,8 @@
 
 .feed-index, .topic-show {
   width: 602px;
-  margin: 0 auto;
+  padding-left: 12px;
+  margin-left: 30px;
 }
 
 .question-index-item, .feed-answer-index-item {
@@ -24,10 +25,32 @@
  border: 1px solid #efefef;
 }
 
+.topic-header {
+  display: flex;
+  height: 158px;
+  font-style: serif;
+  font-size: 23px;
+  font-weight: bold;
+  color: #333;
+  padding-top: 16px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e2e2;
+  background: white;
+  border: 1px solid #efefef;
+}
+
 .answer-topic-list, .question-topic-list {
   color: #949494;
   font-size: 13px;
   margin-bottom: 5px;
+}
+
+.topic-header-contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 66%;
 }
 
 .answer-question-title{
@@ -100,4 +123,13 @@
 
 .answer-submit-form-closed, .answer-update-options-open, .answer-body-open {
   display: none;
+}
+
+.follow-button-selected, .follow-button-unselected {
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.follow-button-selected {
+  color: blue;
 }
