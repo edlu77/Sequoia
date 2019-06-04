@@ -6,10 +6,14 @@ import TopicsListContainer from './topics_list_container';
 
 class TopicShow extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.follow = this.follow.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchQuestions();
     this.props.fetchTopics();
-    this.props.updateUsers();
   };
 
   getQuestionFromAnswer(answer) {
@@ -29,7 +33,10 @@ class TopicShow extends React.Component {
   };
 
   follow(e) {
-    this.props.
+    let user = this.props.currentUser;
+    user.followed_topics.push(this.props.topic.id);
+    debugger
+    this.props.followTopic(user);
   };
 
   render() {
@@ -69,7 +76,7 @@ class TopicShow extends React.Component {
               <li className="topic-header">
                 <div className="topic-header-contents">
                   {topic.name}
-                  <button className="follow-button">
+                  <button className="follow-button" onClick={this.follow}>
                     Follow
                   </button>
                 </div>

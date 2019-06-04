@@ -437,10 +437,65 @@ var clearErrors = function clearErrors() {
 /*!*******************************************!*\
   !*** ./frontend/actions/topic_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_TOPICS, RECEIVE_TOPIC, fetchTopics, fetchTopic */
-/***/ (function(module, exports) {
+/*! exports provided: RECEIVE_ALL_TOPICS, RECEIVE_TOPIC, RECEIVE_CURRENT_USER, fetchTopics, fetchTopic, followTopic */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nTypeError: /Users/edwardlu/Documents/App Academy/Sequoia/frontend/actions/topic_actions.js: Duplicate declaration \"followTopic\"\n\u001b[0m \u001b[90m 36 | \u001b[39m}\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 37 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m followTopic \u001b[33m=\u001b[39m (user) \u001b[33m=>\u001b[39m dispatch \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 39 | \u001b[39m  \u001b[36mreturn\u001b[39m \u001b[33mTopicApiUtil\u001b[39m\u001b[33m.\u001b[39mfollowTopic(user)\u001b[33m.\u001b[39mthen(\u001b[0m\n\u001b[0m \u001b[90m 40 | \u001b[39m    (user) \u001b[33m=>\u001b[39m dispatch(followTopic(user))\u001b[0m\n\u001b[0m \u001b[90m 41 | \u001b[39m  )\u001b[0m\n    at File.buildCodeFrameError (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/core/lib/transformation/file/file.js:261:12)\n    at Scope.checkBlockScopedCollisions (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/scope/index.js:347:22)\n    at Scope.registerBinding (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/scope/index.js:504:16)\n    at Scope.registerDeclaration (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/scope/index.js:444:14)\n    at Object.BlockScoped (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/scope/index.js:189:28)\n    at Object.newFn (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/visitors.js:230:17)\n    at NodePath._call (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/path/context.js:53:20)\n    at NodePath.call (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/path/context.js:36:14)\n    at NodePath.visit (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/path/context.js:88:12)\n    at TraversalContext.visitQueue (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/context.js:118:16)\n    at TraversalContext.visitSingle (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/context.js:90:19)\n    at TraversalContext.visit (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/context.js:146:19)\n    at Function.traverse.node (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/index.js:94:17)\n    at NodePath.visit (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/path/context.js:95:18)\n    at TraversalContext.visitQueue (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/context.js:118:16)\n    at TraversalContext.visitMultiple (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/context.js:85:17)\n    at TraversalContext.visit (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/context.js:144:19)\n    at Function.traverse.node (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/index.js:94:17)\n    at traverse (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/index.js:76:12)\n    at NodePath.traverse (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/path/index.js:161:24)\n    at Scope.crawl (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/scope/index.js:684:10)\n    at Scope.init (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/scope/index.js:634:32)\n    at NodePath.setScope (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/path/context.js:126:30)\n    at NodePath.setContext (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/traverse/lib/path/context.js:141:8)\n    at new File (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/core/lib/transformation/file/file.js:104:8)\n    at normalizeFile (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/core/lib/transformation/normalize-file.js:141:10)\n    at runSync (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at process.nextTick (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/core/lib/transform.js:34:34)\n    at _combinedTickCallback (internal/process/next_tick.js:131:7)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_TOPICS", function() { return RECEIVE_ALL_TOPICS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TOPIC", function() { return RECEIVE_TOPIC; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_USER", function() { return RECEIVE_CURRENT_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTopics", function() { return fetchTopics; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTopic", function() { return fetchTopic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "followTopic", function() { return followTopic; });
+/* harmony import */ var _util_topics_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/topics_api_util */ "./frontend/util/topics_api_util.js");
+
+var RECEIVE_ALL_TOPICS = 'RECEIVE_ALL_TOPICS';
+var RECEIVE_TOPIC = 'RECEIVE_TOPIC';
+var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
+
+var receiveTopics = function receiveTopics(topics) {
+  return {
+    type: RECEIVE_ALL_TOPICS,
+    topics: topics
+  };
+};
+
+var receiveTopic = function receiveTopic(payload) {
+  return {
+    type: RECEIVE_TOPIC,
+    payload: payload
+  };
+};
+
+var updateUser = function updateUser(user) {
+  return {
+    type: RECEIVE_CURRENT_USER,
+    currentUser: user
+  };
+};
+
+var fetchTopics = function fetchTopics() {
+  return function (dispatch) {
+    return _util_topics_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchTopics"]().then(function (topics) {
+      return dispatch(receiveTopics(topics));
+    });
+  };
+};
+var fetchTopic = function fetchTopic(id) {
+  return function (dispatch) {
+    return _util_topics_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchTopic"](id).then(function (payload) {
+      return dispatch(receiveTopic(payload));
+    });
+  };
+};
+var followTopic = function followTopic(user) {
+  return function (dispatch) {
+    return _util_topics_api_util__WEBPACK_IMPORTED_MODULE_0__["followTopic"](user).then(function (user) {
+      return dispatch(updateUser(user));
+    });
+  };
+};
 
 /***/ }),
 
@@ -2474,9 +2529,144 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
   !*** ./frontend/components/topic_show.jsx ***!
   \********************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/edwardlu/Documents/App Academy/Sequoia/frontend/components/topic_show.jsx: Unexpected token (33:2)\n\n\u001b[0m \u001b[90m 31 | \u001b[39m  follow(e) {\u001b[0m\n\u001b[0m \u001b[90m 32 | \u001b[39m    \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mprops\u001b[33m.\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 33 | \u001b[39m  }\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 34 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 35 | \u001b[39m  render() {\u001b[0m\n\u001b[0m \u001b[90m 36 | \u001b[39m    \u001b[36mconst\u001b[39m topic \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mprops\u001b[33m.\u001b[39mtopic \u001b[33m||\u001b[39m \u001b[32m\"\"\u001b[39m\u001b[0m\n    at _class.raise (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:4021:15)\n    at _class.unexpected (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5330:16)\n    at _class.parseIdentifierName (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7121:18)\n    at _class.parseIdentifier (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7103:21)\n    at _class.parseMaybePrivateName (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6449:19)\n    at _class.parseSubscript (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6077:30)\n    at _class.parseSubscripts (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6026:19)\n    at _class.parseExprSubscripts (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6016:17)\n    at _class.parseMaybeUnary (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5985:21)\n    at _class.parseExprOps (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5894:21)\n    at _class.parseMaybeConditional (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5866:21)\n    at _class.parseMaybeAssign (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5813:21)\n    at _class.parseExpression (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:5766:21)\n    at _class.parseStatementContent (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7367:21)\n    at _class.parseStatement (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7253:17)\n    at _class.parseBlockOrModuleBlockBody (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7805:23)\n    at _class.parseBlockBody (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7792:10)\n    at _class.parseBlock (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7781:10)\n    at _class.parseFunctionBody (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7026:24)\n    at _class.parseFunctionBodyAndFinish (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7008:10)\n    at _class.parseMethod (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:6950:10)\n    at _class.pushClassMethod (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:8184:30)\n    at _class.parseClassMemberWithIsStatic (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:8109:12)\n    at _class.parseClassMember (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:8051:10)\n    at _class.parseClassBody (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:8006:12)\n    at _class.parseClass (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7956:10)\n    at _class.parseStatementContent (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7281:21)\n    at _class.parseStatement (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7253:17)\n    at _class.parseBlockOrModuleBlockBody (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7805:23)\n    at _class.parseBlockBody (/Users/edwardlu/Documents/App Academy/Sequoia/node_modules/@babel/parser/lib/index.js:7792:10)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _question_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./question_index_item */ "./frontend/components/question_index_item.jsx");
+/* harmony import */ var _feed_answer_index_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./feed_answer_index_item */ "./frontend/components/feed_answer_index_item.jsx");
+/* harmony import */ var _topics_list_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./topics_list_container */ "./frontend/components/topics_list_container.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+
+
+var TopicShow =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(TopicShow, _React$Component);
+
+  function TopicShow(props) {
+    var _this;
+
+    _classCallCheck(this, TopicShow);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TopicShow).call(this, props));
+    _this.follow = _this.follow.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(TopicShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchQuestions();
+      this.props.fetchTopics();
+    }
+  }, {
+    key: "getQuestionFromAnswer",
+    value: function getQuestionFromAnswer(answer) {
+      for (var i = 0; i < this.props.questions.length; i++) {
+        if (answer.question_id === this.props.questions[i].id) {
+          return this.props.questions[i];
+        }
+
+        ;
+      }
+    }
+  }, {
+    key: "getAuthorFromItem",
+    value: function getAuthorFromItem(item) {
+      for (var i = 0; i < this.props.users.length; i++) {
+        if (item.author_id === this.props.users[i].id) {
+          return this.props.users[i];
+        }
+
+        ;
+      }
+    }
+  }, {
+    key: "follow",
+    value: function follow(e) {
+      var user = this.props.currentUser;
+      user.followed_topics.push(this.props.topic.id);
+      debugger;
+      this.props.followTopic(user);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var topic = this.props.topic || "";
+      var combinedFeed = this.props.feedItems.map(function (item) {
+        if (_this2.props.questions.includes(item)) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_question_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            key: item.created_at,
+            question: item,
+            topic: topic,
+            author: _this2.getAuthorFromItem(item)
+          });
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_feed_answer_index_item__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            key: item.created_at,
+            answer: item,
+            question: _this2.getQuestionFromAnswer(item),
+            author: _this2.getAuthorFromItem(item),
+            users: _this2.props.users
+          });
+        }
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "content-feed"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topic-show-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topics-list-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        selected: this.props.match.params.topicId,
+        topics: this.props.topics
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topic-show"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "feed-list"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "topic-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topic-header-contents"
+      }, topic.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "follow-button",
+        onClick: this.follow
+      }, "Follow"))), combinedFeed))));
+    }
+  }]);
+
+  return TopicShow;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (TopicShow);
 
 /***/ }),
 
@@ -2585,6 +2775,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     }),
     fetchTopics: function fetchTopics() {
       return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__["fetchTopics"])());
+    },
+    followTopic: function followTopic(user) {
+      return dispatch(Object(_actions_topic_actions__WEBPACK_IMPORTED_MODULE_4__["followTopic"])(user));
     }
   };
 };
@@ -3837,6 +4030,42 @@ var logout = function logout() {
   return $.ajax({
     method: 'DELETE',
     url: '/api/session'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/topics_api_util.js":
+/*!******************************************!*\
+  !*** ./frontend/util/topics_api_util.js ***!
+  \******************************************/
+/*! exports provided: fetchTopics, fetchTopic, followTopic */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTopics", function() { return fetchTopics; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTopic", function() { return fetchTopic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "followTopic", function() { return followTopic; });
+var fetchTopics = function fetchTopics() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/topics"
+  });
+};
+var fetchTopic = function fetchTopic(id) {
+  return $.ajax({
+    method: "GET",
+    url: "/api/topics/".concat(id)
+  });
+};
+var followTopic = function followTopic(user) {
+  return $.ajax({
+    method: "PATCH",
+    url: "/api/user",
+    data: {
+      user: user
+    }
   });
 };
 

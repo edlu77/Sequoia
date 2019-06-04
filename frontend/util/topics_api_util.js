@@ -14,7 +14,8 @@ export const fetchTopic = id => {
 
 export const followTopic = user => {
   return $.ajax({
-    method: 'PATCH',
-    url: `/api/users/${user.username}`,
+    method: "PATCH",
+    url: "/api/user",
+    data: { user },
   })
 };
