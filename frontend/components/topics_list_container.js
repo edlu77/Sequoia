@@ -5,11 +5,12 @@ import { fetchTopics } from '../actions/topic_actions';
 
 
 const mapStateToProps = (state, ownProps) => {
+  const followedTopics = ownProps.followedTopics;
   const topics = ownProps.topics;
   const selected = topics[ownProps.selected] || {name: "none"};
   return ({
     selected: selected,
-    topics: topics,
+    followedTopics: followedTopics,
   });
 };
 

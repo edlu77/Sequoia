@@ -2610,18 +2610,16 @@ function (_React$Component) {
     key: "toggleFollow",
     value: function toggleFollow(e) {
       var user = this.props.currentUser;
-      var followedTopics = user.followed_topics || [];
       var topicId = this.props.topic.id.toString();
 
-      if (followedTopics.includes(topicId)) {
-        followedTopics = followedTopics.filter(function (id) {
+      if (user.followed_topics.includes(topicId)) {
+        user.followed_topics = user.followed_topics.filter(function (id) {
           return id != topicId;
         });
       } else {
-        followedTopics.push(this.props.topic.id);
+        user.followed_topics.push(this.props.topic.id);
       }
 
-      user.followed_topics = followedTopics;
       this.props.followTopic(user);
     }
   }, {
@@ -2659,7 +2657,8 @@ function (_React$Component) {
         className: "topics-list-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         selected: this.props.match.params.topicId,
-        topics: this.props.topics
+        topics: this.props.topics,
+        followedTopics: followedTopics
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topic-show"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -2875,6 +2874,18 @@ function (_React$Component) {
             to: "/"
           }, topic.name));
         } else {
+          // filter topic list by followed status
+          // if (this.props.followedTopics.includes(topic.id.toString())) {
+          //   return (
+          //     <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
+          //       <Link
+          //         onClick={this.handleClick}
+          //         className="index-topic-name"
+          //         to={`/topics/${topic.id}`}>{topic.name}
+          //       </Link>
+          //     </li>
+          //   )
+          // }
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: topic.id,
             className: "topics-list-link ".concat(topicHighlight)
@@ -2918,13 +2929,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var followedTopics = ownProps.followedTopics;
   var topics = ownProps.topics;
   var selected = topics[ownProps.selected] || {
     name: "none"
   };
   return {
     selected: selected,
-    topics: topics
+    followedTopics: followedTopics
   };
 };
 

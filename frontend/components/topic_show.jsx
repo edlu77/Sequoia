@@ -34,14 +34,12 @@ class TopicShow extends React.Component {
 
   toggleFollow(e) {
     let user = this.props.currentUser;
-    let followedTopics = user.followed_topics || [];
     let topicId = this.props.topic.id.toString();
-    if (followedTopics.includes(topicId)) {
-      followedTopics = followedTopics.filter(id => id != topicId)
+    if (user.followed_topics.includes(topicId)) {
+      user.followed_topics = user.followed_topics.filter(id => id != topicId)
     } else {
-      followedTopics.push(this.props.topic.id);
+      user.followed_topics.push(this.props.topic.id);
     }
-    user.followed_topics = followedTopics;
     this.props.followTopic(user);
   };
 
@@ -77,7 +75,8 @@ class TopicShow extends React.Component {
           <div className="topics-list-container">
             <TopicsListContainer
               selected={this.props.match.params.topicId}
-              topics={this.props.topics} />
+              topics={this.props.topics}
+              followedTopics={followedTopics} />
           </div>
 
           <div className="topic-show">
