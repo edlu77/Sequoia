@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import SearchContainer from './search_container'
 
 const Navbar = ( {currentUser, logout, openForm, openTopics} ) => {
+
   // <li className="header-left-link">
   //   {openTopics}
   // </li>
-
   const loggedInNav = () => {
     return (
       <nav className="nav-main">
