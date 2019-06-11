@@ -2,6 +2,7 @@ import React from 'react';
 import { closeModal } from '../actions/modal_actions';
 import { connect } from 'react-redux';
 import CreateQuestionFormContainer from './create_question_form_container';
+import SelectTopicsContainer from './select_topics_container';
 
 function Modal({modal, closeModal}) {
   if (!modal) {
@@ -11,6 +12,9 @@ function Modal({modal, closeModal}) {
   switch (modal) {
     case 'createQuestion':
       component = <CreateQuestionFormContainer />;
+      break;
+    case 'selectTopics':
+      component = <SelectTopicsContainer />;
       break;
     default:
       return null;

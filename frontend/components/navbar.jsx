@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchContainer from './search_container'
 
-const Navbar = ( {currentUser, logout, openForm} ) => {
+const Navbar = ( {currentUser, logout, openForm, openTopics} ) => {
+  // <li className="header-left-link">
+  //   {openTopics}
+  // </li>
 
   const loggedInNav = () => {
     return (
@@ -13,7 +16,7 @@ const Navbar = ( {currentUser, logout, openForm} ) => {
             <Link className="header-logo" to="/">seQuoia</Link>
           </li>
           <li className="header-left-link">
-            <Link className="home-button" to="/">Home</Link>
+            <Link className="header-link" to="/">Home</Link>
           </li>
         </ul>
 

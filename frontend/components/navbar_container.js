@@ -17,6 +17,11 @@ const mapDispatchToProps = (dispatch) => {
       <button className="ask-question-button" onClick={() => dispatch(openModal('createQuestion'))}>
         Add Question
       </button>
+    ),
+    openTopics: (
+      <button className="header-link" onClick={() => dispatch(openModal('selectTopics'))}>
+        Feed Settings
+      </button>
     )
 
   });
