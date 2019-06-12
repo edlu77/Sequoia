@@ -1700,9 +1700,6 @@ var Navbar = function Navbar(_ref) {
       openForm = _ref.openForm,
       openTopics = _ref.openTopics;
 
-  // <li className="header-left-link">
-  //   {openTopics}
-  // </li>
   var loggedInNav = function loggedInNav() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
       className: "nav-main"
@@ -1718,7 +1715,9 @@ var Navbar = function Navbar(_ref) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       className: "header-link",
       to: "/"
-    }, "Home"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: "header-left-link"
+    }, openTopics)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       className: "header-list-right group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       className: "search-container"
@@ -2351,8 +2350,10 @@ var mapStateToProps = function mapStateToProps(state) {
   var topics = Object.values(state.entities.topics);
   var currentUserId = state.session.id;
   var currentUser = state.entities.users[currentUserId];
+  var followedTopics = currentUser.followed_topics;
   return {
     topics: topics,
+    followedTopics: followedTopics,
     currentUser: currentUser
   };
 };
@@ -2397,13 +2398,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -2420,23 +2421,62 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SelectTopicsForm).call(this, props));
     _this.state = {
-      selected: _this.props.currentUser.followed_topics
-    }; // this.handleClick = this.handleClick.bind(this)
-
+      selected: _this.props.followedTopics
+    };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
-  } // handleClick(e) {
-  //   this.setState({value: e.currentTarget.innerText});
-  // }
-
+  }
 
   _createClass(SelectTopicsForm, [{
+    key: "findTopic",
+    value: function findTopic(name) {
+      var topics = Object.values(this.props.topics);
+
+      for (var i = 0; i < topics.length; i++) {
+        if (topics[i].name === name) return topics[i].id.toString();
+      }
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      var selectedTopics = this.state.selected;
+      var topicId = this.findTopic(e.currentTarget.value);
+      debugger;
+
+      if (selectedTopics.includes(topicId)) {
+        var idx = selectedTopics.indexOf(topicId);
+        selectedTopics = selectedTopics.slice(0, idx).concat(selectedTopics.slice(idx + 1));
+      } else {
+        selectedTopics.push(topicId);
+      }
+
+      this.setState({
+        selected: selectedTopics
+      });
+      var user = this.props.currentUser;
+      user.followed_topics = selectedTopics;
+      this.props.followTopic(user);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      console.log(this.state.selected);
       var allTopics = Object.values(this.props.topics).slice(1).map(function (topic) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, topic.name);
+        var selected = _this2.state.selected.includes(topic.id.toString());
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          key: topic.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "checkbox",
+          value: topic.name,
+          checked: selected,
+          onChange: _this2.handleClick
+        }), topic.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "topics-list"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topics-select"
       }, allTopics);
     }
   }]);
@@ -3010,25 +3050,26 @@ function (_React$Component) {
           }, topic.name));
         } else {
           // filter topic list by followed status
-          // if (this.props.followedTopics.includes(topic.id.toString())) {
-          //   return (
-          //     <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
-          //       <Link
-          //         onClick={this.handleClick}
-          //         className="index-topic-name"
-          //         to={`/topics/${topic.id}`}>{topic.name}
-          //       </Link>
-          //     </li>
-          //   )
-          // }
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            key: topic.id,
-            className: "topics-list-link ".concat(topicHighlight)
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-            onClick: _this2.handleClick,
-            className: "index-topic-name",
-            to: "/topics/".concat(topic.id)
-          }, topic.name));
+          if (_this2.props.followedTopics.includes(topic.id.toString())) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+              key: topic.id,
+              className: "topics-list-link ".concat(topicHighlight)
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+              onClick: _this2.handleClick,
+              className: "index-topic-name",
+              to: "/topics/".concat(topic.id)
+            }, topic.name));
+          } // no filtering
+          // return (
+          //   <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
+          //     <Link
+          //       onClick={this.handleClick}
+          //       className="index-topic-name"
+          //       to={`/topics/${topic.id}`}>{topic.name}
+          //     </Link>
+          //   </li>
+          // )
+
         }
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {

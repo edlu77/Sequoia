@@ -7,8 +7,10 @@ const mapStateToProps = (state) => {
   const topics = Object.values(state.entities.topics);
   const currentUserId = state.session.id;
   const currentUser = state.entities.users[currentUserId];
+  const followedTopics = currentUser.followed_topics;
   return ({
     topics: topics,
+    followedTopics: followedTopics,
     currentUser: currentUser,
   })
 };

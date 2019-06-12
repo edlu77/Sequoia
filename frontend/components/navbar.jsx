@@ -4,9 +4,6 @@ import SearchContainer from './search_container'
 
 const Navbar = ( {currentUser, logout, openForm, openTopics} ) => {
 
-  // <li className="header-left-link">
-  //   {openTopics}
-  // </li>
   const loggedInNav = () => {
     return (
       <nav className="nav-main">
@@ -17,6 +14,9 @@ const Navbar = ( {currentUser, logout, openForm, openTopics} ) => {
           </li>
           <li className="header-left-link">
             <Link className="header-link" to="/">Home</Link>
+          </li>
+          <li className="header-left-link">
+            {openTopics}
           </li>
         </ul>
 

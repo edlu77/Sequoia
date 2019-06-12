@@ -27,27 +27,28 @@ class TopicsList extends React.Component {
         )
       } else {
         // filter topic list by followed status
-        // if (this.props.followedTopics.includes(topic.id.toString())) {
-        //   return (
-        //     <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
-        //       <Link
-        //         onClick={this.handleClick}
-        //         className="index-topic-name"
-        //         to={`/topics/${topic.id}`}>{topic.name}
-        //       </Link>
-        //     </li>
-        //   )
-        // }
+        if (this.props.followedTopics.includes(topic.id.toString())) {
+          return (
+            <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
+              <Link
+                onClick={this.handleClick}
+                className="index-topic-name"
+                to={`/topics/${topic.id}`}>{topic.name}
+              </Link>
+            </li>
+          )
+        }
 
-        return (
-          <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
-            <Link
-              onClick={this.handleClick}
-              className="index-topic-name"
-              to={`/topics/${topic.id}`}>{topic.name}
-            </Link>
-          </li>
-        )
+        // no filtering
+        // return (
+        //   <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
+        //     <Link
+        //       onClick={this.handleClick}
+        //       className="index-topic-name"
+        //       to={`/topics/${topic.id}`}>{topic.name}
+        //     </Link>
+        //   </li>
+        // )
       }
     });
 
