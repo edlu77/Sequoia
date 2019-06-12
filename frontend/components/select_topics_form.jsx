@@ -18,7 +18,6 @@ class SelectTopicsForm extends React.Component {
   handleClick(e) {
     let selectedTopics = this.state.selected;
     const topicId = this.findTopic(e.currentTarget.value)
-    debugger
     if (selectedTopics.includes(topicId)) {
       let idx = selectedTopics.indexOf(topicId);
       selectedTopics = selectedTopics.slice(0, idx).concat(selectedTopics.slice(idx+1))
@@ -33,7 +32,6 @@ class SelectTopicsForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.selected)
     const allTopics = Object.values(this.props.topics).slice(1).map((topic) => {
       const selected = this.state.selected.includes(topic.id.toString())
       return (

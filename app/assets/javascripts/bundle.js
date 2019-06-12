@@ -1447,7 +1447,8 @@ function (_React$Component) {
         className: "topics-list-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         selected: "0",
-        topics: this.props.topics
+        topics: this.props.topics,
+        followedTopics: this.props.followedTopics
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -1520,9 +1521,6 @@ var uniqueAnswers = function uniqueAnswers(answers) {
 };
 
 var mapStateToProps = function mapStateToProps(state) {
-  // this is for later when we want to filter out questions based on currentUser's subscribed topics
-  // const currentUserId = state.session.id;
-  // const currentUser = state.entities.users[currentUserId];
   var allQuestions = Object.values(state.entities.questions);
   var questions = allQuestions.sort(sortByTime).slice(0, 10); //take 10 most recent questions
 
@@ -1533,12 +1531,16 @@ var mapStateToProps = function mapStateToProps(state) {
 
   var topics = state.entities.topics;
   var users = Object.values(state.entities.users);
+  var currentUserId = state.session.id;
+  var currentUser = state.entities.users[currentUserId];
+  var followedTopics = currentUser.followed_topics;
   return {
     allQuestions: allQuestions,
     questions: questions,
     feedItems: feedItems,
     topics: topics,
-    users: users
+    users: users,
+    followedTopics: followedTopics
   };
 };
 
@@ -2441,7 +2443,6 @@ function (_React$Component) {
     value: function handleClick(e) {
       var selectedTopics = this.state.selected;
       var topicId = this.findTopic(e.currentTarget.value);
-      debugger;
 
       if (selectedTopics.includes(topicId)) {
         var idx = selectedTopics.indexOf(topicId);
@@ -2462,7 +2463,6 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log(this.state.selected);
       var allTopics = Object.values(this.props.topics).slice(1).map(function (topic) {
         var selected = _this2.state.selected.includes(topic.id.toString());
 

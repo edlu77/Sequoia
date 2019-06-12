@@ -40,9 +40,6 @@ var uniqueAnswers = function(answers) {
 };
 
 const mapStateToProps = (state) => {
-  // this is for later when we want to filter out questions based on currentUser's subscribed topics
-  // const currentUserId = state.session.id;
-  // const currentUser = state.entities.users[currentUserId];
   const allQuestions = Object.values(state.entities.questions)
   const questions = allQuestions.sort(sortByTime).slice(0, 10); //take 10 most recent questions
   const bestAnswers = Object.values(state.entities.answers).sort(sortByVotes);
@@ -51,6 +48,9 @@ const mapStateToProps = (state) => {
   const feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
   const topics = state.entities.topics;
   const users = Object.values(state.entities.users);
+  const currentUserId = state.session.id;
+  const currentUser = state.entities.users[currentUserId];
+  const followedTopics = currentUser.followed_topics;
 
   return ({
     allQuestions: allQuestions,
@@ -58,6 +58,7 @@ const mapStateToProps = (state) => {
     feedItems: feedItems,
     topics: topics,
     users: users,
+    followedTopics: followedTopics,
   })
 };
 
