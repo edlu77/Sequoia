@@ -1,3 +1,20 @@
 .topics-select {
+  display: flex;
   background: white;
+  width: 300px;
+  height: 400px;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+}
+
+.topics-select-list {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+label > input {
+  margin-right: 10px;
 }

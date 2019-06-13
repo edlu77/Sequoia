@@ -50,7 +50,9 @@ class SelectTopicsForm extends React.Component {
 
     return (
       <div className="topics-select">
-        {allTopics}
+        <div className="topics-select-list">
+          {allTopics}
+        </div>
       </div>
     )
   }

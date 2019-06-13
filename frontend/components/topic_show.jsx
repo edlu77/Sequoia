@@ -84,7 +84,7 @@ class TopicShow extends React.Component {
               <li className="topic-header">
                 <div className="topic-header-contents">
                   {topic.name}
-                  <button className={`follow-button-${selected}`} onClick={this.toggleFollow}>
+                  <button className={`follow-button ${selected}`} onClick={this.toggleFollow}>
                     Follow
                   </button>
                 </div>

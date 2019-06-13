@@ -65,12 +65,12 @@
   position: relative;
   margin-top: 10px;
   min-height: 40px;
-  // margin-bottom: 5px;
+  margin-bottom: 5px;
   font-size: 15px;
   line-height: 1.4;
 }
 
-.feed-answer-header-open {
+.feed-answer-header open {
   display: none;
 }
 
@@ -100,36 +100,43 @@
   margin-bottom: 4px;
 }
 
-.answer-upvote-button-, .answer-upvote-button-upvoted, .answer-delete-button, .answer-update-button {
+.answer-upvote-button, .answer-delete-button, .answer-update-button {
   border-radius: 40px;
   padding-top: 8px!important;
   padding-bottom: 8px!important;
   padding-left: 12px!important;
   padding-right: 12px!important;
 }
+.answer-upvote-button {
+  width: 80px;
+}
 
-.answer-downvote-button-, .answer-downvote-button-downvoted {
+.answer-downvote-button {
   border-radius: 40px;
   padding: 5px;
 }
 
-.answer-downvote-button-:hover, .answer-upvote-button-:hover, .answer-upvote-button-upvoted:hover, .answer-downvote-button-downvoted:hover, .answer-delete-button:hover, .answer-update-button:hover {
+.answer-downvote-button:hover, .answer-upvote-button:hover, .answer-delete-button:hover, .answer-update-button:hover {
   background: #fafafa;
 }
 
-.answer-downvote-button-downvoted, .answer-upvote-button-upvoted {
+.downvoted, .upvoted {
   color: blue;
 }
 
-.answer-submit-form-closed, .answer-update-options-open, .answer-body-open {
+.answer-submit-form.closed {
   display: none;
 }
 
-.follow-button-selected, .follow-button-unselected {
+.answer-body.open {
+  display: none;
+}
+
+.follow-button {
   font-weight: normal;
   font-size: 15px;
 }
 
-.follow-button-selected {
+.follow-button.selected {
   color: blue;
 }

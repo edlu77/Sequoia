@@ -150,18 +150,18 @@ class UpdateAnswerForm extends React.Component {
   render() {
 		const date = new Date(this.state.answer.created_at)
     return (
-			<div>
-				<div className={`feed-answer-header-${this.state.editOpen}`}>
+			<div className='answer-edit'>
+				<div className={`feed-answer-header ${this.state.editOpen}`}>
 					{this.state.author.username}
 					<div className="feed-answer-created-time">
 						{`Answered ${MONTHS[(date.getMonth()+1)] + " " + date.getDate() + ", " + date.getFullYear()}`}
 					</div>
 				</div>
 
-				<div className={`answer-body-${this.state.editOpen}`}
+				<div className={`answer-body ${this.state.editOpen}`}
 					dangerouslySetInnerHTML={{__html: this.state.body}}>
 				</div>
-	      <div className={`answer-submit-form-${this.state.editOpen}`}>
+	      <div className={`answer-submit-form ${this.state.editOpen}`}>
 
 					<div className="answer-submit-form-userinfo">
 						{this.state.currentUser.username}
@@ -180,7 +180,7 @@ class UpdateAnswerForm extends React.Component {
 	      </div>
 
 				<div className='answer-options'>
-					<button className={`answer-upvote-button-${this.state.upvoted}`} onClick={this.upvote}>
+					<button className={`answer-upvote-button ${this.state.upvoted}`} onClick={this.upvote}>
 						Upvote · {this.state.upvotes}
 					</button>
 					<button className="answer-update-button" onClick={this.toggleEdit}>
@@ -189,7 +189,7 @@ class UpdateAnswerForm extends React.Component {
 					<button className="answer-delete-button" onClick={this.deleteAnswer}>
 						Delete
 					</button>
-					<button className={`answer-downvote-button-${this.state.downvoted}`} onClick={this.downvote}>
+					<button className={`answer-downvote-button ${this.state.downvoted}`} onClick={this.downvote}>
 						Downvote
 					</button>
 				</div>

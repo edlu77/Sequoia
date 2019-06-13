@@ -1300,13 +1300,11 @@ var FeedAnswerIndexItem = function FeedAnswerIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "feed-answer-title",
     to: "/questions/".concat(props.answer.question_id)
-  }, props.question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "answer-edit"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, props.question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_update_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
     answer: props.answer,
     questionId: props.question.id,
     author: props.author
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
     answer: props.answer,
     users: props.users
   }));
@@ -1521,19 +1519,24 @@ var uniqueAnswers = function uniqueAnswers(answers) {
 };
 
 var mapStateToProps = function mapStateToProps(state) {
-  var allQuestions = Object.values(state.entities.questions);
-  var questions = allQuestions.sort(sortByTime).slice(0, 10); //take 10 most recent questions
-
-  var bestAnswers = Object.values(state.entities.answers).sort(sortByVotes);
-  var recentAnswers = Object.values(state.entities.answers).sort(sortByTime);
-  var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0, 10);
-  var feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
-
   var topics = state.entities.topics;
   var users = Object.values(state.entities.users);
   var currentUserId = state.session.id;
   var currentUser = state.entities.users[currentUserId];
   var followedTopics = currentUser.followed_topics;
+  var allQuestions = Object.values(state.entities.questions);
+  var questions = allQuestions.sort(sortByTime).filter(function (item) {
+    return followedTopics.includes(item.topic_id.toString());
+  }).slice(0, 10); //take 10 most recent questions
+
+  var allAnswers = Object.values(state.entities.answers);
+  var bestAnswers = allAnswers.sort(sortByVotes);
+  var recentAnswers = allAnswers.sort(sortByTime);
+  var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).filter(function (item) {
+    return followedTopics.includes(item.topic_id.toString());
+  }).slice(0, 10);
+  var feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
+
   return {
     allQuestions: allQuestions,
     questions: questions,
@@ -2477,7 +2480,9 @@ function (_React$Component) {
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topics-select"
-      }, allTopics);
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "topics-select-list"
+      }, allTopics));
     }
   }]);
 
@@ -2843,7 +2848,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "topic-header-contents"
       }, topic.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "follow-button-".concat(selected),
+        className: "follow-button ".concat(selected),
         onClick: this.toggleFollow
       }, "Follow"))), combinedFeed))));
     }
@@ -3340,17 +3345,19 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var date = new Date(this.state.answer.created_at);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "feed-answer-header-".concat(this.state.editOpen)
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-edit"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "feed-answer-header ".concat(this.state.editOpen)
       }, this.state.author.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-answer-created-time"
       }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "answer-body-".concat(this.state.editOpen),
+        className: "answer-body ".concat(this.state.editOpen),
         dangerouslySetInnerHTML: {
           __html: this.state.body
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "answer-submit-form-".concat(this.state.editOpen)
+        className: "answer-submit-form ".concat(this.state.editOpen)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form-userinfo"
       }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -3370,7 +3377,7 @@ function (_React$Component) {
       }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-options"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "answer-upvote-button-".concat(this.state.upvoted),
+        className: "answer-upvote-button ".concat(this.state.upvoted),
         onClick: this.upvote
       }, "Upvote \xB7 ", this.state.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-update-button",
@@ -3379,7 +3386,7 @@ function (_React$Component) {
         className: "answer-delete-button",
         onClick: this.deleteAnswer
       }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "answer-downvote-button-".concat(this.state.downvoted),
+        className: "answer-downvote-button ".concat(this.state.downvoted),
         onClick: this.downvote
       }, "Downvote")));
     }

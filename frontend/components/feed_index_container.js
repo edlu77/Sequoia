@@ -40,17 +40,24 @@ var uniqueAnswers = function(answers) {
 };
 
 const mapStateToProps = (state) => {
-  const allQuestions = Object.values(state.entities.questions)
-  const questions = allQuestions.sort(sortByTime).slice(0, 10); //take 10 most recent questions
-  const bestAnswers = Object.values(state.entities.answers).sort(sortByVotes);
-  const recentAnswers = Object.values(state.entities.answers).sort(sortByTime);
-  const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).slice(0,10);
-  const feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
   const topics = state.entities.topics;
+
   const users = Object.values(state.entities.users);
   const currentUserId = state.session.id;
   const currentUser = state.entities.users[currentUserId];
   const followedTopics = currentUser.followed_topics;
+
+  const allQuestions = Object.values(state.entities.questions)
+  const questions = allQuestions.sort(sortByTime).filter(item =>
+    followedTopics.includes(item.topic_id.toString())).slice(0, 10); //take 10 most recent questions
+
+  const allAnswers = Object.values(state.entities.answers)
+  const bestAnswers = allAnswers.sort(sortByVotes);
+  const recentAnswers = allAnswers.sort(sortByTime);
+  const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).filter(item =>
+    followedTopics.includes(item.topic_id.toString())).slice(0, 10);
+
+  const feedItems = questions.concat(answers).sort(sortByTime) //combine everything, sort all by time
 
   return ({
     allQuestions: allQuestions,

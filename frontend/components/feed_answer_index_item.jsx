@@ -13,12 +13,10 @@ const FeedAnswerIndexItem = (props) => {
           {props.question.title}
         </Link>
       </div>
-      <div className='answer-edit'>
-        <UpdateAnswerFormContainer
-          answer = {props.answer}
-          questionId = {props.question.id}
-          author = {props.author} />
-      </div>
+      <UpdateAnswerFormContainer
+        answer = {props.answer}
+        questionId = {props.question.id}
+        author = {props.author} />
       <CommentIndexContainer
         answer={props.answer}
         users={props.users}/>
