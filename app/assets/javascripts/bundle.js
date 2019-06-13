@@ -3199,6 +3199,7 @@ function (_React$Component) {
       currentUser: _this.props.currentUser,
       editOpen: _this.props.editOpen,
       body: _this.props.answer.body,
+      edited: _this.props.answer.body,
       author: _this.props.author,
       upvotes: _this.props.answer.upvotes,
       voters: _this.props.answer.voters,
@@ -3209,7 +3210,7 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.toggleEdit = _this.toggleEdit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.upvote = _this.upvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.downvote = _this.downvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deleteAnswer = _this.deleteAnswer.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -3221,7 +3222,7 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
 
-      if (this.state.body === "<p><br></p>") {
+      if (this.state.edited === "<p><br></p>") {
         return;
       }
 
@@ -3230,7 +3231,7 @@ function (_React$Component) {
         voters: this.state.voters,
         downvoters: this.state.downvoters,
         upvotes: this.state.upvotes,
-        body: this.state.body
+        body: this.state.edited
       });
       this.setState({
         editOpen: 'closed'
@@ -3240,7 +3241,7 @@ function (_React$Component) {
     key: "handleChange",
     value: function handleChange(value) {
       this.setState({
-        body: value
+        edited: value
       });
     }
   }, {
@@ -3264,11 +3265,19 @@ function (_React$Component) {
       }
     }
   }, {
-    key: "toggleEdit",
-    value: function toggleEdit(e) {
-      this.setState({
-        editOpen: this.state.editOpen === 'closed' ? 'open' : 'closed'
-      });
+    key: "handleUpdate",
+    value: function handleUpdate(e) {
+      if (this.state.editOpen === 'open') {
+        this.setState({
+          edited: this.state.body,
+          editOpen: this.state.editOpen === 'closed' ? 'open' : 'closed'
+        });
+      } else {
+        this.setState({
+          body: this.state.edited,
+          editOpen: this.state.editOpen === 'closed' ? 'open' : 'closed'
+        });
+      }
     }
   }, {
     key: "upvote",
@@ -3354,7 +3363,7 @@ function (_React$Component) {
       }, "Answered ".concat(MONTHS[date.getMonth() + 1] + " " + date.getDate() + ", " + date.getFullYear()))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-body ".concat(this.state.editOpen),
         dangerouslySetInnerHTML: {
-          __html: this.state.body
+          __html: this.state.edited
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form ".concat(this.state.editOpen)
@@ -3367,7 +3376,7 @@ function (_React$Component) {
         className: "answer-submit-form-input",
         theme: "snow",
         onChange: this.handleChange,
-        value: this.state.body,
+        value: this.state.edited,
         formats: this.formats,
         modules: quillModules,
         placeholder: "Write your answer"
@@ -3381,7 +3390,7 @@ function (_React$Component) {
         onClick: this.upvote
       }, "Upvote \xB7 ", this.state.upvotes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-update-button",
-        onClick: this.toggleEdit
+        onClick: this.handleUpdate
       }, this.state.editOpen === 'open' ? 'Cancel Edit' : 'Edit Answer'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-delete-button",
         onClick: this.deleteAnswer

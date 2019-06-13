@@ -34,6 +34,7 @@ class UpdateAnswerForm extends React.Component {
 			currentUser: this.props.currentUser,
 			editOpen: this.props.editOpen,
       body: this.props.answer.body,
+			edited: this.props.answer.body,
 			author: this.props.author,
 			upvotes: this.props.answer.upvotes,
 			voters: this.props.answer.voters,
@@ -44,7 +45,7 @@ class UpdateAnswerForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
 		this.handleFile = this.handleFile.bind(this);
-		this.toggleEdit = this.toggleEdit.bind(this);
+		this.handleUpdate = this.handleUpdate.bind(this);
 		this.upvote = this.upvote.bind(this);
 		this.downvote = this.downvote.bind(this);
 		this.deleteAnswer = this.deleteAnswer.bind(this);
@@ -52,7 +53,7 @@ class UpdateAnswerForm extends React.Component {
 
   handleSubmit(e) {
 		e.preventDefault();
-		if (this.state.body === "<p><br></p>") {
+		if (this.state.edited === "<p><br></p>") {
 			return
 		}
 		this.props.updateAnswer({
@@ -60,13 +61,13 @@ class UpdateAnswerForm extends React.Component {
 			voters: this.state.voters,
 			downvoters: this.state.downvoters,
 			upvotes: this.state.upvotes,
-			body: this.state.body,
+			body: this.state.edited,
 		})
 		this.setState({editOpen: 'closed'})
   }
 
   handleChange(value) {
-    this.setState({ body: value })
+    this.setState({ edited: value })
   }
 
 	handleFile(e) {
@@ -81,8 +82,12 @@ class UpdateAnswerForm extends React.Component {
 		}
 	}
 
-	toggleEdit(e) {
-		this.setState({editOpen:(this.state.editOpen === 'closed') ? 'open' : 'closed'});
+	handleUpdate(e) {
+		if (this.state.editOpen === 'open') {
+			this.setState({edited: this.state.body, editOpen:(this.state.editOpen === 'closed') ? 'open' : 'closed'});
+		} else {
+			this.setState({body: this.state.edited, editOpen:(this.state.editOpen === 'closed') ? 'open' : 'closed'});
+		}
 	}
 
 	upvote (e) {
@@ -159,7 +164,7 @@ class UpdateAnswerForm extends React.Component {
 				</div>
 
 				<div className={`answer-body ${this.state.editOpen}`}
-					dangerouslySetInnerHTML={{__html: this.state.body}}>
+					dangerouslySetInnerHTML={{__html: this.state.edited}}>
 				</div>
 	      <div className={`answer-submit-form ${this.state.editOpen}`}>
 
@@ -172,7 +177,7 @@ class UpdateAnswerForm extends React.Component {
 						className="answer-submit-form-input"
 	          theme="snow"
 	          onChange={this.handleChange}
-	          value={this.state.body}
+	          value={this.state.edited}
 	          formats={this.formats}
 	          modules={quillModules}
 						placeholder="Write your answer" />
@@ -183,7 +188,7 @@ class UpdateAnswerForm extends React.Component {
 					<button className={`answer-upvote-button ${this.state.upvoted}`} onClick={this.upvote}>
 						Upvote · {this.state.upvotes}
 					</button>
-					<button className="answer-update-button" onClick={this.toggleEdit}>
+					<button className="answer-update-button" onClick={this.handleUpdate}>
 						{(this.state.editOpen === 'open') ? 'Cancel Edit' : 'Edit Answer'}
 					</button>
 					<button className="answer-delete-button" onClick={this.deleteAnswer}>

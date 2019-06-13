@@ -108,7 +108,7 @@
   padding-right: 12px!important;
 }
 .answer-upvote-button {
-  width: 80px;
+  width: 70px;
 }
 
 .answer-downvote-button {
@@ -139,4 +139,9 @@
 
 .follow-button.selected {
   color: blue;
+}
+
+.answer-body > p {
+  margin-top: 5px;
+  margin-bottom: 1em;
 }
