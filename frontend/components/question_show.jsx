@@ -19,10 +19,11 @@ class QuestionShow extends React.Component {
       <div className="content-question">
         <div className="question-show-wrapper">
           <div className="question-show">
-            <div className="question-show-topic">
-            </div>
-            <div className="question-show-title">
-              {question.title}
+            <div className="question-show-header">
+              <div className="question-show-topic"></div>
+              <div className="question-show-title">
+                {question.title}
+              </div>
             </div>
 
             <CreateAnswerFormContainer

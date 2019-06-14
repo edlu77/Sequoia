@@ -14,11 +14,12 @@
 
 .comment-submit-area {
   word-break: break-word;
-  padding: 3px 5px 4px;
+  padding: 4px 16px;
   width: 100%;
   background: #fff;
-  border: 1px solid #e2e2e2;
-  border-radius: 3px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
 }
 
 .comment-submit-button {
@@ -39,8 +40,7 @@
 }
 
 .comment-index-item {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 8px;
 }
 
 .comment-author {

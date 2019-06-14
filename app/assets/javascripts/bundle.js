@@ -626,10 +626,12 @@ function (_React$Component) {
         formats: this.formats,
         modules: quillModules,
         placeholder: "Write your answer"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-buttons"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-submit-button",
         onClick: this.handleSubmit
-      }, "Submit"));
+      }, "Submit")));
     }
   }]);
 
@@ -2058,10 +2060,12 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "question-show-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show-topic"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-show-title"
-      }, question.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_create_answer_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         questionId: this.props.questionId
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         answers: answers,
@@ -3380,10 +3384,12 @@ function (_React$Component) {
         formats: this.formats,
         modules: quillModules,
         placeholder: "Write your answer"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-buttons"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-submit-button",
         onClick: this.handleSubmit
-      }, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Submit"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-options"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "answer-upvote-button ".concat(this.state.upvoted),

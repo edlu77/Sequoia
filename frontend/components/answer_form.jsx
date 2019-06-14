@@ -66,7 +66,9 @@ class AnswerForm extends React.Component {
           formats={this.formats}
           modules={quillModules}
 					placeholder="Write your answer" />
-				<button className="answer-submit-button" onClick={this.handleSubmit}>Submit</button>
+				<div className="form-buttons">
+					<button className="answer-submit-button" onClick={this.handleSubmit}>Submit</button>
+				</div>
       </div>
     )
   };

@@ -25,6 +25,10 @@
   margin-bottom: 8px;
 }
 
+.question-show-header {
+  margin-bottom: 12px;
+}
+
 .question-show-topic {
   font-size: 13px;
   color: #666;
@@ -48,13 +52,16 @@
   min-height: 39px;
 }
 
+.form-buttons {
+  padding: 8px;
+}
+
 .answer-submit-button {
   font-size: 13px;
   line-height: 1.4;
   border-radius: 3px;
   font-weight: 500;
   padding: 3px 7px 4px 7px;
-  margin-left: 5px;
   background: #3e78ad;
   border: 1px solid #3a66ad;
   color: white;
