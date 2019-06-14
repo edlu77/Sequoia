@@ -27,7 +27,7 @@
 
 .topic-header {
   display: flex;
-  height: 158px;
+  height: 105px;
   font-style: serif;
   font-size: 23px;
   font-weight: bold;
@@ -40,18 +40,21 @@
   border: 1px solid #efefef;
 }
 
+.topic-header-contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // height: 66%;
+  padding-left: 16px;
+  margin-bottom: 8px;
+}
+
 .answer-topic-list, .question-topic-list {
   color: #949494;
   font-size: 13px;
   margin-bottom: 5px;
 }
 
-.topic-header-contents {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 66%;
-}
 
 .answer-question-title{
   font-weight: bold;
