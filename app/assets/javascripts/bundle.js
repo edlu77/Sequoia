@@ -3257,7 +3257,7 @@ function (_React$Component) {
       var file = e.currentTarget.files[0];
 
       reader.onloadend = function () {
-        var newBody = _this2.state.body + "<img src=\"".concat(reader.result, "\"></img>");
+        var newBody = _this2.state.edited + "<img src=\"".concat(reader.result, "\"></img>");
 
         _this2.setState({
           edited: newBody

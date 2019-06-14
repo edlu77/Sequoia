@@ -74,7 +74,7 @@ class UpdateAnswerForm extends React.Component {
 		const reader = new FileReader();
 		const file = e.currentTarget.files[0];
 		reader.onloadend = () => {
-			const newBody = this.state.body + `<img src=\"${reader.result}\"></img>`;
+			const newBody = this.state.edited + `<img src=\"${reader.result}\"></img>`;
 			this.setState({ edited: newBody });
 		}
 		if (file) {
