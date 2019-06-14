@@ -3260,7 +3260,7 @@ function (_React$Component) {
         var newBody = _this2.state.body + "<img src=\"".concat(reader.result, "\"></img>");
 
         _this2.setState({
-          body: newBody
+          edited: newBody
         });
       };
 
