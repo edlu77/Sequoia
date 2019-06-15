@@ -70,7 +70,7 @@ class FeedIndex extends React.Component {
           <div className="topics-list-container">
             <TopicsListContainer
               selected = "0"
-              topics = {this.props.topics}
+              topics = {topics}
               followedTopics = {this.props.followedTopics} />
           </div>
           <div className="feed-index">

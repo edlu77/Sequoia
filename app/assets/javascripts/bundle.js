@@ -1447,7 +1447,7 @@ function (_React$Component) {
         className: "topics-list-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_topics_list_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         selected: "0",
-        topics: this.props.topics,
+        topics: topics,
         followedTopics: this.props.followedTopics
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "feed-index"
@@ -1527,16 +1527,23 @@ var mapStateToProps = function mapStateToProps(state) {
   var currentUser = state.entities.users[currentUserId];
   var followedTopics = currentUser.followed_topics;
   var allQuestions = Object.values(state.entities.questions);
-  var questions = allQuestions.sort(sortByTime).filter(function (item) {
-    return followedTopics.includes(item.topic_id.toString());
-  }).slice(0, 10); //take 10 most recent questions
-
+  var questions = allQuestions;
   var allAnswers = Object.values(state.entities.answers);
   var bestAnswers = allAnswers.sort(sortByVotes);
   var recentAnswers = allAnswers.sort(sortByTime);
-  var answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).filter(function (item) {
-    return followedTopics.includes(item.topic_id.toString());
-  }).slice(0, 10);
+  var answers = uniqueAnswers(bestAnswers.concat(recentAnswers));
+
+  if (followedTopics.length > 0) {
+    questions = allQuestions.sort(sortByTime).filter(function (item) {
+      return followedTopics.includes(item.topic_id.toString());
+    });
+    answers = answers.filter(function (item) {
+      return followedTopics.includes(item.topic_id.toString());
+    });
+  }
+
+  questions = questions.slice(0, 10);
+  answers = answers.slice(0, 10);
   var feedItems = questions.concat(answers).sort(sortByTime); //combine everything, sort all by time
 
   return {
@@ -3059,7 +3066,7 @@ function (_React$Component) {
           }, topic.name));
         } else {
           // filter topic list by followed status
-          if (_this2.props.followedTopics.includes(topic.id.toString())) {
+          if (_this2.props.followedTopics.length === 0) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
               key: topic.id,
               className: "topics-list-link ".concat(topicHighlight)
@@ -3068,6 +3075,17 @@ function (_React$Component) {
               className: "index-topic-name",
               to: "/topics/".concat(topic.id)
             }, topic.name));
+          } else {
+            if (_this2.props.followedTopics.includes(topic.id.toString())) {
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+                key: topic.id,
+                className: "topics-list-link ".concat(topicHighlight)
+              }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+                onClick: _this2.handleClick,
+                className: "index-topic-name",
+                to: "/topics/".concat(topic.id)
+              }, topic.name));
+            }
           } // no filtering
           // return (
           //   <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >

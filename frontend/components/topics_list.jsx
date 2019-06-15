@@ -27,7 +27,7 @@ class TopicsList extends React.Component {
         )
       } else {
         // filter topic list by followed status
-        if (this.props.followedTopics.includes(topic.id.toString())) {
+        if (this.props.followedTopics.length === 0) {
           return (
             <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
               <Link
@@ -37,6 +37,18 @@ class TopicsList extends React.Component {
               </Link>
             </li>
           )
+        } else {
+          if (this.props.followedTopics.includes(topic.id.toString())) {
+            return (
+              <li key={topic.id} className={`topics-list-link ${topicHighlight}`} >
+                <Link
+                  onClick={this.handleClick}
+                  className="index-topic-name"
+                  to={`/topics/${topic.id}`}>{topic.name}
+                </Link>
+              </li>
+            )
+          }
         }
 
         // no filtering

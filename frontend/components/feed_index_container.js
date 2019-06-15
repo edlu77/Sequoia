@@ -48,14 +48,21 @@ const mapStateToProps = (state) => {
   const followedTopics = currentUser.followed_topics;
 
   const allQuestions = Object.values(state.entities.questions)
-  const questions = allQuestions.sort(sortByTime).filter(item =>
-    followedTopics.includes(item.topic_id.toString())).slice(0, 10); //take 10 most recent questions
+  let questions = allQuestions;
 
   const allAnswers = Object.values(state.entities.answers)
   const bestAnswers = allAnswers.sort(sortByVotes);
   const recentAnswers = allAnswers.sort(sortByTime);
-  const answers = uniqueAnswers(bestAnswers.concat(recentAnswers)).filter(item =>
-    followedTopics.includes(item.topic_id.toString())).slice(0, 10);
+  let answers = uniqueAnswers(bestAnswers.concat(recentAnswers))
+
+  if (followedTopics.length > 0) {
+    questions = allQuestions.sort(sortByTime).filter(item =>
+      followedTopics.includes(item.topic_id.toString()))
+    answers = answers.filter(item =>
+      followedTopics.includes(item.topic_id.toString()));
+  }
+  questions = questions.slice(0, 10);
+  answers = answers.slice(0, 10);
 
   const feedItems = questions.concat(answers).sort(sortByTime) //combine everything, sort all by time
 
