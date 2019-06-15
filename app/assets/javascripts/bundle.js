@@ -539,7 +539,7 @@ var quillModules = {
     'list': 'ordered'
   }, {
     'list': 'bullet'
-  }], ['link']]
+  }], ['link'], ['image']]
 };
 
 var AnswerForm =
@@ -615,10 +615,7 @@ function (_React$Component) {
         className: "answer-submit-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form-userinfo"
-      }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "file",
-        onChange: this.handleFile
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
         className: "answer-submit-form-input",
         theme: "snow",
         onChange: this.handleChange,
@@ -638,7 +635,8 @@ function (_React$Component) {
   return AnswerForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-;
+; // <input type="file" onChange={this.handleFile}></input>
+
 /* harmony default export */ __webpack_exports__["default"] = (AnswerForm);
 
 /***/ }),

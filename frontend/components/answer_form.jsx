@@ -6,7 +6,8 @@ let quillModules = {
 	toolbar: [
 		['bold', 'italic'],
 		[{'list': 'ordered'}, {'list': 'bullet'}],
-		['link']
+		['link'],
+		['image']
 	],
 };
 
@@ -57,7 +58,6 @@ class AnswerForm extends React.Component {
 				<div className="answer-submit-form-userinfo">
 					{this.state.currentUser.username}
 				</div>
-				<input type="file" onChange={this.handleFile}></input>
         <ReactQuill
 					className="answer-submit-form-input"
           theme="snow"
@@ -73,5 +73,6 @@ class AnswerForm extends React.Component {
     )
   };
 };
+// <input type="file" onChange={this.handleFile}></input>
 
 export default AnswerForm;
