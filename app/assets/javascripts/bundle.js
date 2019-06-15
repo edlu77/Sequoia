@@ -3298,7 +3298,6 @@ function (_React$Component) {
       var file = e.currentTarget.files[0];
       var range = this.quillRef.getSelection();
       var position = range ? range.index : 0;
-      debugger;
 
       reader.onloadend = function () {
         var newBody = _this2.state.edited.slice(0, position) + "<img src=\"".concat(reader.result, "\"></img>") + _this2.state.edited.slice(position);

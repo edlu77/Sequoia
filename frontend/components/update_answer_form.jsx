@@ -97,7 +97,6 @@ class UpdateAnswerForm extends React.Component {
 		const file = e.currentTarget.files[0];
 		const range = this.quillRef.getSelection();
 		let position = range ? range.index : 0;
-		debugger
 		reader.onloadend = () => {
 			const newBody = this.state.edited.slice(0, position) + `<img src=\"${reader.result}\"></img>` + this.state.edited.slice(position);
 			this.setState({ edited: newBody });
