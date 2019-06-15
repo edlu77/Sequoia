@@ -6,7 +6,8 @@ let quillModules = {
 	toolbar: [
 		['bold', 'italic'],
 		[{'list': 'ordered'}, {'list': 'bullet'}],
-		['link']
+		['link'],
+		['image'],
 	],
 };
 
@@ -42,6 +43,8 @@ class UpdateAnswerForm extends React.Component {
 			upvoted: (this.props.answer.voters.includes(this.props.currentUser.id.toString())) ? 'upvoted' : '',
 			downvoted: (this.props.answer.downvoters.includes(this.props.currentUser.id.toString())) ? 'downvoted' : '',
     };
+		this.reactQuillRef = null;
+		this.quillRef = null;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
 		this.handleFile = this.handleFile.bind(this);
@@ -49,7 +52,26 @@ class UpdateAnswerForm extends React.Component {
 		this.upvote = this.upvote.bind(this);
 		this.downvote = this.downvote.bind(this);
 		this.deleteAnswer = this.deleteAnswer.bind(this);
+		this.attachQuillRefs = this.attachQuillRefs.bind(this);
   };
+
+	componentDidMount () {
+		this.attachQuillRefs()
+	}
+
+ 	componentDidUpdate () {
+	 	this.attachQuillRefs()
+ 	}
+
+	attachQuillRefs() {
+	 // Ensure React-Quill reference is available:
+	 if (typeof this.reactQuillRef.getEditor !== 'function') return;
+	 // Skip if Quill reference is defined:
+	 if (this.quillRef != null) return;
+
+	 const quillRef = this.reactQuillRef.getEditor();
+	 if (quillRef != null) this.quillRef = quillRef;
+	}
 
   handleSubmit(e) {
 		e.preventDefault();
@@ -73,8 +95,11 @@ class UpdateAnswerForm extends React.Component {
 	handleFile(e) {
 		const reader = new FileReader();
 		const file = e.currentTarget.files[0];
+		const range = this.quillRef.getSelection();
+		let position = range ? range.index : 0;
+		debugger
 		reader.onloadend = () => {
-			const newBody = this.state.edited + `<img src=\"${reader.result}\"></img>`;
+			const newBody = this.state.edited.slice(0, position) + `<img src=\"${reader.result}\"></img>` + this.state.edited.slice(position);
 			this.setState({ edited: newBody });
 		}
 		if (file) {
@@ -171,9 +196,9 @@ class UpdateAnswerForm extends React.Component {
 					<div className="answer-submit-form-userinfo">
 						{this.state.currentUser.username}
 					</div>
-					<input type="file" onChange={this.handleFile}></input>
 
 	        <ReactQuill
+						ref={(el) => { this.reactQuillRef = el }}
 						className="answer-submit-form-input"
 	          theme="snow"
 	          onChange={this.handleChange}
@@ -204,5 +229,7 @@ class UpdateAnswerForm extends React.Component {
     )
   };
 };
+
+// <input type="file" onChange={this.handleFile}></input>
 
 export default UpdateAnswerForm;

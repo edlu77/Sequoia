@@ -3187,7 +3187,7 @@ var quillModules = {
     'list': 'ordered'
   }, {
     'list': 'bullet'
-  }], ['link']]
+  }], ['link'], ['image']]
 };
 var MONTHS = {
   1: "Jan",
@@ -3229,6 +3229,8 @@ function (_React$Component) {
       upvoted: _this.props.answer.voters.includes(_this.props.currentUser.id.toString()) ? 'upvoted' : '',
       downvoted: _this.props.answer.downvoters.includes(_this.props.currentUser.id.toString()) ? 'downvoted' : ''
     };
+    _this.reactQuillRef = null;
+    _this.quillRef = null;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -3236,10 +3238,31 @@ function (_React$Component) {
     _this.upvote = _this.upvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.downvote = _this.downvote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deleteAnswer = _this.deleteAnswer.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.attachQuillRefs = _this.attachQuillRefs.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(UpdateAnswerForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.attachQuillRefs();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.attachQuillRefs();
+    }
+  }, {
+    key: "attachQuillRefs",
+    value: function attachQuillRefs() {
+      // Ensure React-Quill reference is available:
+      if (typeof this.reactQuillRef.getEditor !== 'function') return; // Skip if Quill reference is defined:
+
+      if (this.quillRef != null) return;
+      var quillRef = this.reactQuillRef.getEditor();
+      if (quillRef != null) this.quillRef = quillRef;
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
@@ -3273,9 +3296,12 @@ function (_React$Component) {
 
       var reader = new FileReader();
       var file = e.currentTarget.files[0];
+      var range = this.quillRef.getSelection();
+      var position = range ? range.index : 0;
+      debugger;
 
       reader.onloadend = function () {
-        var newBody = _this2.state.edited + "<img src=\"".concat(reader.result, "\"></img>");
+        var newBody = _this2.state.edited.slice(0, position) + "<img src=\"".concat(reader.result, "\"></img>") + _this2.state.edited.slice(position);
 
         _this2.setState({
           edited: newBody
@@ -3375,6 +3401,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var date = new Date(this.state.answer.created_at);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-edit"
@@ -3391,10 +3419,10 @@ function (_React$Component) {
         className: "answer-submit-form ".concat(this.state.editOpen)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-form-userinfo"
-      }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "file",
-        onChange: this.handleFile
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      }, this.state.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        ref: function ref(el) {
+          _this3.reactQuillRef = el;
+        },
         className: "answer-submit-form-input",
         theme: "snow",
         onChange: this.handleChange,
@@ -3428,7 +3456,8 @@ function (_React$Component) {
   return UpdateAnswerForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-;
+; // <input type="file" onChange={this.handleFile}></input>
+
 /* harmony default export */ __webpack_exports__["default"] = (UpdateAnswerForm);
 
 /***/ }),

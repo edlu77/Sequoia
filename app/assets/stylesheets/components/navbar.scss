@@ -104,7 +104,12 @@
 }
 
 .search-input {
+  width: inherit;
+}
+
+.search-input > input {
   padding: 3px 8px;
+  width: inherit;
 }
 
 .search-match-list-open {
